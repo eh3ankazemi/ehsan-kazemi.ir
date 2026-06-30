@@ -18,6 +18,7 @@ const csp = [
 
 const nextConfig: NextConfig = {
   output: "export",
+  basePath: "/nextjs-portofolio",
   images: {
     unoptimized: true,
   },
