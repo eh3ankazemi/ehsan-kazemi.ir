@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "bunx serve out",
+    "preview": "bunx serve out"
   },
   "dependencies": {
     "@mdx-js/loader": "3.1.1",
