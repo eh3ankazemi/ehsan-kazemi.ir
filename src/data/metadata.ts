@@ -42,14 +42,14 @@ export const siteMetadata: SiteMetadata = {
    */
   author: {
     name: "Ehsan Kazemi",
-    url: process.env.NEXT_PUBLIC_SITE_URL,
+    url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ehsan-kazemi.ir/',
   },
 
   /**
    * Base URL of your website (used for canonical URLs and Open Graph).
    * Set NEXT_PUBLIC_SITE_URL in your environment (e.g. .env.local) to override the default.
    */
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ehsan-kazemi.ir/",
 
   /**
    * Social media handles
