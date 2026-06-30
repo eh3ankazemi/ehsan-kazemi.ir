@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { compileMDX } from "next-mdx-remote/rsc"
+import { Suspense } from "react"
 import { BsStack } from "react-icons/bs"
 import rehypeHighlight from "rehype-highlight"
 import remark_gfm from "remark-gfm"
@@ -12,6 +13,7 @@ import AnimatedArticle from "@/components/AnimatedArticle"
 import BackToPageButton from "@/components/BackToPageButton"
 import { Timeline, TimelineItem } from "@/components/mdx/Timeline"
 import TechBadge from "@/components/TechBadge"
+import { Loading } from "@/components/ui/loading"
 import { homeIntroConfig } from "@/data/content"
 import { siteMetadata } from "@/data/metadata"
 import { getAllWorkItems } from "@/lib/mdx"
@@ -59,7 +61,7 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
  */
 function CompanyHeader({ frontmatter }: { frontmatter: WorkItemFrontmatter }) {
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       {frontmatter.logoUrl && (
         <Image
           src={frontmatter.logoUrl}
@@ -70,7 +72,7 @@ function CompanyHeader({ frontmatter }: { frontmatter: WorkItemFrontmatter }) {
         />
       )}
       <h1 className="text-4xl font-bold">{frontmatter.company}</h1>
-    </>
+    </Suspense>
   )
 }
 

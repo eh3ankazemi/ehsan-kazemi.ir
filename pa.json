@@ -1,0 +1,12 @@
+,
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "lint": "eslint --fix .",
+    "lint:check": "eslint . --max-warnings=0",
+    "lint:write": "eslint --fix . && prettier --write .",
+    "format-lint": "prettier --write . && eslint --fix .",
+    "types:check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage"
