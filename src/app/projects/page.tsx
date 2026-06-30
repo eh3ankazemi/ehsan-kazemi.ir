@@ -1,5 +1,7 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
+import { Suspense } from "react"
+import { Loading } from "@/components/ui/loading"
 import { homeIntroConfig, paginationConfig } from "@/data/content"
 import { getAllProjects } from "@/lib/mdx"
 import { filterProjects, paginateItems, sortProjects } from "@/lib/utils"
@@ -115,15 +117,17 @@ export default async function ProjectsPage(props: {
   }
 
   return (
-    <ProjectsClientUI
-      uniqueTechStack={uniqueTechStack}
-      selectedTechStack={selectedTechStack}
-      sortOrder={sortOrder}
-      filteredProjects={filteredProjects}
-      paginatedProjects={paginatedProjects}
-      currentPage={currentPage}
-      totalPages={totalPages}
-      baseUrl="/projects"
-    />
+    <Suspense fallback={<Loading />}>
+      <ProjectsClientUI
+        uniqueTechStack={uniqueTechStack}
+        selectedTechStack={selectedTechStack}
+        sortOrder={sortOrder}
+        filteredProjects={filteredProjects}
+        paginatedProjects={paginatedProjects}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        baseUrl="/projects"
+      />
+    </Suspense>
   )
 }
