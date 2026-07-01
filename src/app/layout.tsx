@@ -1,5 +1,5 @@
 import "./globals.css"
-import { Gabarito,Vazirmatn } from "next/font/google"
+import { Gabarito, Vazirmatn } from "next/font/google"
 import { ThemeProvider } from "next-themes"
 import React, { ReactNode } from "react"
 import Footer from "@/components/Footer"
@@ -14,13 +14,13 @@ import { LanguageProvider } from "@/providers/LanguageProvider"
  * We only use this font in the application (for headings and body text).
  */
 const gabarito = Gabarito({
-  variable: "--font-gabarito",
   subsets: ["latin"],
+  variable: "--font-gabarito",
 })
 
-const  vazirmatn =  Vazirmatn({
+const vazirmatn = Vazirmatn({
+  subsets: ["arabic"],
   variable: "--font-vazirmatn",
-  subsets: ["Vazirmatn"],
 })
 
 /**
@@ -52,36 +52,30 @@ export { metadata } from "@/data/metadata"
  */
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html
-      lang="en"
-      dir="ltr"
-      data-theme={siteMetadata.theme}
-      suppressHydrationWarning
-    >
+    <html lang="en" dir="ltr" data-theme={siteMetadata.theme} suppressHydrationWarning>
       <body
-        className={`antialiased flex flex-col min-h-screen transition-colors overscroll-none ${gabarito.className} ${gabarito.variable}  ${vazirmatn.className} ${vazirmatn.variable}`}
+        className={`antialiased flex flex-col min-h-screen transition-colors overscroll-none ${gabarito.variable} ${vazirmatn.variable}`}
+        //  ${gabarito.className} ${gabarito.variable}  ${vazirmatn.className} ${vazirmatn.variable}`}
         suppressHydrationWarning
       >
-      <ThemeProvider attribute="class" defaultTheme="system">
-        <LanguageProvider>
-          <ClientProviders>
-            <div
-              className={cn(
-                "fixed inset-0 -z-10",
-                "bg-[radial-gradient(circle,#d1d5db_1px,transparent_1px)]",
-                "dark:bg-[radial-gradient(circle,#3f3f46_1px,transparent_1px)]",
-                "bg-size-[30px_30px]",
-                "mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]"
-              )}
-            />
-            <Header />
-            <main className="grow container mx-auto px-4 py-6">
-              {children}
-            </main>
-            <Footer />
-          </ClientProviders>
-        </LanguageProvider>
-      </ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="system">
+          <LanguageProvider>
+            <ClientProviders>
+              <div
+                className={cn(
+                  "fixed inset-0 -z-10",
+                  "bg-[radial-gradient(circle,#d1d5db_1px,transparent_1px)]",
+                  "dark:bg-[radial-gradient(circle,#3f3f46_1px,transparent_1px)]",
+                  "bg-size-[30px_30px]",
+                  "mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]"
+                )}
+              />
+              <Header />
+              <main className="grow container mx-auto px-4 py-6">{children}</main>
+              <Footer />
+            </ClientProviders>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
