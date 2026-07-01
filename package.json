@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "preview": "bunx serve out",
-    "prebuild": "bun run scripts/generate-llms.ts",
+    "prebuild": "bun run scripts/generate.ts",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "lint": "eslint --fix .",

@@ -42,7 +42,7 @@ export const siteMetadata: SiteMetadata = {
    */
   author: {
     name: "Ehsan Kazemi",
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ehsan-kazemi.ir',
+    url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ehsan-kazemi.ir",
   },
 
   /**

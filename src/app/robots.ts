@@ -6,14 +6,14 @@ import type { MetadataRoute } from "next"
  * Allows all search engines to crawl and index the portfolio for maximum discoverability.
  */
 
-export const dynamic = "force-static";
+export const dynamic = "force-static"
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "*",
-        
-        disallow: '/',
+
+        disallow: "/",
 
         // allow: "/",
         // disallow: ["/api/", "/_next/", "/private/"],

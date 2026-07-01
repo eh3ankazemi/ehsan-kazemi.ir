@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generating static files
+llms.txt
+rss.xml
+sitemap.xml
