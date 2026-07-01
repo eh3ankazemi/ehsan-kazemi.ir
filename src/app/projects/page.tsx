@@ -1,7 +1,4 @@
-import { Suspense } from "react"
-
 import Projects from "@/components/projects/Projects"
-import { Loading } from "@/components/ui/loading"
 import { getAllProjects } from "@/lib/mdx"
 
 export default async function ProjectsPage() {
@@ -22,9 +19,6 @@ export default async function ProjectsPage() {
     }))
     .sort((a, b) => a.tech.localeCompare(b.tech))
 
-  return (
-    <Suspense fallback={<Loading />}>
-      <Projects projects={projects} uniqueTechStack={uniqueTechStack} baseUrl="/projects" />
-    </Suspense>
-  )
+  return <Projects projects={projects} uniqueTechStack={uniqueTechStack} baseUrl="/projects" />
+
 }

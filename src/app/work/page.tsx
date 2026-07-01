@@ -1,5 +1,3 @@
-import { Suspense } from "react"
-import { Loading } from "@/components/ui/loading"
 import Works from "@/components/works/Works"
 import { getAllWorkItems } from "@/lib/mdx"
 
@@ -26,9 +24,5 @@ export default async function WorkPage(props: {
     .map(([company, count]) => ({ company, count }))
     .sort((a, b) => a.company.localeCompare(b.company))
 
-  return (
-    <Suspense fallback={<Loading />}>
-      <Works work={work} uniqueCompanies={uniqueCompanies} baseUrl="/work" />
-    </Suspense>
-  )
+  return       <Works work={work} uniqueCompanies={uniqueCompanies} baseUrl="/work" />
 }

@@ -7,7 +7,6 @@ import ActiveFilterChips from "@/components/ActiveFilterChips"
 import FilterDropdown from "@/components/FilterDropdown"
 import PaginationControls from "@/components/PaginationControls"
 import SortDropdown from "@/components/SortDropdown"
-import { Loading } from "@/components/ui/loading"
 import { paginationConfig } from "@/data/content"
 import { BlogPostProps } from "@/lib/types"
 import { filterBlogPosts, paginateItems, sortBlogPosts } from "@/lib/utils"
@@ -133,7 +132,7 @@ export default function Blogs({
   return (
     <section className="mx-auto max-w-4xl px-4">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={null}>
           <FilterDropdown
             items={uniqueTags.map(({ tag, count }) => ({
               name: tag,

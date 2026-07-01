@@ -2,7 +2,6 @@ import { Metadata } from "next"
 import { Suspense } from "react"
 
 import Blogs from "@/components/blog/Blog"
-import { Loading } from "@/components/ui/loading"
 import { homeIntroConfig } from "@/data/content"
 import { getAllBlogPosts } from "@/lib/mdx"
 
@@ -46,9 +45,5 @@ export default async function BlogPage() {
     }))
     .sort((a, b) => a.tag.localeCompare(b.tag))
 
-  return (
-    <Suspense fallback={<Loading />}>
-      <Blogs posts={posts} uniqueTags={uniqueTags} baseUrl="/blog" />
-    </Suspense>
-  )
+  return <Blogs posts={posts} uniqueTags={uniqueTags} baseUrl="/blog" />
 }

@@ -1,7 +1,4 @@
-import { Suspense } from "react"
-
 import HomeContent from "@/components/home/HomeContent"
-import { Loading } from "@/components/ui/loading"
 import { footerConfig, homeIntroConfig } from "@/data/content"
 import { siteMetadata } from "@/data/metadata"
 import { getAllBlogPosts, getAllProjects, getAllWorkItems } from "@/lib/mdx"
@@ -40,9 +37,7 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
-      <Suspense fallback={<Loading />}>
-        <HomeContent blog={blog} work={work} projects={projects} />
-      </Suspense>
+      <HomeContent blog={blog} work={work} projects={projects} />
     </>
   )
 }

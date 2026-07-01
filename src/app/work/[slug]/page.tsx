@@ -13,7 +13,6 @@ import AnimatedArticle from "@/components/AnimatedArticle"
 import BackToPageButton from "@/components/BackToPageButton"
 import { Timeline, TimelineItem } from "@/components/mdx/Timeline"
 import TechBadge from "@/components/TechBadge"
-import { Loading } from "@/components/ui/loading"
 import { homeIntroConfig } from "@/data/content"
 import { siteMetadata } from "@/data/metadata"
 import { getAllWorkItems } from "@/lib/mdx"
@@ -61,7 +60,7 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
  */
 function CompanyHeader({ frontmatter }: { frontmatter: WorkItemFrontmatter }) {
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={null}>
       {frontmatter.logoUrl && (
         <Image
           src={frontmatter.logoUrl}

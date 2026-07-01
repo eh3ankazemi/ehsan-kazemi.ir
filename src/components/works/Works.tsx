@@ -5,7 +5,6 @@ import { Suspense, useEffect, useMemo, useState } from "react"
 
 import FilterDropdown from "@/components/FilterDropdown"
 import SortDropdown from "@/components/SortDropdown"
-import { Loading } from "@/components/ui/loading"
 import { paginationConfig } from "@/data/content"
 import { filterWorkItems, paginateItems, sortWorkItems } from "@/lib/utils"
 import ActiveFilterChips from "../ActiveFilterChips"
@@ -128,7 +127,7 @@ export default function Works({
   return (
     <section className="mx-auto max-w-4xl px-4">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={null}>
           <FilterDropdown
             items={uniqueCompanies.map(({ company, count }) => ({
               name: company,
