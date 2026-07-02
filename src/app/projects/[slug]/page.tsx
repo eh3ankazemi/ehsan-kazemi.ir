@@ -44,10 +44,10 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
   }
 
   return {
-    title: `${project.title} | ${homeIntroConfig.name}`,
+    // title: `${project.title} | ${homeIntroConfig.name}`,
     description: project.description,
     openGraph: {
-      title: `${project.title} | ${homeIntroConfig.name}`,
+      // title: `${project.title} | ${homeIntroConfig.name}`,
       description: project.description,
       type: "article",
     },

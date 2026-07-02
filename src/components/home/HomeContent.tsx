@@ -10,7 +10,6 @@ import BlogPreview from "@/components/home/BlogPreview"
 import ProjectsPreview from "@/components/home/ProjectsPreview"
 import QuickFacts from "@/components/home/QuickFacts"
 import WorkPreview from "@/components/home/WorkPreview"
-import { homeIntroConfig } from "@/data/content"
 import { useTranslation } from "@/hooks/useTranslation"
 import { BlogPostProps, ProjectProps, WorkItemProps } from "@/lib/types"
 
@@ -28,6 +27,7 @@ interface HomeContentProps {
  * @param projects - An array of project data to display in the projects preview section.
  */
 export default function HomeContent({ blog, work, projects }: HomeContentProps) {
+    const t = useTranslation()
   return (
     <MotionConfig reducedMotion="user">
       <section className="px-4 max-w-4xl mx-auto">
@@ -40,7 +40,7 @@ export default function HomeContent({ blog, work, projects }: HomeContentProps) 
           className="text-center mt-2"
         >
           <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-            Hi, I&#39;m {homeIntroConfig.shortName || homeIntroConfig.name}{" "}
+            {t.home.title}
             <motion.span
               initial={{ rotate: 0 }}
               animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
@@ -58,7 +58,7 @@ export default function HomeContent({ blog, work, projects }: HomeContentProps) 
             viewport={{ once: true }}
             className="space-y-4 max-w-3xl mx-auto mb-8"
           >
-            {homeIntroConfig.introParagraphs.map((paragraph, index) => (
+            {t.homeIntro.introParagraphs.map((paragraph, index) => (
               <motion.p
                 key={index}
                 variants={staggerItemVariants}

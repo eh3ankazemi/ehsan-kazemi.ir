@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import ViewAllHeader from "@/components/ViewAllHeader"
 import WorkItem from "@/components/WorkItem"
 import { homeIntroConfig } from "@/data/content"
+import { useTranslation } from "@/hooks/useTranslation"
 import { WorkItemProps } from "@/lib/types"
 import { fadeUpVariants, staggerContainerVariants, staggerItemVariants } from "./animations"
 
@@ -18,13 +19,14 @@ function sortWork(items: WorkItemProps[]): WorkItemProps[] {
     if (aIsPresent && !bIsPresent) return -1
     if (!aIsPresent && bIsPresent) return 1
     if (aIsPresent && bIsPresent) return a.company.localeCompare(b.company)
-    const endDiff = new Date(b.end).getTime() - new Date(a.end).getTime()
+      const endDiff = new Date(b.end).getTime() - new Date(a.end).getTime()
     if (endDiff !== 0) return endDiff
     return a.company.localeCompare(b.company)
   })
 }
 
 export default function WorkPreview({ work }: WorkPreviewProps) {
+  const t = useTranslation()
   const items = sortWork(work).slice(0, homeIntroConfig.workItemsToShow)
 
   return (
@@ -35,7 +37,7 @@ export default function WorkPreview({ work }: WorkPreviewProps) {
       viewport={{ once: true, margin: "-100px" }}
       className="mt-20"
     >
-      <ViewAllHeader title="Work Experience" pageUrl="/work" itemCount={work.length} />
+      <ViewAllHeader title={t.work.experience} pageUrl="/work" itemCount={work.length} />
       <motion.div
         initial="hidden"
         whileInView="visible"

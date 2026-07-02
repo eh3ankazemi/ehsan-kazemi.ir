@@ -2,7 +2,8 @@ import Link from "next/link"
 import { FaCodeBranch } from "react-icons/fa"
 import { footerConfig, socialIconMap } from "@/data/content"
 import { cn } from "@/lib/utils"
-import packageJson from "../../package.json"
+import packageJson from "../../../package.json"
+import Rights from "./rights"
 
 /**
  * Internal component to render social media links
@@ -70,9 +71,7 @@ export default function Footer() {
       <div className="max-w-xs mx-auto mb-4 h-px bg-linear-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent" />
 
       {/* Copyright */}
-      <p className="text-sm mb-2 text-gray-600 dark:text-gray-400">
-        © {new Date().getFullYear()} {footerConfig.copyrightName}. All rights reserved.
-      </p>
+      <Rights />
 
       {/* Version & Attribution - Terminal style */}
       {footerConfig.showVersionAndAttribution && (
@@ -96,7 +95,9 @@ export default function Footer() {
             )}
           >
             <FaCodeBranch className="w-3 h-3 text-gray-500 dark:text-gray-500" />
-            <span className="font-semibold text-accent-600 dark:text-accent-400">{packageJson.version}</span>
+            <span className="font-semibold text-accent-600 dark:text-accent-400">
+              {packageJson.version}
+            </span>
           </Link>
 
           <span className="text-gray-500 dark:text-gray-500">

@@ -1,7 +1,27 @@
 {
+  "isRTL": true,
   "lang": "fa",
-   "name":"احسان کاظمی",
-   "short_name":"احسان",
+  "footer":"احسان کاظمی. تمامی حقوق محفوظ است.",
+  "work": {
+    "experience": "تجربه کاری",
+    "notFound":"صفحه مورد نظر شما وجود ندارد. لطفاً به صفحه اول سوابق کاری برگردید."
+  },
+  "homeIntro": {
+    "introParagraphs": [
+      "I'm a software engineer passionate about solving problems, building things, and reading sci-fi. Whenever I'm not coding, you can find me exploring the world, playing tennis or skating. I love to share my knowledge and experiences through my blog, where I write about tech, books, and life lessons.",
+      "I am currently working at Hypernova Labs as a software engineer, where I focus on building scalable applications and improving user experiences. I have a keen interest in full-stack development, particularly in React and Node.js. I enjoy collaborating with cross-functional teams to deliver high-quality software solutions."
+    ],
+    "facts": {
+      "company": "Hypernova Labs",
+      "education": "Computer Science Grad @ VuA",
+      "location": "Lille, France",
+      "languages": "EN / FA",
+      "role": "Full-Stack Dev"
+    },
+    "fanFact": "حقایق سریع و جالب",
+    "name": "احسان کاظمی",
+    "shortName": "احسان"
+  },
   "navigation": {
     "home": "خانه",
     "blog": "وبلاگ",

@@ -1,7 +1,27 @@
 {
-  "lang":"en",
-  "name":"Ehsan kazemi",
-   "short_name":"Ehsan",
+  "isRTL": false,
+  "lang": "en",
+  "footer": "Ehsan Kazemi. All rights reserved.",
+  "work": {
+    "experience": "Work Experience",
+    "notFound": "The page you requested does not exist. Please return to the first page of work experience."
+  },
+  "homeIntro": {
+    "introParagraphs": [
+      "I'm a software engineer passionate about solving problems, building things, and reading sci-fi. Whenever I'm not coding, you can find me exploring the world, playing tennis or skating. I love to share my knowledge and experiences through my blog, where I write about tech, books, and life lessons.",
+      "I am currently working at Hypernova Labs as a software engineer, where I focus on building scalable applications and improving user experiences. I have a keen interest in full-stack development, particularly in React and Node.js. I enjoy collaborating with cross-functional teams to deliver high-quality software solutions."
+    ],
+    "facts": {
+      "company": "Hypernova Labs",
+      "education": "Computer Science Grad @ VuA",
+      "location": "Lille, France",
+      "languages": "EN / FA",
+      "role": "Full-Stack Dev"
+    },
+    "fanFact": "Quick & Fun Facts",
+    "name": "Ehsan kazemi",
+    "shortName": "Ehsan"
+  },
   "navigation": {
     "home": "Home",
     "blog": "Blog",

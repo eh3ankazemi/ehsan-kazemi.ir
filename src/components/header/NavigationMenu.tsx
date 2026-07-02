@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "@/hooks/useTranslation"
 import { cn } from "@/lib/utils"
 
@@ -14,26 +14,26 @@ export default function NavigationMenu() {
   const t = useTranslation()
   const pathname = usePathname()
 
-  
-    // Only show breadcrumbs for /blog, /projects, /work and their subpaths
-    const navItems = [
-  { name:       t.navigation.home, path: "/" },
-  { name: t.navigation.work, path: "/work" },
-  { name: t.navigation.projects, path: "/projects" },
-  { name: t.navigation.blog, path: "/blog" },
-]
-  
+  const navItems = useMemo(
+    () => [
+      { name: t.navigation.home, path: "/" },
+      { name: t.navigation.work, path: "/work" },
+      { name: t.navigation.projects, path: "/projects" },
+      { name: t.navigation.blog, path: "/blog" },
+    ],
+    [t]
+  )
 
   const getActiveIndex = (p: string) =>
     navItems.findIndex(({ path }) =>
       path === "/" ? p === "/" : p === path || p.startsWith(path + "/")
     )
 
-  const [activeIndex, setActiveIndex] = useState(() => getActiveIndex(pathname))
+  const [activeIndex, setActiveIndex] = useState(getActiveIndex(pathname))
 
   useEffect(() => {
     setActiveIndex(getActiveIndex(pathname))
-  }, [pathname])
+  }, [pathname, navItems])
 
   return (
     <nav className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -47,25 +47,31 @@ export default function NavigationMenu() {
           "hover:shadow-xl transition-shadow duration-300 min-h-0"
         )}
       >
-        {/* Animated active indicator as the border only */}
         <div
-          className={cn(
-            "absolute top-0 left-0 h-full transition-all duration-300 ease-in-out pointer-events-none z-0 flex",
-            "bg-accent-500/10 dark:bg-accent-500/10"
-          )}
-          style={{
-            width: `calc((100% - ${navItems.length - 1} * 0.120rem) / ${navItems.length})`,
-            transform: `translateX(calc(${activeIndex} * (100% + 0.125rem)))`,
-            border: "2px solid var(--accent-500)",
-            borderRadius: "9999px",
-            boxShadow: "0 2 12px color-mix(in srgb, var(--accent-500) 30%, transparent)",
-            opacity: activeIndex === -1 ? 0 : 1,
-          }}
-        ></div>
+        className={cn(
+          "absolute top-0 left-0 h-full transition-all duration-300 ease-in-out pointer-events-none z-0 flex",
+          "bg-accent-500/10 dark:bg-accent-500/10"
+        )}
+        style={{
+          width: `calc((100% - ${(navItems.length - 1) * 0.120}rem) / ${navItems.length})`,
+          transform:
+          t.isRTL
+          ? `translateX(calc(${navItems.length - 1 - activeIndex} * (100% + 0.125rem)))`
+          : `translateX(calc(${activeIndex} * (100% + 0.125rem)))`,
+          border: "2px solid var(--accent-500)",
+          borderRadius: "9999px",
+          boxShadow: "0 2 12px color-mix(in srgb, var(--accent-500) 30%, transparent)",
+          opacity: activeIndex === -1 ? 0 : 1,
+        }}
+      />
         {navItems.map(({ name, path }, idx) => {
-          const isActive = pathname === path
+          const isActive =
+            path === "/"
+              ? pathname === "/"
+              : pathname === path || pathname.startsWith(path + "/")
+
           return (
-            <li key={name} className="relative z-10 flex justify-center items-center">
+            <li key={path} className="relative z-10 flex justify-center items-center">
               <Link
                 href={path}
                 aria-current={isActive ? "page" : undefined}
@@ -79,12 +85,12 @@ export default function NavigationMenu() {
                     : "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-800/50"
                 )}
                 tabIndex={0}
-              >
+>
                 {name}
               </Link>
-              {/* Invisible divider except last item */}
+
               {idx < navItems.length - 1 && (
-                <span className="mx-0.5 h-5 w-px" aria-hidden="true"></span>
+                <span className="mx-0.5 h-5 w-px" aria-hidden="true" />
               )}
             </li>
           )

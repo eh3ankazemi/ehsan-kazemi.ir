@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { factIconMap, homeIntroConfig } from "@/data/content"
+import { useTranslation } from "@/hooks/useTranslation"
 import { cn } from "@/lib/utils"
 import { fadeUpVariants } from "./animations"
 
@@ -9,8 +10,9 @@ import { fadeUpVariants } from "./animations"
  * Simple component which renders pill-like quick facts about the user, based on the homeIntroConfig data.
  */
 export default function QuickFacts() {
+  const t = useTranslation()
   const allFacts = [
-    ...Object.entries(homeIntroConfig.facts)
+    ...Object.entries(t.homeIntro.facts)
       .filter(([, value]) => value && value.trim() !== "")
       .map(([category, value]) => {
         const categoryKey = category as keyof typeof factIconMap
@@ -34,7 +36,7 @@ export default function QuickFacts() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 dark:text-white"
       >
-        Quick &amp; Fun Facts
+        {t.homeIntro.fanFact}
       </motion.h2>
 
       <div className="flex flex-wrap justify-center gap-2 sm:gap-3 px-4 max-w-4xl mx-auto">

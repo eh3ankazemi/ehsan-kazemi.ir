@@ -8,7 +8,6 @@ import MobileMenuToggle from "@/components/header/MobileMenuToggle"
 import NavigationMenu from "@/components/header/NavigationMenu"
 import { ScrollProgress } from "@/components/header/ScrollProgress"
 import ThemeToggleButton from "@/components/header/ThemeToggleButton"
-import { useTranslation } from "@/hooks/useTranslation"
 import { cn } from "@/lib/utils"
 import LanguageToggleButton from "./LanguageToggleButton"
 
@@ -54,7 +53,6 @@ export default function Header() {
           {/* Theme toggle button */}
           <ThemeToggleButton />
 
-          {/* Lang toggle button */}
           {/* <LangToggleButton /> */}
           <LanguageToggleButton/>
 

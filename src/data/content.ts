@@ -24,28 +24,13 @@ import { FaBluesky, FaXTwitter } from "react-icons/fa6"
  * Configuration for the home page intro section
  */
 export const homeIntroConfig = {
+  name: "Ehsan kazemi",
+  shortName: "Ehsan",
+  role: "Full-Stack Dev",
   /**
-   * Your full name (used in breadcrumbs, footer, and other places)
-   */
-  name: "John Doe",
-
-  /**
-   * Your short/first name (optional - used in "Hi, I'm..." greeting)
-   * If not provided, the full name will be used
-   */
-  shortName: "John",
-
-  /**
-   * Introduction paragraphs (can be multiple)
-   */
-  introParagraphs: [
-    "I'm a software engineer passionate about solving problems, building things, and reading sci-fi. Whenever I'm not coding, you can find me exploring the world, playing tennis or skating. I love to share my knowledge and experiences through my blog, where I write about tech, books, and life lessons.",
-    "I am currently working at Hypernova Labs as a software engineer, where I focus on building scalable applications and improving user experiences. I have a keen interest in full-stack development, particularly in React and Node.js. I enjoy collaborating with cross-functional teams to deliver high-quality software solutions.",
-  ],
-
-  /**
-   * Quick facts displayed as chips below your introduction
-   * Fill in the fields below. Leave empty ("") to hide a fact.
+   * Additional custom facts to display below the predefined ones.
+   * Add any extra facts you want to display with their icons.
+   * You must use an icon from react-icons and provide its label.
    */
   facts: {
     company: "Hypernova Labs",
@@ -54,12 +39,6 @@ export const homeIntroConfig = {
     languages: "EN / ES / DE",
     role: "Full-Stack Dev",
   },
-
-  /**
-   * Additional custom facts to display below the predefined ones.
-   * Add any extra facts you want to display with their icons.
-   * You must use an icon from react-icons and provide its label.
-   */
   additionalFacts: [
     { icon: FaBook, label: "Book Reviewer" },
     { icon: FaGamepad, label: "Sci-fi Fan" },
