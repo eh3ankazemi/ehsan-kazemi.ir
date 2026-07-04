@@ -48,27 +48,24 @@ export default function NavigationMenu() {
         )}
       >
         <div
-        className={cn(
-          "absolute top-0 left-0 h-full transition-all duration-300 ease-in-out pointer-events-none z-0 flex",
-          "bg-accent-500/10 dark:bg-accent-500/10"
-        )}
-        style={{
-          width: `calc((100% - ${(navItems.length - 1) * 0.120}rem) / ${navItems.length})`,
-          transform:
-          t.isRTL
-          ? `translateX(calc(${navItems.length - 1 - activeIndex} * (100% + 0.125rem)))`
-          : `translateX(calc(${activeIndex} * (100% + 0.125rem)))`,
-          border: "2px solid var(--accent-500)",
-          borderRadius: "9999px",
-          boxShadow: "0 2 12px color-mix(in srgb, var(--accent-500) 30%, transparent)",
-          opacity: activeIndex === -1 ? 0 : 1,
-        }}
-      />
+          className={cn(
+            "absolute top-0 left-0 h-full transition-all duration-300 ease-in-out pointer-events-none z-0 flex",
+            "bg-accent-500/10 dark:bg-accent-500/10"
+          )}
+          style={{
+            width: `calc((100% - ${(navItems.length - 1) * 0.12}rem) / ${navItems.length})`,
+            transform: t.isRTL
+              ? `translateX(calc(${navItems.length - 1 - activeIndex} * (100% + 0.125rem)))`
+              : `translateX(calc(${activeIndex} * (100% + 0.125rem)))`,
+            border: "2px solid var(--accent-500)",
+            borderRadius: "9999px",
+            boxShadow: "0 2 12px color-mix(in srgb, var(--accent-500) 30%, transparent)",
+            opacity: activeIndex === -1 ? 0 : 1,
+          }}
+        />
         {navItems.map(({ name, path }, idx) => {
           const isActive =
-            path === "/"
-              ? pathname === "/"
-              : pathname === path || pathname.startsWith(path + "/")
+            path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(path + "/")
 
           return (
             <li key={path} className="relative z-10 flex justify-center items-center">
@@ -85,13 +82,11 @@ export default function NavigationMenu() {
                     : "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-800/50"
                 )}
                 tabIndex={0}
->
+              >
                 {name}
               </Link>
 
-              {idx < navItems.length - 1 && (
-                <span className="mx-0.5 h-5 w-px" aria-hidden="true" />
-              )}
+              {idx < navItems.length - 1 && <span className="mx-0.5 h-5 w-px" aria-hidden="true" />}
             </li>
           )
         })}

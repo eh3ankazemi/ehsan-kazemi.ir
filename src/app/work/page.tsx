@@ -24,5 +24,5 @@ export default async function WorkPage(props: {
     .map(([company, count]) => ({ company, count }))
     .sort((a, b) => a.company.localeCompare(b.company))
 
-  return       <Works work={work} uniqueCompanies={uniqueCompanies} baseUrl="/work" />
+  return <Works work={work} uniqueCompanies={uniqueCompanies} baseUrl="/work" />
 }

@@ -13,7 +13,6 @@ import type { Person, WithContext } from "schema-dts"
  * The "sameAs" property includes links to social media profiles, which can help search engines understand the author's online presence.
  */
 export default async function Home() {
-
   const [blog, work, projects] = await Promise.all([
     getAllBlogPosts(),
     getAllWorkItems(),

@@ -19,7 +19,7 @@ function sortWork(items: WorkItemProps[]): WorkItemProps[] {
     if (aIsPresent && !bIsPresent) return -1
     if (!aIsPresent && bIsPresent) return 1
     if (aIsPresent && bIsPresent) return a.company.localeCompare(b.company)
-      const endDiff = new Date(b.end).getTime() - new Date(a.end).getTime()
+    const endDiff = new Date(b.end).getTime() - new Date(a.end).getTime()
     if (endDiff !== 0) return endDiff
     return a.company.localeCompare(b.company)
   })

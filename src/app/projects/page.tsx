@@ -20,5 +20,4 @@ export default async function ProjectsPage() {
     .sort((a, b) => a.tech.localeCompare(b.tech))
 
   return <Projects projects={projects} uniqueTechStack={uniqueTechStack} baseUrl="/projects" />
-
 }

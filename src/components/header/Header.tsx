@@ -54,7 +54,7 @@ export default function Header() {
           <ThemeToggleButton />
 
           {/* <LangToggleButton /> */}
-          <LanguageToggleButton/>
+          <LanguageToggleButton />
 
           {/* Hamburger Mobile Menu toggle */}
           <MobileMenuToggle

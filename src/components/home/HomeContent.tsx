@@ -27,7 +27,7 @@ interface HomeContentProps {
  * @param projects - An array of project data to display in the projects preview section.
  */
 export default function HomeContent({ blog, work, projects }: HomeContentProps) {
-    const t = useTranslation()
+  const t = useTranslation()
   return (
     <MotionConfig reducedMotion="user">
       <section className="px-4 max-w-4xl mx-auto">

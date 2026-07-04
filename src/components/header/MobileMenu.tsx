@@ -20,14 +20,13 @@ export default function MobileMenu({
   const t = useTranslation()
   const pathname = usePathname()
 
-  
-    // Only show breadcrumbs for /blog, /projects, /work and their subpaths
-    const navItems = [
-  { name:       t.navigation.home, path: "/" },
-  { name: t.navigation.work, path: "/work" },
-  { name: t.navigation.projects, path: "/projects" },
-  { name: t.navigation.blog, path: "/blog" },
-]
+  // Only show breadcrumbs for /blog, /projects, /work and their subpaths
+  const navItems = [
+    { name: t.navigation.home, path: "/" },
+    { name: t.navigation.work, path: "/work" },
+    { name: t.navigation.projects, path: "/projects" },
+    { name: t.navigation.blog, path: "/blog" },
+  ]
   const menuRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {

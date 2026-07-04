@@ -55,7 +55,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" dir="ltr" data-theme={siteMetadata.theme} suppressHydrationWarning>
       <body
         className={`antialiased flex flex-col min-h-screen transition-colors overscroll-none ${gabarito.variable} ${vazirmatn.variable}`}
-        //  ${gabarito.className} ${gabarito.variable}  ${vazirmatn.className} ${vazirmatn.variable}`}
         suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="system">
