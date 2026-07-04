@@ -56,8 +56,9 @@ export default function Works({
     return sortWorkItems(filterWorkItems(work, selectedCompanies), sortOrder)
   }, [work, selectedCompanies, sortOrder])
 
+  const WorkItemsLangToShow = filteredWorkItems.filter(workItem => workItem.fa === t.isRTL)
   const { items: paginatedWorkItems, totalPages } = paginateItems(
-    filteredWorkItems,
+    WorkItemsLangToShow,
     currentPage,
     WORK_PAGE_SIZE
   )
@@ -123,10 +124,9 @@ export default function Works({
   }
 
 
-  const WorkItemsLangToShow = paginatedWorkItems.filter(workItem => workItem.fa === t.isRTL)
   // Unique companies for filter dropdown
   const companyCounts: Record<string, number> = {}
-  WorkItemsLangToShow.forEach((workItem: { company: string | number }) => {
+  paginatedWorkItems.forEach((workItem: { company: string | number }) => {
     companyCounts[workItem.company] = (companyCounts[workItem.company] || 0) + 1
   })
   const uniqueCompanies: { company: string; count: number }[] = Object.entries(companyCounts)
@@ -146,7 +146,7 @@ export default function Works({
             onApply={handleApplyFilters}
             onClear={handleClearFilters}
             placeholder={t.filter.company}
-            resultCount={WorkItemsLangToShow.length}
+            resultCount={paginatedWorkItems.length}
           />
         </Suspense>
 
@@ -168,7 +168,7 @@ export default function Works({
         onClearAll={selectedCompanies.length > 1 ? handleClearFilters : undefined}
       />
 
-      <WorkClientUI filteredWorkItems={filteredWorkItems} paginatedWorkItems={WorkItemsLangToShow} />
+      <WorkClientUI filteredWorkItems={filteredWorkItems} paginatedWorkItems={paginatedWorkItems} />
 
       <PaginationControls
         currentPage={currentPage}

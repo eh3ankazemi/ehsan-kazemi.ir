@@ -1,0 +1,54 @@
+---
+fa: false
+title: "Building JWT Authentication in Next.js"
+summary: "Learn how to implement secure JWT authentication in Next.js using API routes, protected pages, and best security practices."
+date: "2026-07-05"
+tags:
+  - Next.js
+  - Authentication
+  - JWT
+  - TypeScript
+---
+
+Authentication is a core feature of most modern web applications. In this guide, we'll build a secure JWT authentication system using Next.js.
+
+## Why JWT?
+
+- Stateless authentication
+- Easy API integration
+- Fast and scalable
+
+## Project Structure
+
+```text
+app/
+├── login/
+├── dashboard/
+├── api/
+│   └── auth/
+```
+
+## Creating Tokens
+
+Generate a JWT after verifying user credentials.
+
+```ts
+const token = jwt.sign(payload, process.env.JWT_SECRET!, {
+  expiresIn: "7d",
+})
+```
+
+## Protecting Routes
+
+Verify the token before allowing access to protected pages.
+
+## Security Tips
+
+- Store tokens securely
+- Use HTTP-only cookies
+- Validate every request
+- Never expose secrets
+
+## Conclusion
+
+JWT authentication is a reliable solution for modern web applications when implemented with proper security practices.

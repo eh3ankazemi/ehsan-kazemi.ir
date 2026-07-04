@@ -1,0 +1,64 @@
+---
+fa: true
+title: "ساخت اولین چت‌بات هوش مصنوعی با Next.js و OpenAI"
+summary: "در این آموزش یک چت‌بات هوش مصنوعی با استفاده از Next.js، TypeScript و OpenAI API می‌سازیم."
+date: "2026-07-05"
+tags:
+  - Next.js
+  - AI
+  - OpenAI
+  - TypeScript
+  - Full Stack
+---
+
+هوش مصنوعی به بخش مهمی از توسعه نرم‌افزار تبدیل شده است. در این مقاله یاد می‌گیریم چگونه یک چت‌بات ساده با استفاده از **Next.js** و **OpenAI API** بسازیم.
+
+## امکانات پروژه
+
+- رابط کاربری مدرن
+- پاسخ‌های هوش مصنوعی
+- API سمت سرور
+- پشتیبانی از TypeScript
+- نمایش پیام‌ها به‌صورت Real-time
+
+## ساختار پروژه
+
+```text
+app/
+├── chat/
+├── api/
+│   └── chat/
+├── components/
+└── lib/
+```
+
+## ساخت API
+
+```ts
+export async function POST(req: Request) {
+  const { messages } = await req.json()
+
+  // ارسال پیام‌ها به OpenAI
+}
+```
+
+## رابط کاربری
+
+برای تجربه بهتر کاربران، بخش‌های زیر را به‌صورت Component طراحی کنید:
+
+- Message
+- Chat Input
+- Loading State
+- Markdown Renderer
+
+## نکات مهم
+
+- اعتبارسنجی ورودی کاربران
+- مدیریت خطاها
+- استفاده از Streaming Response
+- نگهداری API Key در فایل `.env`
+- بهینه‌سازی عملکرد
+
+## جمع‌بندی
+
+ساخت یک چت‌بات هوش مصنوعی، پروژه‌ای مناسب برای یادگیری هم‌زمان Next.js، TypeScript و APIهای هوش مصنوعی است و می‌تواند پایه‌ای برای توسعه ابزارهای پیشرفته‌تر باشد.

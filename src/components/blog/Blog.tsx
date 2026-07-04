@@ -54,8 +54,9 @@ export default function Blogs({ posts, baseUrl }: { posts: BlogPostProps[]; base
   }, [posts, selectedTags, sortOrder])
 
   // Pagination
+  const PostItemsLangToShow = filteredPosts.filter(postItem => postItem.fa === t.isRTL)
   const { items: paginatedPosts, totalPages } = paginateItems(
-    filteredPosts,
+    PostItemsLangToShow,
     currentPage,
     POSTS_PAGE_SIZE
   )
@@ -123,10 +124,9 @@ export default function Blogs({ posts, baseUrl }: { posts: BlogPostProps[]; base
     router.push(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`)
   }
 
-  const PostItemsLangToShow = paginatedPosts.filter(postItem => postItem.fa === t.isRTL)
   // Unique tags for filter dropdown
   const tagCounts: Record<string, number> = {}
-  PostItemsLangToShow.forEach(post => {
+  paginatedPosts.forEach(post => {
     ;(post.tags ?? []).forEach(tag => {
       tagCounts[tag] = (tagCounts[tag] || 0) + 1
     })
@@ -151,7 +151,7 @@ export default function Blogs({ posts, baseUrl }: { posts: BlogPostProps[]; base
             onApply={handleApplyFilters}
             onClear={handleClearFilters}
             placeholder={t.filter.company}
-            resultCount={PostItemsLangToShow.length}
+            resultCount={paginatedPosts.length}
           />
         </Suspense>
 
@@ -179,7 +179,7 @@ export default function Blogs({ posts, baseUrl }: { posts: BlogPostProps[]; base
         onClearAll={selectedTags.length > 1 ? handleClearFilters : undefined}
       />
 
-      <BlogClientUI filteredPosts={filteredPosts} paginatedPosts={PostItemsLangToShow} />
+      <BlogClientUI filteredPosts={filteredPosts} paginatedPosts={paginatedPosts} />
 
       <PaginationControls
         currentPage={currentPage}

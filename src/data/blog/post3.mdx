@@ -1,52 +1,51 @@
 ---
 fa: false
-title: "Intro to React and How to Use It"
-summary: "Learn what React is, why it's popular, and how to create your first component."
-date: "2025-04-15"
+title: "Getting Started with Machine Learning using Scikit-learn"
+summary: "A beginner-friendly introduction to machine learning with Python and Scikit-learn, covering datasets, training models, and evaluation."
+date: "2026-07-05"
 tags:
-  - React
-  - Frontend
-  - JavaScript
-  - Web Development
+  - Python
+  - Machine Learning
+  - Scikit-learn
+  - AI
 ---
 
-**React** is a JavaScript library for building user interfaces. It makes it easy to create interactive UIs by using a component-based approach.
+Machine Learning enables computers to learn patterns from data without being explicitly programmed.
 
-## Why Use React?
+## Why Scikit-learn?
 
-- **Reusable components** save time and make code cleaner
-- **Virtual DOM** makes updates faster
-- **Strong community** and tons of tools
+- Beginner friendly
+- Powerful algorithms
+- Excellent documentation
+- Perfect for classic ML
 
-## Your First React Component
+## Install
 
-Let's create a simple "Hello, World!" component:
-
-```jsx
-import React from "react"
-
-function HelloWorld() {
-  return <h1>Hello, World!</h1>
-}
-
-export default HelloWorld
+```bash
+pip install scikit-learn
 ```
 
-## Setting Up a Project (with Vite)
+## Your First Model
 
-```shell
-# Create a new React project with Vite
-npm create vite@latest my-app -- --template react
+```python
+from sklearn.linear_model import LinearRegression
 
-cd my-app
-npm install
-npm run dev
+model = LinearRegression()
+model.fit(X_train, y_train)
 ```
 
-## Core Concepts to Learn
+## Common Algorithms
 
-- **JSX**: JavaScript + XML syntax
-- **Props**: Passing data into components
-- **State**: Managing local component data
+- Linear Regression
+- Logistic Regression
+- Decision Trees
+- Random Forest
+- K-Nearest Neighbors
 
-Stay curious, and happy coding! 🎯
+## Model Evaluation
+
+Always evaluate your model using appropriate metrics before deployment.
+
+## Conclusion
+
+Scikit-learn is one of the best libraries for learning machine learning and building reliable predictive models.

@@ -2,7 +2,6 @@ import { IconType } from "react-icons"
 import {
   FaMapMarkerAlt,
   FaLanguage,
-  FaGamepad,
   FaUniversity,
   FaBuilding,
   FaTools,

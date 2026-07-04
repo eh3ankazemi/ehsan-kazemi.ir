@@ -47,10 +47,11 @@ export default function Projects({ projects, baseUrl }: { projects: any; baseUrl
   const filteredProjects = useMemo(() => {
     return sortProjects(filterProjects(projects, selectedTechStack), sortOrder)
   }, [projects, selectedTechStack, sortOrder])
-
+  
+  const projectItemsLangToShow = filteredProjects.filter(projectItem => projectItem.fa === t.isRTL)
   const { items: paginatedProjects, totalPages } = useMemo(
-    () => paginateItems(filteredProjects, currentPage, PROJECTS_PAGE_SIZE),
-    [filteredProjects, currentPage]
+    () => paginateItems(projectItemsLangToShow, currentPage, PROJECTS_PAGE_SIZE),
+    [projectItemsLangToShow, currentPage]
   )
 
   if (currentPage < 1 || (totalPages > 0 && currentPage > totalPages)) {
@@ -121,10 +122,9 @@ export default function Projects({ projects, baseUrl }: { projects: any; baseUrl
     })
   }
 
-  const projectItemsLangToShow = paginatedProjects.filter(projectItem => projectItem.fa === t.isRTL)
   // Unique techStackCounts for filter dropdown
   const techStackCounts: Record<string, number> = {}
-  projectItemsLangToShow.forEach(project => {
+  paginatedProjects.forEach(project => {
     ;(project.techStack ?? []).forEach(tech => {
       techStackCounts[tech] = (techStackCounts[tech] || 0) + 1
     })
@@ -149,7 +149,7 @@ export default function Projects({ projects, baseUrl }: { projects: any; baseUrl
             onApply={handleApplyFilters}
             onClear={handleClearFilters}
             placeholder={t.filter.company}
-            resultCount={projectItemsLangToShow.length}
+            resultCount={paginatedProjects.length}
           />
         </Suspense>
 
@@ -179,7 +179,7 @@ export default function Projects({ projects, baseUrl }: { projects: any; baseUrl
 
       <ProjectsClientUI
         filteredProjects={filteredProjects}
-        paginatedProjects={projectItemsLangToShow}
+        paginatedProjects={paginatedProjects}
       />
 
       <PaginationControls

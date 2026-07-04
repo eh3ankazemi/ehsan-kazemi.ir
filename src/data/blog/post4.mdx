@@ -1,46 +1,59 @@
 ---
 fa: false
-title: "Git Basics for Beginners"
-summary: "Learn what Git is, why it's important, and how to start version-controlling your projects."
-date: "2025-04-18"
+title: "Building Your First AI Chat App with Next.js and OpenAI"
+summary: "Learn how to build a modern AI chat application using Next.js, TypeScript, and the OpenAI API with streaming responses."
+date: "2026-07-05"
 tags:
-  - Git
-  - Version Control
-  - Development
-  - GitHub
+  - Next.js
+  - AI
+  - OpenAI
+  - TypeScript
+  - Full Stack
 ---
 
-**Git** is a distributed version control system. It helps you track changes, collaborate with others, and manage code more effectively.
+AI-powered applications are becoming an essential part of modern software. In this guide, we'll build a simple AI chat application using Next.js and the OpenAI API.
 
-## Why Use Git?
+## What You'll Build
 
-- Track every change in your project
-- Collaborate with team members easily
-- Roll back to previous versions when needed
+- A responsive chat interface
+- Streaming AI responses
+- Server-side API routes
+- Clean TypeScript code
+- Markdown message rendering
 
-## Common Git Commands
+## Project Structure
 
-```shell
-# Initialize a new Git repository
-git init
-
-# Check the status of your repository
-git status
-
-# Stage changes
-git add .
-
-# Commit changes
-git commit -m "Initial commit"
-
-# Push to a remote repository
-git push origin main
+```text
+app/
+├── chat/
+├── api/
+│   └── chat/
+├── components/
+└── lib/
 ```
+
+## Creating the API Route
+
+```ts
+export async function POST(req: Request) {
+  const { messages } = await req.json()
+
+  // Send messages to your AI provider
+}
+```
+
+## Building the Chat UI
+
+Create reusable components for messages, input, and loading states to keep the application clean and maintainable.
 
 ## Best Practices
 
-- Write meaningful commit messages
-- Commit often but logically
-- Always pull before pushing changes
+- Validate user input
+- Handle API errors gracefully
+- Stream responses for a better UX
+- Store API keys securely
+- Optimize performance
 
-Start using Git from day one on all your projects! 🚀
+## Conclusion
+
+Building an AI chat app is an excellent way to learn modern full-stack development while exploring the capabilities of large language models. With Next.js and TypeScript, you can create fast, scalable, and user-friendly AI applications.

@@ -1,0 +1,67 @@
+---
+fa: false
+title: "Building a Multilingual Website with Next.js App Router"
+summary: "Learn how to add multilingual support to a Next.js App Router project using dynamic routes, dictionaries, and SEO best practices."
+date: "2026-07-05"
+tags:
+  - Next.js
+  - TypeScript
+  - i18n
+  - SEO
+---
+
+Creating a multilingual website is one of the best ways to reach a wider audience. In this guide, we'll build a multilingual application using **Next.js App Router** with clean URLs and SEO-friendly routing.
+
+## Why Use App Router for i18n?
+
+- Better SEO with localized URLs
+- Easy dictionary-based translations
+- Supports static generation
+- Great developer experience
+
+## Folder Structure
+
+```text
+app/
+ ├── [lang]/
+ │   ├── page.tsx
+ │   ├── blog/
+ │   └── projects/
+ ├── layout.tsx
+```
+
+## Creating Dictionaries
+
+Store translations inside dedicated files.
+
+```ts
+export const dictionary = {
+  home: "Home",
+  blog: "Blog",
+  projects: "Projects",
+}
+```
+
+Then load the correct dictionary based on the current locale.
+
+## Language Switcher
+
+A language switcher simply changes the locale while preserving the current route.
+
+```tsx
+<Link href="/fa">فارسی</Link>
+<Link href="/en">English</Link>
+```
+
+## SEO
+
+Don't forget to generate localized metadata.
+
+- Title
+- Description
+- Open Graph
+- Alternate language links
+
+## Conclusion
+
+Adding multilingual support early makes your application easier to scale and improves both user experience and search engine visibility.

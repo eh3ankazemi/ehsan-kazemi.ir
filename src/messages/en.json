@@ -42,6 +42,8 @@
     "title": "Hi, I'm Ehsan",
     "recentBlog": "Recent Blog Posts",
     "recentProjects": "Recent Projects",
-    "view": "View all"
+    "view": "View all",
+    "notFound":"Page Not Found",
+    "gohome":"Go Home"
   }
 }

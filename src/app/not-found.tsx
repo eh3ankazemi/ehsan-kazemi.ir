@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { useTranslation } from "@/hooks/useTranslation"
 import { cn } from "@/lib/utils"
 
 const funLines = [
@@ -22,10 +23,13 @@ const funLines = [
 
 export default function NotFound() {
   const [line, setLine] = useState(funLines[0])
+  const t = useTranslation()
 
   useEffect(() => {
-    setLine(funLines[Math.floor(Math.random() * funLines.length)])
-  }, [])
+    setLine(t.isRTL
+      ? "این صفحه‌ای نیست که دنبالش هستید!"
+      : funLines[Math.floor(Math.random() * funLines.length)])
+  }, [t.isRTL])
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
@@ -44,7 +48,7 @@ export default function NotFound() {
         transition={{ delay: 0.2, duration: 0.4 }}
         className="text-xl md:text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100"
       >
-        Page Not Found
+        {t.home.notFound}
       </motion.h1>
 
       <motion.div
@@ -81,7 +85,7 @@ export default function NotFound() {
             "dark:focus-visible:ring-offset-black"
           )}
         >
-          <span>Go Home</span>
+          <span>{t.home.gohome}</span>
           <motion.span
             initial={{ x: 0 }}
             animate={{ x: 0 }}
