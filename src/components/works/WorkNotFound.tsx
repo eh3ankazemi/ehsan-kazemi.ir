@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { FaArrowLeft, FaExclamationCircle } from "react-icons/fa"
+import { FaArrowLeft, FaArrowRight, FaExclamationCircle } from "react-icons/fa"
 import { useTranslation } from "@/hooks/useTranslation"
 import { cn } from "@/lib/utils"
 
@@ -23,7 +23,12 @@ export default function WorkNotFound() {
           "focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-2"
         )}
       >
-        <FaArrowLeft className="inline-block mr-2" /> Back to /work
+        {t.isRTL ? (
+          <FaArrowRight className="inline-block mr-2" />
+        ) : (
+          <FaArrowLeft className="inline-block mr-2" />
+        )}{" "}
+        Back to /work
       </Link>
     </div>
   )
