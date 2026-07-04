@@ -33,13 +33,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const decodedTag = decodeURIComponent(tag)
 
   return {
-    title: `پست‌های برچسب‌گذاری شده "${decodedTag}" | احسان کاضمی`,
+    title: `پست‌های برچسب‌گذاری شده "${decodedTag}" | احسان کاظمی`,
     description: `مرور پست‌های وبلاگ با برچسب‌های ${decodedTag}.`,
     alternates: {
       canonical: `/blog/tag/${decodedTag.toLowerCase()}`,
     },
     openGraph: {
-      title: `پست‌های برچسب‌گذاری شده "${decodedTag}" | احسان کاضمی`,
+      title: `پست‌های برچسب‌گذاری شده "${decodedTag}" | احسان کاظمی`,
       description: `مرور پست‌های وبلاگ با برچسب‌های ${decodedTag}.`,
       type: "website",
     },

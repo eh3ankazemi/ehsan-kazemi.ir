@@ -10,7 +10,7 @@ import { getAllBlogPosts } from "@/lib/mdx"
  */
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "وبلاگ | احسان کاضمی",
+    title: "وبلاگ | احسان کاظمی",
     description: "آخرین پست‌های وبلاگ من در مورد توسعه نرم‌افزار، فناوری و موارد دیگر را بخوانید.",
     alternates: {
       canonical: "/blog",
@@ -23,26 +23,9 @@ export async function generateMetadata(): Promise<Metadata> {
  */
 export default async function BlogPage() {
   const posts = await getAllBlogPosts()
-
-  // Count tags
-  const tagCounts: Record<string, number> = {}
-
-  posts.forEach(post => {
-    ;(post.tags ?? []).forEach(tag => {
-      tagCounts[tag] = (tagCounts[tag] || 0) + 1
-    })
-  })
-
-  const uniqueTags = Object.entries(tagCounts)
-    .map(([tag, count]) => ({
-      tag,
-      count,
-    }))
-    .sort((a, b) => a.tag.localeCompare(b.tag))
-
   return (
     <Suspense fallback={<Loading />}>
-      <Blogs posts={posts} uniqueTags={uniqueTags} baseUrl="/blog" />
+      <Blogs posts={posts} baseUrl="/blog" />
     </Suspense>
   )
 }

@@ -29,7 +29,7 @@ import type { BlogPosting, WithContext } from "schema-dts"
 export async function generateStaticParams() {
   const posts = await getAllBlogPosts()
   return posts.map(post => ({
-    slug: post.slug,
+    slug: encodeURIComponent(post.slug),
   }))
 }
 
@@ -39,7 +39,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: { params: pageParams }): Promise<Metadata> {
   const { slug } = await props.params
   const posts = await getAllBlogPosts()
-  const post = posts.find(p => p.slug === slug)
+  const post = posts.find(p => p.slug === decodeURIComponent(slug))
 
   if (!post) {
     return {
@@ -48,10 +48,10 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
   }
 
   return {
-    title: `${post.title} | احسان کاضمی`,
+    title: `${post.title} | احسان کاظمی`,
     description: post.title,
     openGraph: {
-      title: `${post.title} | احسان کاضمی`,
+      title: `${post.title} | احسان کاظمی`,
       description: post.title,
       type: "article",
       publishedTime: post.date,
@@ -66,10 +66,10 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
 export default async function BlogPostPage(props: { params: pageParams }) {
   const { slug } = await props.params
   const posts = await getAllBlogPosts()
-  const post = posts.find(p => p.slug === slug)
+  const post = posts.find(p => p.slug === decodeURIComponent(slug))
   if (!post) return notFound()
 
-  const filePath = path.join(process.cwd(), "src", "data", "blog", `${slug}.mdx`)
+  const filePath = path.join(process.cwd(), "src", "data", "blog", `${decodeURIComponent(slug)}.mdx`)
 
   if (!fs.existsSync(filePath)) {
     return notFound()
@@ -134,12 +134,12 @@ export default async function BlogPostPage(props: { params: pageParams }) {
     ...(post.tags && post.tags.length > 0 && { keywords: post.tags.join(", ") }),
     author: {
       "@type": "Person",
-      name: "احسان کاضمی",
+      name: "احسان کاظمی",
       url: siteMetadata.siteUrl,
     },
     publisher: {
       "@type": "Person",
-      name: "احسان کاضمی",
+      name: "احسان کاظمی",
       url: siteMetadata.siteUrl,
     },
   }
@@ -179,7 +179,7 @@ export default async function BlogPostPage(props: { params: pageParams }) {
       {/* Table of Contents */}
       <TableOfContents />
 
-      <div className="prose dark:prose-invert max-w-full overflow-hidden">{content}</div>
+      <div className="prose dark:prose-invert max-w-full overflow-hidden textright">{content}</div>
       <SimilarBlogPosts allPosts={posts} currentPostPlug={slug} maxPosts={3} />
     </AnimatedArticle>
   )

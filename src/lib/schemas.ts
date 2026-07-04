@@ -1,6 +1,7 @@
 import { z } from "zod"
 
 export const BlogFrontmatterSchema = z.object({
+  fa:z.boolean(),
   title: z.string(),
   summary: z.string(),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Must be YYYY-MM-DD"),
@@ -8,6 +9,7 @@ export const BlogFrontmatterSchema = z.object({
 })
 
 export const WorkItemFrontmatterSchema = z.object({
+  fa:z.boolean(),
   company: z.string(),
   title: z.string(),
   start: z.string(),
@@ -20,6 +22,7 @@ export const WorkItemFrontmatterSchema = z.object({
 })
 
 export const ProjectFrontmatterSchema = z.object({
+  fa:z.boolean(),
   title: z.string(),
   image: z.string(),
   description: z.string(),

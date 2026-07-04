@@ -28,6 +28,9 @@ interface HomeContentProps {
  */
 export default function HomeContent({ blog, work, projects }: HomeContentProps) {
   const t = useTranslation()
+  const workItemsLangToShow = work.filter(Item => Item.fa === t.isRTL)
+  const projectsItemsLangToShow = projects.filter(Item => Item.fa === t.isRTL)
+  const blogItemsLangToShow = blog.filter(Item => Item.fa === t.isRTL)
   return (
     <MotionConfig reducedMotion="user">
       <section className="px-4 max-w-4xl mx-auto">
@@ -71,9 +74,9 @@ export default function HomeContent({ blog, work, projects }: HomeContentProps) 
         </motion.div>
 
         <QuickFacts />
-        <WorkPreview work={work} />
-        <ProjectsPreview projects={projects} />
-        <BlogPreview blog={blog} />
+        <WorkPreview work={workItemsLangToShow} />
+        <ProjectsPreview projects={projectsItemsLangToShow} />
+        <BlogPreview blog={blogItemsLangToShow} />
       </section>
     </MotionConfig>
   )

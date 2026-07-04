@@ -17,11 +17,9 @@ const WORK_PAGE_SIZE = paginationConfig.projectsPerPage
 
 export default function Works({
   work,
-  uniqueCompanies,
   baseUrl,
 }: {
   work: any
-  uniqueCompanies: { company: string; count: number }[]
   baseUrl: string
 }) {
   const router = useRouter()
@@ -64,9 +62,7 @@ export default function Works({
     WORK_PAGE_SIZE
   )
 
-  if (currentPage < 1 || (totalPages > 0 && currentPage > totalPages)) {
-    return <WorkNotFound />
-  }
+  if (currentPage < 1 || (totalPages > 0 && currentPage > totalPages)) return <WorkNotFound />
 
   const handleToggleCompany = (company: string) => {
     setCompanyDrafts(prev =>
@@ -126,6 +122,16 @@ export default function Works({
     router.push(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`)
   }
 
+
+  const WorkItemsLangToShow = paginatedWorkItems.filter(workItem => workItem.fa === t.isRTL)
+  // Unique companies for filter dropdown
+  const companyCounts: Record<string, number> = {}
+  WorkItemsLangToShow.forEach((workItem: { company: string | number }) => {
+    companyCounts[workItem.company] = (companyCounts[workItem.company] || 0) + 1
+  })
+  const uniqueCompanies: { company: string; count: number }[] = Object.entries(companyCounts)
+    .map(([company, count]) => ({ company, count }))
+    .sort((a, b) => a.company.localeCompare(b.company))
   return (
     <section className="mx-auto max-w-4xl px-4">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
@@ -140,7 +146,7 @@ export default function Works({
             onApply={handleApplyFilters}
             onClear={handleClearFilters}
             placeholder={t.filter.company}
-            resultCount={filteredWorkItems.length}
+            resultCount={WorkItemsLangToShow.length}
           />
         </Suspense>
 
@@ -162,7 +168,7 @@ export default function Works({
         onClearAll={selectedCompanies.length > 1 ? handleClearFilters : undefined}
       />
 
-      <WorkClientUI filteredWorkItems={filteredWorkItems} paginatedWorkItems={paginatedWorkItems} />
+      <WorkClientUI filteredWorkItems={filteredWorkItems} paginatedWorkItems={WorkItemsLangToShow} />
 
       <PaginationControls
         currentPage={currentPage}

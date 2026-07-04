@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { useTranslation } from "@/hooks/useTranslation"
 import { cn } from "@/lib/utils"
 
 interface BackToPageButtonProps {
@@ -14,8 +15,7 @@ interface BackToPageButtonProps {
  */
 export default function BackToPageButton({ pageUrl }: BackToPageButtonProps) {
   const pageName = pageUrl.split("/").filter(Boolean).pop() || "page"
-  const capitalizedName = pageName.charAt(0).toUpperCase() + pageName.slice(1)
-
+  const t = useTranslation()
   return (
     <Link
       href={pageUrl}
@@ -37,7 +37,7 @@ export default function BackToPageButton({ pageUrl }: BackToPageButtonProps) {
       >
         ←
       </motion.span>
-      <span>Back to {capitalizedName}</span>
+      <span>{t.navigation.back + " " + t.navigation[pageName]}</span>
     </Link>
   )
 }

@@ -24,7 +24,7 @@ import type { EmployeeRole, WithContext } from "schema-dts"
 export async function generateStaticParams() {
   const work = await getAllWorkItems()
   return work.map(item => ({
-    slug: item.slug,
+    slug: encodeURIComponent(item.slug),
   }))
 }
 
@@ -34,7 +34,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: { params: pageParams }): Promise<Metadata> {
   const { slug } = await props.params
   const work = await getAllWorkItems()
-  const post = work.find(w => w.slug === slug)
+  const post = work.find(w => w.slug === decodeURIComponent(slug))
 
   if (!post) {
     return {
@@ -43,10 +43,10 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
   }
 
   return {
-    title: `${post.company} - ${post.title} | احسان کاضمی`,
+    title: `${post.company} - ${post.title} | احسان کاظمی`,
     description: post.description,
     openGraph: {
-      title: `${post.company} - ${post.title} | احسان کاضمی`,
+      title: `${post.company} - ${post.title} | احسان کاظمی`,
       description: post.description,
       type: "article",
     },
@@ -81,10 +81,17 @@ function CompanyHeader({ frontmatter }: { frontmatter: WorkItemFrontmatter }) {
 export default async function WorkItemPage(props: { params: pageParams }) {
   const { slug } = await props.params
   const work = await getAllWorkItems()
-  const post = work.find(w => w.slug === slug)
+  const post = work.find(w => w.slug === decodeURIComponent(slug))
+
   if (!post) return notFound()
 
-  const filePath = path.join(process.cwd(), "src", "data", "work", `${slug}.mdx`)
+  const filePath = path.join(
+    process.cwd(),
+    "src",
+    "data",
+    "work",
+    `${decodeURIComponent(post.slug)}.mdx`
+  )
 
   if (!fs.existsSync(filePath)) {
     return notFound()
@@ -162,7 +169,7 @@ export default async function WorkItemPage(props: { params: pageParams }) {
           </div>
         </>
       )}
-      <div className="max-w-5xl prose dark:prose-invert">{content}</div>
+      <div className="max-w-5xl prose dark:prose-invert textright">{content}</div>
     </AnimatedArticle>
   )
 }

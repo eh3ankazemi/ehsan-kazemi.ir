@@ -72,6 +72,7 @@ export async function getAllBlogPosts(): Promise<BlogPostProps[]> {
     BlogFrontmatterSchema,
     (slug, fm, fileContent) => ({
       slug,
+      fa: fm.fa,
       title: fm.title,
       summary: fm.summary,
       date: fm.date,
@@ -99,6 +100,7 @@ export async function getAllWorkItems(): Promise<WorkItemProps[]> {
     workDir,
     WorkItemFrontmatterSchema,
     (slug, fm) => ({
+      fa: fm.fa,
       slug,
       company: fm.company,
       title: fm.title,
@@ -134,6 +136,7 @@ export async function getAllProjects(): Promise<ProjectProps[]> {
 
   cachedProjects = await loadMDXDirectory(projectsDir, ProjectFrontmatterSchema, (slug, fm) => ({
     slug,
+    fa: fm.fa,
     title: fm.title,
     image: fm.image,
     description: fm.description,

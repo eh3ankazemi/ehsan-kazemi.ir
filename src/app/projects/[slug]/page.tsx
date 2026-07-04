@@ -24,7 +24,7 @@ import type { CreativeWork, WithContext } from "schema-dts"
 export async function generateStaticParams() {
   const projects = await getAllProjects()
   return projects.map(project => ({
-    slug: project.slug,
+    slug: encodeURIComponent(project.slug),
   }))
 }
 
@@ -34,7 +34,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: { params: pageParams }): Promise<Metadata> {
   const { slug } = await props.params
   const projects = await getAllProjects()
-  const project = projects.find(p => p.slug === slug)
+  const project = projects.find(p => p.slug === decodeURIComponent(slug))
 
   if (!project) {
     return {
@@ -43,10 +43,10 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
   }
 
   return {
-    title: `${project.title} | احسان کاضمی`,
+    title: `${project.title} | احسان کاظمی`,
     description: project.description,
     openGraph: {
-      title: `${project.title} | احسان کاضمی`,
+      title: `${project.title} | احسان کاظمی`,
       description: project.description,
       type: "article",
     },
@@ -61,12 +61,13 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
  */
 export default async function ProjectPage(props: { params: pageParams }) {
   const { slug } = await props.params
+  const decoderSlug = decodeURIComponent(slug)
   const projects = await getAllProjects()
-  const post = projects.find(p => p.slug === slug)
+  const post = projects.find(p => p.slug === decoderSlug)
   if (!post) return notFound()
 
-  const filePath = path.join(process.cwd(), "src", "data", "projects", `${slug}.mdx`)
-  const projectPhotoDir = path.join(process.cwd(), "public", "projects", slug)
+  const filePath = path.join(process.cwd(), "src", "data", "projects", `${decoderSlug}.mdx`)
+  const projectPhotoDir = path.join(process.cwd(), "public", "projects", decoderSlug)
 
   if (!fs.existsSync(filePath)) {
     return notFound()
@@ -98,7 +99,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
 
     imageFiles.forEach((filename, index) => {
       projectImages.push({
-        src: `/projects/${slug}/${filename}`,
+        src: `/projects/${decoderSlug}/${filename}`,
         alt: `${frontmatter.title} ${index + 1}`,
       })
     })
@@ -117,7 +118,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
     ...(frontmatter.githubUrl && { codeRepository: frontmatter.githubUrl }),
     author: {
       "@type": "Person",
-      name: "احسان کاضمی",
+      name: "احسان کاظمی",
       url: siteMetadata.siteUrl,
     },
   }
@@ -206,7 +207,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
       )}
 
       {/* Display the actual content of the .mdx file */}
-      <div className="max-w-4xl prose dark:prose-invert">{content}</div>
+      <div className="max-w-4xl prose dark:prose-invert textright">{content}</div>
     </AnimatedArticle>
   )
 }

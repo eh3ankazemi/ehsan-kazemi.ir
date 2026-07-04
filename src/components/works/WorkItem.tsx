@@ -73,7 +73,7 @@ export default function WorkItem({
 
         {/* Duration and Locations */}
         <div className="mt-2 text-gray-500 flex flex-col sm:flex-row sm:items-center">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 textright">
             <FaCalendarAlt className="w-4 h-4" />
             <span>
               {start} – {end}

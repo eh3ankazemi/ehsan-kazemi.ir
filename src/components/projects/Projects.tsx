@@ -16,15 +16,7 @@ import ProjectsNotFound from "./ProjectsNotFound"
 
 const PROJECTS_PAGE_SIZE = paginationConfig.projectsPerPage
 
-export default function Projects({
-  projects,
-  uniqueTechStack,
-  baseUrl,
-}: {
-  projects: any
-  uniqueTechStack: { tech: string; count: number }[]
-  baseUrl: string
-}) {
+export default function Projects({ projects, baseUrl }: { projects: any; baseUrl: string }) {
   const t = useTranslation()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -129,6 +121,20 @@ export default function Projects({
     })
   }
 
+  const projectItemsLangToShow = paginatedProjects.filter(projectItem => projectItem.fa === t.isRTL)
+  // Unique techStackCounts for filter dropdown
+  const techStackCounts: Record<string, number> = {}
+  projectItemsLangToShow.forEach(project => {
+    ;(project.techStack ?? []).forEach(tech => {
+      techStackCounts[tech] = (techStackCounts[tech] || 0) + 1
+    })
+  })
+  const uniqueTechStack = Object.entries(techStackCounts)
+    .map(([tech, count]) => ({
+      tech,
+      count,
+    }))
+    .sort((a, b) => a.tech.localeCompare(b.tech))
   return (
     <section className="mx-auto max-w-4xl px-4">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
@@ -143,7 +149,7 @@ export default function Projects({
             onApply={handleApplyFilters}
             onClear={handleClearFilters}
             placeholder={t.filter.company}
-            resultCount={filteredProjects.length}
+            resultCount={projectItemsLangToShow.length}
           />
         </Suspense>
 
@@ -171,7 +177,10 @@ export default function Projects({
         onClearAll={selectedTechStack.length > 1 ? handleClearFilters : undefined}
       />
 
-      <ProjectsClientUI filteredProjects={filteredProjects} paginatedProjects={paginatedProjects} />
+      <ProjectsClientUI
+        filteredProjects={filteredProjects}
+        paginatedProjects={projectItemsLangToShow}
+      />
 
       <PaginationControls
         currentPage={currentPage}

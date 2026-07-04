@@ -17,15 +17,7 @@ import BlogNotFound from "./BlogNotFound"
 
 const POSTS_PAGE_SIZE = paginationConfig.blogPostsPerPage
 
-export default function Blogs({
-  posts,
-  uniqueTags,
-  baseUrl,
-}: {
-  posts: BlogPostProps[]
-  uniqueTags: { tag: string; count: number }[]
-  baseUrl: string
-}) {
+export default function Blogs({ posts, baseUrl }: { posts: BlogPostProps[]; baseUrl: string }) {
   const router = useRouter()
   const t = useTranslation()
   const searchParams = useSearchParams()
@@ -131,6 +123,20 @@ export default function Blogs({
     router.push(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`)
   }
 
+  const PostItemsLangToShow = paginatedPosts.filter(postItem => postItem.fa === t.isRTL)
+  // Unique tags for filter dropdown
+  const tagCounts: Record<string, number> = {}
+  PostItemsLangToShow.forEach(post => {
+    ;(post.tags ?? []).forEach(tag => {
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1
+    })
+  })
+  const uniqueTags = Object.entries(tagCounts)
+    .map(([tag, count]) => ({
+      tag,
+      count,
+    }))
+    .sort((a, b) => a.tag.localeCompare(b.tag))
   return (
     <section className="mx-auto max-w-4xl px-4">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
@@ -145,7 +151,7 @@ export default function Blogs({
             onApply={handleApplyFilters}
             onClear={handleClearFilters}
             placeholder={t.filter.company}
-            resultCount={filteredPosts.length}
+            resultCount={PostItemsLangToShow.length}
           />
         </Suspense>
 
@@ -173,7 +179,7 @@ export default function Blogs({
         onClearAll={selectedTags.length > 1 ? handleClearFilters : undefined}
       />
 
-      <BlogClientUI filteredPosts={filteredPosts} paginatedPosts={paginatedPosts} />
+      <BlogClientUI filteredPosts={filteredPosts} paginatedPosts={PostItemsLangToShow} />
 
       <PaginationControls
         currentPage={currentPage}
