@@ -1,50 +1,30 @@
 import { IconType } from "react-icons"
 import {
   FaMapMarkerAlt,
-  FaBook,
   FaLanguage,
   FaGamepad,
   FaUniversity,
-  FaSkiing,
   FaBuilding,
   FaTools,
   FaGithub,
   FaLinkedin,
-  FaGoodreads,
   FaEnvelope,
   FaInstagram,
+  FaYoutube,
+  FaPhone,
+  FaPlayCircle,
+  FaLink,
+  FaGoodreads,
   FaReddit,
   FaDribbble,
-  FaYoutube,
   FaStackOverflow,
 } from "react-icons/fa"
-import { FaBluesky, FaXTwitter } from "react-icons/fa6"
+import { FaBluesky, FaMoneyBills, FaXTwitter } from "react-icons/fa6"
 
 /**
  * Configuration for the home page intro section
  */
 export const homeIntroConfig = {
-  name: "Ehsan kazemi",
-  shortName: "Ehsan",
-  role: "Full-Stack Dev",
-  /**
-   * Additional custom facts to display below the predefined ones.
-   * Add any extra facts you want to display with their icons.
-   * You must use an icon from react-icons and provide its label.
-   */
-  facts: {
-    company: "Hypernova Labs",
-    education: "Computer Science Grad @ VuA",
-    location: "Lille, France",
-    languages: "EN / ES / DE",
-    role: "Full-Stack Dev",
-  },
-  additionalFacts: [
-    { icon: FaBook, label: "Book Reviewer" },
-    { icon: FaGamepad, label: "Sci-fi Fan" },
-    { icon: FaSkiing, label: "Skiing Enthusiast" },
-  ] as Array<{ icon: IconType; label: string }>,
-
   /**
    * Number of work items to show in the preview sections on the home page.
    * Note that the actual number shown may be less if there aren't enough items.
@@ -100,33 +80,23 @@ export const paginationConfig = {
  */
 export const footerConfig = {
   /**
-   * Name displayed in the copyright notice
-   */
-  copyrightName: "John Doe",
-
-  /**
-   * Show version and attribution section
-   * Set to true if you want to hide the "built by @alemoraru" attribution and version number.
-   * By default, this is true to give credit to the template creator, but you can disable it if desired.
-   */
-  showVersionAndAttribution: true,
-
-  /**
    * Social media links
    * Simply add your URLs below. Leave empty ("") to hide a social link.
    */
   socialLinks: {
-    github: "/",
-    linkedin: "/",
-    goodreads: "/",
-    instagram: "/",
-    twitter: "/",
-    reddit: "/",
-    dribbble: "/",
-    youtube: "/",
-    bluesky: "/",
-    stackoverflow: "/",
-    email: "contact@example.com",
+    github: "https://github.com/eh3ankazemi",
+    linkedin: "https://www.linkedin.com/in/eh3ankazemi",
+    goodreads: "",
+    instagram: "https://www.instagram.com/eh3ankazemi/",
+    twitter: "https://x.com/eh3ankazemi",
+    reddit: "",
+    dribbble: "",
+    youtube: "https://www.youtube.com/@eh3ankazemi",
+    stackoverflow: "",
+    bluesky: "",
+    link: "https://links.ehsan-kazemi.ir/",
+    call: "tel:+989212154476",
+    email: "mailto:eh3ankazemii@gmail.com",
   },
 }
 
@@ -137,12 +107,14 @@ export const footerConfig = {
  * Internal mapping of predefined fact categories to their icons
  * This is used internally by the HomeContent component - users don't need to modify this
  */
-export const factIconMap: Record<keyof typeof homeIntroConfig.facts, IconType> = {
+export const factIconMap: Record<string, IconType> = {
   company: FaBuilding,
   education: FaUniversity,
   location: FaMapMarkerAlt,
   languages: FaLanguage,
   role: FaTools,
+  crypto:FaMoneyBills, 
+  movie:FaPlayCircle, 
 }
 
 /**
@@ -163,5 +135,7 @@ export const socialIconMap: Record<
   youtube: { icon: FaYoutube, label: "YouTube" },
   bluesky: { icon: FaBluesky, label: "Bluesky" },
   stackoverflow: { icon: FaStackOverflow, label: "Stack Overflow" },
+  link: { icon: FaLink, label: "LinkStack" },
+  call: { icon: FaPhone, label: "Call" },
   email: { icon: FaEnvelope, label: "Email" },
 }

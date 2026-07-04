@@ -291,3 +291,7 @@ html[lang="fa"] body {
     content: "";
   }
 }
+
+html[lang="fa"] .textright{
+  text-align: right;
+}

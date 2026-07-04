@@ -8,15 +8,17 @@
   },
   "homeIntro": {
     "introParagraphs": [
-      "I'm a software engineer passionate about solving problems, building things, and reading sci-fi. Whenever I'm not coding, you can find me exploring the world, playing tennis or skating. I love to share my knowledge and experiences through my blog, where I write about tech, books, and life lessons.",
-      "I am currently working at Hypernova Labs as a software engineer, where I focus on building scalable applications and improving user experiences. I have a keen interest in full-stack development, particularly in React and Node.js. I enjoy collaborating with cross-functional teams to deliver high-quality software solutions."
+      "من یک توسعه‌دهنده نرم‌افزار هستم که به هوش مصنوعی و توسعه فول‌استک علاقه‌مندم. با استفاده از React، Next.js، TypeScript و MongoDB اپلیکیشن‌های وب مدرن توسعه می‌دهم و هم‌زمان در زمینه هوش مصنوعی و یادگیری ماشین با Python، PyTorch و Scikit-learn مهارت‌هایم را گسترش می‌دهم.",
+      "از تبدیل ایده‌ها به محصولات واقعی، حل مسائل چالش‌برانگیز و یادگیری مداوم فناوری‌های جدید لذت می‌برم. همیشه در حال ساختن، آزمایش کردن و به‌اشتراک‌گذاری چیزهایی هستم که از طریق پروژه‌هایم یاد می‌گیرم."
     ],
     "facts": {
-      "company": "Hypernova Labs",
-      "education": "Computer Science Grad @ VuA",
-      "location": "Lille, France",
-      "languages": "EN / FA",
-      "role": "Full-Stack Dev"
+      "company": "کار به عنوان فریلنسر",
+      "education": "دﯾﭙﻠﻢ ﮐﺎﻣﭙﯿﻮﺗﺮ",
+      "location": "اصفهان، ایران",
+      "languages": "انگلیس / فارسی",
+      "role": "AI Engineer, Full-Stack Dev",
+      "crypto": "کریپتو",
+      "movie": "Movie & Anime"
     },
     "fanFact": "حقایق سریع و جالب",
     "name": "احسان کاظمی",

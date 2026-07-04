@@ -49,10 +49,10 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
   }
 
   return {
-    // title: `${post.title} | ${homeIntroConfig.name}`,
+    title: `${post.title} | احسان کاضمی`,
     description: post.title,
     openGraph: {
-      // title: `${post.title} | ${homeIntroConfig.name}`,
+      title: `${post.title} | احسان کاضمی`,
       description: post.title,
       type: "article",
       publishedTime: post.date,
@@ -135,12 +135,12 @@ export default async function BlogPostPage(props: { params: pageParams }) {
     ...(post.tags && post.tags.length > 0 && { keywords: post.tags.join(", ") }),
     author: {
       "@type": "Person",
-      name: homeIntroConfig.name,
+      name: "احسان کاضمی",
       url: siteMetadata.siteUrl,
     },
     publisher: {
       "@type": "Person",
-      name: homeIntroConfig.name,
+      name: "احسان کاضمی",
       url: siteMetadata.siteUrl,
     },
   }

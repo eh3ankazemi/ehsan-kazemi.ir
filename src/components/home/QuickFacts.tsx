@@ -11,15 +11,12 @@ import { fadeUpVariants } from "./animations"
  */
 export default function QuickFacts() {
   const t = useTranslation()
-  const allFacts = [
-    ...Object.entries(t.homeIntro.facts)
-      .filter(([, value]) => value && value.trim() !== "")
-      .map(([category, value]) => {
-        const categoryKey = category as keyof typeof factIconMap
-        return { icon: factIconMap[categoryKey], label: value }
-      }),
-    ...homeIntroConfig.additionalFacts,
-  ]
+  const allFacts = Object.entries(t.homeIntro.facts)
+    .filter(([, value]) => value && value.trim() !== "")
+    .map(([category, value]) => {
+      const categoryKey = category as keyof typeof factIconMap
+      return { icon: factIconMap[categoryKey], label: value }
+    })
 
   return (
     <motion.div

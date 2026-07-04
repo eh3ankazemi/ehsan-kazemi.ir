@@ -27,7 +27,7 @@ export default async function Home() {
     name: siteMetadata.author.name,
     url: siteMetadata.siteUrl,
     description: siteMetadata.description,
-    jobTitle: homeIntroConfig.role,
+    jobTitle: "AI Engineer, Full-Stack Dev",
     ...(sameAs.length > 0 && { sameAs }),
   }
 

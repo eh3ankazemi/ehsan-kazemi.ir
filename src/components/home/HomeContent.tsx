@@ -62,7 +62,7 @@ export default function HomeContent({ blog, work, projects }: HomeContentProps) 
               <motion.p
                 key={index}
                 variants={staggerItemVariants}
-                className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 text-left"
+                className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300 text-left textright"
               >
                 {paragraph}
               </motion.p>

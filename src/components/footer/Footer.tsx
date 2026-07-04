@@ -25,7 +25,7 @@ function SocialLinks() {
               key={label}
               href={href}
               aria-label={label}
-              target={href.startsWith("mailto") ? "_blank" : undefined}
+              target="_blank"
               className={cn(
                 "group relative flex items-center justify-center w-11 h-11",
                 "rounded-lg border border-gray-300 dark:border-gray-700",
@@ -74,44 +74,44 @@ export default function Footer() {
       <Rights />
 
       {/* Version & Attribution - Terminal style */}
-      {footerConfig.showVersionAndAttribution && (
-        <div
+      <div
+        className={cn(
+          "flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3",
+          "text-xs font-mono text-gray-500 dark:text-gray-500"
+        )}
+      >
+        <Link
+          href={`https://github.com/eh3ankazemi/ehsan-kazemi.ir/releases/tag/v${packageJson.version}`}
+          rel="noopener noreferrer"
+          target="_blank"
           className={cn(
-            "flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3",
-            "text-xs font-mono text-gray-500 dark:text-gray-500"
+            "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md",
+            "bg-gray-200 dark:bg-gray-800",
+            "border border-gray-300 dark:border-gray-700",
+            "hover:border-accent-500 dark:hover:border-accent-400",
+            "hover:bg-accent-500/10 dark:hover:bg-accent-500/10",
+            "transition-all duration-200",
+            "hover:shadow-sm"
           )}
         >
-          <Link
-            href={`https://github.com/eh3ankazemi/ehsan-kazemi.ir/releases/tag/v${packageJson.version}`}
-            rel="noopener noreferrer"
-            className={cn(
-              "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md",
-              "bg-gray-200 dark:bg-gray-800",
-              "border border-gray-300 dark:border-gray-700",
-              "hover:border-accent-500 dark:hover:border-accent-400",
-              "hover:bg-accent-500/10 dark:hover:bg-accent-500/10",
-              "transition-all duration-200",
-              "hover:shadow-sm"
-            )}
-          >
-            <FaCodeBranch className="w-3 h-3 text-gray-500 dark:text-gray-500" />
-            <span className="font-semibold text-accent-600 dark:text-accent-400">
-              {packageJson.version}
-            </span>
-          </Link>
-
-          <span className="text-gray-500 dark:text-gray-500">
-            built by{" "}
-            <Link
-              href="https://github.com/alemoraru"
-              rel="noopener noreferrer"
-              className="font-semibold hover:text-accent-500 dark:hover:text-accent-400 transition-colors duration-200"
-            >
-              @alemoraru
-            </Link>
+          <FaCodeBranch className="w-3 h-3 text-gray-500 dark:text-gray-500" />
+          <span className="font-semibold text-accent-600 dark:text-accent-400">
+            {packageJson.version}
           </span>
-        </div>
-      )}
+        </Link>
+
+        <span className="text-gray-500 dark:text-gray-500">
+          built by{" "}
+          <Link
+            href="https://github.com/eh3ankazemi"
+            rel="noopener noreferrer"
+            target="_blank"
+            className="font-semibold hover:text-accent-500 dark:hover:text-accent-400 transition-colors duration-200"
+          >
+            @eh3ankazemi
+          </Link>
+        </span>
+      </div>
     </footer>
   )
 }

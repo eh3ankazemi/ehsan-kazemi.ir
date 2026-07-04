@@ -44,11 +44,10 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
   }
 
   return {
-    title: `${post.company} - ${post.title} | ${"homeIntroConfig.name"}`,
-    // title: `${post.company} - ${post.title} | ${homeIntroConfig.name}`,
+    title: `${post.company} - ${post.title} | احسان کاضمی`,
     description: post.description,
     openGraph: {
-      // title: `${post.company} - ${post.title} | ${homeIntroConfig.name}`,
+      title: `${post.company} - ${post.title} | احسان کاضمی`,
       description: post.description,
       type: "article",
     },

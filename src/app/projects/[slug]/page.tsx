@@ -44,10 +44,10 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
   }
 
   return {
-    // title: `${project.title} | ${homeIntroConfig.name}`,
+    title: `${project.title} | احسان کاضمی`,
     description: project.description,
     openGraph: {
-      // title: `${project.title} | ${homeIntroConfig.name}`,
+      title: `${project.title} | احسان کاضمی`,
       description: project.description,
       type: "article",
     },
@@ -118,7 +118,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
     ...(frontmatter.githubUrl && { codeRepository: frontmatter.githubUrl }),
     author: {
       "@type": "Person",
-      name: homeIntroConfig.name,
+      name: "احسان کاضمی",
       url: siteMetadata.siteUrl,
     },
   }

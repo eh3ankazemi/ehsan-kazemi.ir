@@ -34,14 +34,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const decodedTag = decodeURIComponent(tag)
 
   return {
-    // title: `Posts tagged "${decodedTag}" | ${homeIntroConfig.name}`,
-    description: `Browse blog posts tagged with ${decodedTag}.`,
+    title: `پست‌های برچسب‌گذاری شده "${decodedTag}" | احسان کاضمی`,
+    description: `مرور پست‌های وبلاگ با برچسب‌های ${decodedTag}.`,
     alternates: {
       canonical: `/blog/tag/${decodedTag.toLowerCase()}`,
     },
     openGraph: {
-      // title: `Posts tagged "${decodedTag}" | ${homeIntroConfig.name}`,
-      description: `Browse blog posts tagged with ${decodedTag}.`,
+      title: `پست‌های برچسب‌گذاری شده "${decodedTag}" | احسان کاضمی`,
+      description: `مرور پست‌های وبلاگ با برچسب‌های ${decodedTag}.`,
       type: "website",
     },
   }

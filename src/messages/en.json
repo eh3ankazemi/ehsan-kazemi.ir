@@ -8,15 +8,17 @@
   },
   "homeIntro": {
     "introParagraphs": [
-      "I'm a software engineer passionate about solving problems, building things, and reading sci-fi. Whenever I'm not coding, you can find me exploring the world, playing tennis or skating. I love to share my knowledge and experiences through my blog, where I write about tech, books, and life lessons.",
-      "I am currently working at Hypernova Labs as a software engineer, where I focus on building scalable applications and improving user experiences. I have a keen interest in full-stack development, particularly in React and Node.js. I enjoy collaborating with cross-functional teams to deliver high-quality software solutions."
+      "I'm a software developer passionate about Artificial Intelligence and Full-Stack Development. I build modern web applications with React, Next.js, TypeScript, and MongoDB, while exploring AI and Machine Learning with Python, PyTorch, and Scikit-learn.",
+      "I love turning ideas into real products, solving challenging problems, and continuously learning new technologies. I'm always building, experimenting, and sharing what I learn through my projects."
     ],
     "facts": {
-      "company": "Hypernova Labs",
-      "education": "Computer Science Grad @ VuA",
-      "location": "Lille, France",
-      "languages": "EN / FA",
-      "role": "Full-Stack Dev"
+      "company": "Freelancer",
+      "education": "Computer Diploma",
+      "location": "Isfahan, IRAN",
+      "languages": "English / Farsi",
+      "role": "AI Engineer, Full-Stack Dev",
+      "crypto": "Crypto",
+      "movie": "Movie & Anime"
     },
     "fanFact": "Quick & Fun Facts",
     "name": "Ehsan kazemi",

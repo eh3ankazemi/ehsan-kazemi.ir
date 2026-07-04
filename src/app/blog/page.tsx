@@ -3,7 +3,6 @@ import { Suspense } from "react"
 
 import Blogs from "@/components/blog/Blog"
 import { Loading } from "@/components/ui/loading"
-import { homeIntroConfig } from "@/data/content"
 import { getAllBlogPosts } from "@/lib/mdx"
 
 /**
@@ -11,15 +10,11 @@ import { getAllBlogPosts } from "@/lib/mdx"
  */
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `Blog | ${homeIntroConfig.name}`,
+    title: "وبلاگ | احسان کاضمی",
+    // todo
     description: "Read my latest blog posts about software development, technology, and more.",
     alternates: {
       canonical: "/blog",
-    },
-    openGraph: {
-      title: `Blog | ${homeIntroConfig.name}`,
-      description: "Read my latest blog posts about software development, technology, and more.",
-      type: "website",
     },
   }
 }
