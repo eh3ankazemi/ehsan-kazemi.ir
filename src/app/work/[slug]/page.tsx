@@ -5,7 +5,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { compileMDX } from "next-mdx-remote/rsc"
-import { Suspense } from "react"
 import { BsStack } from "react-icons/bs"
 import rehypeHighlight from "rehype-highlight"
 import remark_gfm from "remark-gfm"
@@ -61,7 +60,7 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
  */
 function CompanyHeader({ frontmatter }: { frontmatter: WorkItemFrontmatter }) {
   return (
-    <Suspense fallback={null}>
+    <>
       {frontmatter.logoUrl && (
         <Image
           src={frontmatter.logoUrl}
@@ -72,7 +71,7 @@ function CompanyHeader({ frontmatter }: { frontmatter: WorkItemFrontmatter }) {
         />
       )}
       <h1 className="text-4xl font-bold">{frontmatter.company}</h1>
-    </Suspense>
+    </>
   )
 }
 

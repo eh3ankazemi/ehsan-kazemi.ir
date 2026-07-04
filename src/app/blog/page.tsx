@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-import { Suspense } from "react"
 
 import Blogs from "@/components/blog/Blog"
 import { homeIntroConfig } from "@/data/content"
