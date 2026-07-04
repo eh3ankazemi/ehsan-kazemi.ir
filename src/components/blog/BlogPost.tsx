@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { FaBookOpen, FaRegCalendarAlt } from "react-icons/fa"
-import BlogTag from "@/components/BlogTag"
+import BlogTag from "@/components/blog/BlogTag"
 import { BlogPostProps } from "@/lib/types"
 import { cn } from "@/lib/utils"
 

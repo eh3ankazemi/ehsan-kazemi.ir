@@ -1,9 +1,10 @@
 "use client"
 
 import { motion } from "framer-motion"
-import BlogPost from "@/components/BlogPost"
+import BlogPost from "@/components/blog/BlogPost"
 import ViewAllHeader from "@/components/ViewAllHeader"
 import { homeIntroConfig } from "@/data/content"
+import { useTranslation } from "@/hooks/useTranslation"
 import { BlogPostProps } from "@/lib/types"
 import { fadeUpVariants, staggerContainerVariants, staggerItemVariants } from "./animations"
 
@@ -12,6 +13,7 @@ interface BlogPreviewProps {
 }
 
 export default function BlogPreview({ blog }: BlogPreviewProps) {
+  const t = useTranslation()
   const posts = blog
     .slice()
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -25,7 +27,7 @@ export default function BlogPreview({ blog }: BlogPreviewProps) {
       viewport={{ once: true, margin: "-100px" }}
       className="mt-20 mb-16"
     >
-      <ViewAllHeader title="Recent Blog Posts" pageUrl="/blog" itemCount={blog.length} />
+      <ViewAllHeader title={t.home.recentBlog} pageUrl="/blog" itemCount={blog.length} />
       <motion.div
         initial="hidden"
         whileInView="visible"

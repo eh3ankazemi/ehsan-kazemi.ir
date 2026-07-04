@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { FaFrown } from "react-icons/fa"
-import WorkItem from "@/components/WorkItem"
+import WorkItem from "@/components/works/WorkItem"
 import { WorkItemProps } from "@/lib/types"
 
 export default function WorkClientUI({

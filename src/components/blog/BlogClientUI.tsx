@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { FaFrown } from "react-icons/fa"
 
-import BlogPost from "@/components/BlogPost"
+import BlogPost from "@/components/blog/BlogPost"
 import { BlogPostProps } from "@/lib/types"
 
 export default function BlogClientUI({

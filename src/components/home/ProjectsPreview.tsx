@@ -1,9 +1,10 @@
 "use client"
 
 import { motion } from "framer-motion"
-import ProjectTile from "@/components/ProjectTile"
+import ProjectTile from "@/components/projects/ProjectTile"
 import ViewAllHeader from "@/components/ViewAllHeader"
 import { homeIntroConfig } from "@/data/content"
+import { useTranslation } from "@/hooks/useTranslation"
 import { ProjectProps } from "@/lib/types"
 import { fadeUpVariants, staggerContainerVariants, staggerItemVariants } from "./animations"
 
@@ -26,6 +27,7 @@ function sortProjects(items: ProjectProps[]): ProjectProps[] {
 
 export default function ProjectsPreview({ projects }: ProjectsPreviewProps) {
   const items = sortProjects(projects).slice(0, homeIntroConfig.projectsToShow)
+  const t = useTranslation()
 
   return (
     <motion.div
@@ -35,7 +37,11 @@ export default function ProjectsPreview({ projects }: ProjectsPreviewProps) {
       viewport={{ once: true, margin: "-100px" }}
       className="mt-20"
     >
-      <ViewAllHeader title="Recent Projects" pageUrl="/projects" itemCount={projects.length} />
+      <ViewAllHeader
+        title={t.home.recentProjects}
+        pageUrl="/projects"
+        itemCount={projects.length}
+      />
       <motion.div
         initial="hidden"
         whileInView="visible"

@@ -6,6 +6,7 @@ import { Suspense, useEffect, useMemo, useState } from "react"
 import FilterDropdown from "@/components/FilterDropdown"
 import SortDropdown from "@/components/SortDropdown"
 import { paginationConfig } from "@/data/content"
+import { useTranslation } from "@/hooks/useTranslation"
 import { filterWorkItems, paginateItems, sortWorkItems } from "@/lib/utils"
 import ActiveFilterChips from "../ActiveFilterChips"
 import PaginationControls from "../PaginationControls"
@@ -24,6 +25,7 @@ export default function Works({
   baseUrl: string
 }) {
   const router = useRouter()
+  const t = useTranslation()
   const searchParams = useSearchParams()
 
   // Read query params correctly
@@ -137,7 +139,7 @@ export default function Works({
             onToggle={handleToggleCompany}
             onApply={handleApplyFilters}
             onClear={handleClearFilters}
-            placeholder="Filter by Company"
+            placeholder={t.filter.company}
             resultCount={filteredWorkItems.length}
           />
         </Suspense>
@@ -147,8 +149,8 @@ export default function Works({
             sortOrder={sortOrder}
             onChange={handleSortChange}
             options={[
-              { label: "Newest First", value: "newest" },
-              { label: "Oldest First", value: "oldest" },
+              { label: t.filter.newest, value: "newest" },
+              { label: t.filter.oldest, value: "oldest" },
             ]}
           />
         </Suspense>

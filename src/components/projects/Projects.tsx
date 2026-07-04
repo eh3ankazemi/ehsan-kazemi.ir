@@ -6,6 +6,7 @@ import { Suspense, useEffect, useMemo, useState } from "react"
 import FilterDropdown from "@/components/FilterDropdown"
 import SortDropdown from "@/components/SortDropdown"
 import { paginationConfig } from "@/data/content"
+import { useTranslation } from "@/hooks/useTranslation"
 import { filterProjects, paginateItems, sortProjects } from "@/lib/utils"
 
 import ActiveFilterChips from "../ActiveFilterChips"
@@ -24,6 +25,7 @@ export default function Projects({
   uniqueTechStack: { tech: string; count: number }[]
   baseUrl: string
 }) {
+  const t = useTranslation()
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -140,7 +142,7 @@ export default function Projects({
             onToggle={handleToggleTech}
             onApply={handleApplyFilters}
             onClear={handleClearFilters}
-            placeholder="Filter by Tech"
+            placeholder={t.filter.company}
             resultCount={filteredProjects.length}
           />
         </Suspense>
@@ -151,11 +153,11 @@ export default function Projects({
             onChange={handleSortChange}
             options={[
               {
-                label: "Newest First",
+                label: t.filter.newest,
                 value: "newest",
               },
               {
-                label: "Oldest First",
+                label: t.filter.oldest,
                 value: "oldest",
               },
             ]}

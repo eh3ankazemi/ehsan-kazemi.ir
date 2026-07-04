@@ -1,5 +1,5 @@
 import HomeContent from "@/components/home/HomeContent"
-import { footerConfig, homeIntroConfig } from "@/data/content"
+import { footerConfig } from "@/data/content"
 import { siteMetadata } from "@/data/metadata"
 import { getAllBlogPosts, getAllProjects, getAllWorkItems } from "@/lib/mdx"
 import type { Person, WithContext } from "schema-dts"

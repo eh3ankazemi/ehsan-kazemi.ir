@@ -30,7 +30,17 @@
     "projects": "Projects",
     "work": "Work"
   },
+  "filter": {
+    "company": "Filter by Company",
+    "newest": "Newest First",
+    "oldest": "Oldest First",
+    "apply": "Apply",
+    "clear": "Clear"
+  },
   "home": {
-    "title": "Hi, I'm Ehsan"
+    "title": "Hi, I'm Ehsan",
+    "recentBlog": "Recent Blog Posts",
+    "recentProjects": "Recent Projects",
+    "view": "View all"
   }
 }

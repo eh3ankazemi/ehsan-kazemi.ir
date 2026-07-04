@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import ViewAllHeader from "@/components/ViewAllHeader"
-import WorkItem from "@/components/WorkItem"
+import WorkItem from "@/components/works/WorkItem"
 import { homeIntroConfig } from "@/data/content"
 import { useTranslation } from "@/hooks/useTranslation"
 import { WorkItemProps } from "@/lib/types"

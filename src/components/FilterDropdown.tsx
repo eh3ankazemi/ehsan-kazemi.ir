@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useState, useRef, useEffect } from "react"
 import { FaChevronDown, FaBroom, FaCheck } from "react-icons/fa"
+import { useTranslation } from "@/hooks/useTranslation"
 import { cn } from "@/lib/utils"
 
 interface FilterDropdownProps {
@@ -28,6 +29,7 @@ export default function FilterDropdown({
 }: FilterDropdownProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const t = useTranslation()
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -157,7 +159,7 @@ export default function FilterDropdown({
                   "focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-800"
                 )}
               >
-                Apply
+                {t.filter.apply}
               </button>
               <button
                 onClick={onClear}
@@ -173,7 +175,7 @@ export default function FilterDropdown({
                 title="Clear filters"
               >
                 <FaBroom />
-                Clear
+                {t.filter.clear}
               </button>
             </div>
           </motion.div>

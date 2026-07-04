@@ -8,6 +8,7 @@ import FilterDropdown from "@/components/FilterDropdown"
 import PaginationControls from "@/components/PaginationControls"
 import SortDropdown from "@/components/SortDropdown"
 import { paginationConfig } from "@/data/content"
+import { useTranslation } from "@/hooks/useTranslation"
 import { BlogPostProps } from "@/lib/types"
 import { filterBlogPosts, paginateItems, sortBlogPosts } from "@/lib/utils"
 
@@ -26,6 +27,7 @@ export default function Blogs({
   baseUrl: string
 }) {
   const router = useRouter()
+  const t = useTranslation()
   const searchParams = useSearchParams()
 
   // Query params
@@ -142,7 +144,7 @@ export default function Blogs({
             onToggle={handleToggleTag}
             onApply={handleApplyFilters}
             onClear={handleClearFilters}
-            placeholder="Filter by Tag"
+            placeholder={t.filter.company}
             resultCount={filteredPosts.length}
           />
         </Suspense>
@@ -153,11 +155,11 @@ export default function Blogs({
             onChange={handleSortChange}
             options={[
               {
-                label: "Newest First",
+                label: t.filter.newest,
                 value: "desc",
               },
               {
-                label: "Oldest First",
+                label: t.filter.oldest,
                 value: "asc",
               },
             ]}

@@ -1,14 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { factIconMap, homeIntroConfig } from "@/data/content"
+import { factIconMap } from "@/data/content"
 import { useTranslation } from "@/hooks/useTranslation"
 import { cn } from "@/lib/utils"
 import { fadeUpVariants } from "./animations"
 
-/**
- * Simple component which renders pill-like quick facts about the user, based on the homeIntroConfig data.
- */
 export default function QuickFacts() {
   const t = useTranslation()
   const allFacts = Object.entries(t.homeIntro.facts)

@@ -3,8 +3,7 @@ import Link from "next/link"
 import { FaArrowLeft, FaTag } from "react-icons/fa"
 
 import BackToPageButton from "@/components/BackToPageButton"
-import BlogPost from "@/components/BlogPost"
-import { homeIntroConfig } from "@/data/content"
+import BlogPost from "@/components/blog/BlogPost"
 import { getAllBlogPosts } from "@/lib/mdx"
 import { getClosestTagPosts } from "@/lib/utils"
 

@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { FaFrown } from "react-icons/fa"
 
-import ProjectTile from "@/components/ProjectTile"
+import ProjectTile from "@/components/projects/ProjectTile"
 import { ProjectProps } from "@/lib/types"
 
 export default function ProjectsClientUI({

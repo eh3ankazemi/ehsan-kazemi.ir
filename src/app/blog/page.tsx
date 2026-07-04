@@ -11,8 +11,7 @@ import { getAllBlogPosts } from "@/lib/mdx"
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "وبلاگ | احسان کاضمی",
-    // todo
-    description: "Read my latest blog posts about software development, technology, and more.",
+    description: "آخرین پست‌های وبلاگ من در مورد توسعه نرم‌افزار، فناوری و موارد دیگر را بخوانید.",
     alternates: {
       canonical: "/blog",
     },

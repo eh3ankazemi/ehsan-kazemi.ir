@@ -113,8 +113,8 @@ export const factIconMap: Record<string, IconType> = {
   location: FaMapMarkerAlt,
   languages: FaLanguage,
   role: FaTools,
-  crypto:FaMoneyBills, 
-  movie:FaPlayCircle, 
+  crypto: FaMoneyBills,
+  movie: FaPlayCircle,
 }
 
 /**

@@ -16,32 +16,42 @@ export const siteMetadata: SiteMetadata = {
   /**
    * Site title (shown in browser tabs and search results)
    */
-  title: "Next.js Developer Portfolio Template",
+  title: "احسان کاظمی | مهندس هوش مصنوعی و توسعه‌دهنده فول‌استک",
+  // Ehsan Kazemi | AI Engineer & Full-Stack Developer
 
   /**
    * Site description (shown in search results and social media)
    */
   description:
-    "Developer portfolio showcasing projects, work experience, and technical blog posts. Built with Next.js, TypeScript, and Tailwind CSS.",
-
+    "نمونه‌کارهای احسان کاظمی را ببینید؛ شامل وبلاگ و پروژه‌های هوش مصنوعی، یادگیری ماشین، توسعه فول‌استک و وب مدرن ساخته‌شده با Python، React، Next.js، TypeScript و PyTorch.",
+  // Explore the portfolio of Ehsan Kazemi, showcasing AI, machine learning, full-stack development, and modern web projects built with Python, React, Next.js, TypeScript, and PyTorch.
+  
   /**
    * Keywords for SEO
    */
   keywords: [
-    "Developer",
-    "Software Engineer",
-    "Next.js",
+    "احسان کاظمی",
+    "Ehsan Kazemi",
+    "eh3ankazemi",
+    "توسعه‌دهنده نرم‌افزار",
+    "هوش مصنوعی",
+    "توسعه‌دهنده فول استک",
+    "یادگیری ماشین",
+    "AI Developer",
+    "Software Developer",
+    "Full Stack Developer",
     "React",
+    "Next.js",
     "TypeScript",
-    "Web Development",
+    "Python",
+    "Artificial Intelligence",
     "Portfolio",
   ],
-
   /**
    * Author information
    */
   author: {
-    name: "Ehsan Kazemi",
+    name: "احسان کاظمی",
     url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ehsan-kazemi.ir",
   },
 

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { useTranslation } from "@/hooks/useTranslation"
 import { cn } from "@/lib/utils"
 
 interface ViewAllButtonProps {
@@ -17,6 +18,7 @@ interface ViewAllButtonProps {
  * @param itemCount - The total count of items to display on the "View All" button.
  */
 export default function ViewAllHeader({ title, pageUrl, itemCount }: ViewAllButtonProps) {
+  const t = useTranslation()
   return (
     <div className="flex justify-between items-center mb-6">
       <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">{title}</h2>
@@ -31,7 +33,7 @@ export default function ViewAllHeader({ title, pageUrl, itemCount }: ViewAllButt
           "dark:focus-visible:ring-offset-black rounded-sm"
         )}
       >
-        <span>View all</span>
+        <span>{t.home.view}</span>
         <span
           className={cn(
             "inline-flex items-center justify-center min-w-5 h-5 px-1.5",
@@ -50,7 +52,7 @@ export default function ViewAllHeader({ title, pageUrl, itemCount }: ViewAllButt
           transition={{ type: "spring", stiffness: 400, damping: 20 }}
           className="text-base"
         >
-          →
+          {t.isRTL ? "←" : "→"}
         </motion.span>
       </Link>
     </div>
