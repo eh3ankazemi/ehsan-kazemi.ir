@@ -4,9 +4,11 @@ import { join } from "node:path"
 import { siteMetadata } from "@/data/metadata"
 
 export async function generateRobots() {
+  // Allow: /
   const robots = `User-agent: *
-Disallow: /
-
+Disallow: /api/*
+Disallow: /_next/*
+Disallow: /private/*
 Sitemap: ${siteMetadata.siteUrl}/sitemap.xml
 `
 
