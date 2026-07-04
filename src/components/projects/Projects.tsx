@@ -19,18 +19,25 @@ export default function Projects({
   projects,
   uniqueTechStack,
   baseUrl,
+  initialSearchParams,
 }: {
   projects: any
   uniqueTechStack: { tech: string; count: number }[]
   baseUrl: string
+  initialSearchParams: {
+    page?: string
+    sort?: string
+    tech?: string
+  }
 }) {
   const router = useRouter()
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
 
-  const techParam = searchParams.get("tech")
-  const sortParam = searchParams.get("sort")
-  const pageParam = searchParams.get("page")
+  const [params, setParams] = useState(initialSearchParams)
 
+  const techParam = params.tech
+  const sortParam = params.sort
+  const pageParam = params.page
   const currentPage = Number(pageParam) || 1
 
   const sortOrder: "newest" | "oldest" = sortParam === "oldest" ? "oldest" : "newest"
@@ -68,41 +75,61 @@ export default function Projects({
   }
 
   const handleApplyFilters = () => {
-    const params = new URLSearchParams(searchParams.toString())
+    const query = new URLSearchParams(params)
 
     if (techDrafts.length) {
-      params.set("tech", techDrafts.join(","))
+      query.set("tech", techDrafts.join(","))
     } else {
-      params.delete("tech")
+      query.delete("tech")
     }
 
-    params.delete("page")
+    query.delete("page")
 
-    router.replace(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`, {
-      scroll: false,
-    })
+    const next = Object.fromEntries(query.entries())
+
+    setParams(next)
+
+    router.replace(
+      `${baseUrl}${query.toString() ? `?${query.toString()}` : ""}`,
+      { scroll: false }
+    )
   }
+  // const handleApplyFilters = () => {
+  //   const params = new URLSearchParams(searchParams.toString())
+
+  //   if (techDrafts.length) {
+  //     params.set("tech", techDrafts.join(","))
+  //   } else {
+  //     params.delete("tech")
+  //   }
+
+  //   params.delete("page")
+
+  //   router.replace(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`, {
+  //     scroll: false,
+  //   })
+  // }
 
   const handleClearFilters = () => {
     setTechDrafts([])
 
-    const params = new URLSearchParams(searchParams.toString())
+    const query = new URLSearchParams(params)
 
-    params.delete("tech")
-    params.delete("page")
+    query.delete("tech")
+    query.delete("page")
 
-    router.replace(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`, {
+    router.replace(`${baseUrl}${query.toString() ? `?${query.toString()}` : ""}`, {
       scroll: false,
     })
   }
 
   const handleSortChange = (order: "newest" | "oldest" | "asc" | "desc") => {
-    const params = new URLSearchParams(searchParams.toString())
+    const query = new URLSearchParams(params)
 
-    params.set("sort", order)
-    params.delete("page")
+    query.set("sort", order)
+    query.delete("page")
 
-    router.replace(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`, {
+    router.replace(`${baseUrl}${query.toString() ? `?${query.toString()}` : ""}`, {
       scroll: false,
     })
   }
@@ -112,17 +139,16 @@ export default function Projects({
 
     setTechDrafts(updated)
 
-    const params = new URLSearchParams(searchParams.toString())
-
+    const query = new URLSearchParams(params)
     if (updated.length) {
-      params.set("tech", updated.join(","))
+      query.set("tech", updated.join(","))
     } else {
-      params.delete("tech")
+      query.delete("tech")
     }
 
-    params.delete("page")
+    query.delete("page")
 
-    router.replace(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`, {
+    router.replace(`${baseUrl}${query.toString() ? `?${query.toString()}` : ""}`, {
       scroll: false,
     })
   }
@@ -175,7 +201,7 @@ export default function Projects({
         currentPage={currentPage}
         totalPages={totalPages}
         baseUrl={baseUrl}
-        searchParams={Object.fromEntries(searchParams.entries())}
+        searchParams={params}
       />
     </section>
   )
