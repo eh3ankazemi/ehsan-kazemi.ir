@@ -55,6 +55,7 @@ export default function SimilarBlogPosts({
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {scoredPosts.map(sim => (
           <BlogPost
+            fa
             key={sim.slug}
             slug={sim.slug}
             title={sim.title}

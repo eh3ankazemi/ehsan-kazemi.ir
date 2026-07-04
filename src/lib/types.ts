@@ -7,7 +7,7 @@ export type pageParams = Promise<{ slug: string }>
  * @description This interface defines the structure (i.e., contents) of a blog post card.
  */
 export interface BlogPostProps {
-  fa:boolean,
+  fa: boolean
   slug: string
   title: string
   summary: string
@@ -22,7 +22,7 @@ export type { BlogPostFrontmatter } from "@/lib/schemas"
  * @description This interface defines the structure (i.e., contents) of a project card.
  */
 export interface ProjectProps {
-  fa:boolean,
+  fa: boolean
   slug: string
   title: string
   image: string
@@ -42,7 +42,7 @@ export type { ProjectFrontmatter } from "@/lib/schemas"
  * @description This interface defines the structure (i.e., contents) of a work experience item.
  */
 export interface WorkItemProps {
-  fa:boolean,
+  fa: boolean
   slug: string
   company: string
   title: string
