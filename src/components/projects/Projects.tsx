@@ -130,7 +130,7 @@ export default function Projects({
   return (
     <section className="mx-auto max-w-4xl px-4">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-        <>
+        <Suspense fallback={null}>
           <FilterDropdown
             items={uniqueTechStack.map(({ tech, count }) => ({
               name: tech,
@@ -143,9 +143,9 @@ export default function Projects({
             placeholder="Filter by Tech"
             resultCount={filteredProjects.length}
           />
-        </>
+        </Suspense>
 
-        <>
+        <Suspense fallback={null}>
           <SortDropdown
             sortOrder={sortOrder}
             onChange={handleSortChange}
@@ -160,7 +160,7 @@ export default function Projects({
               },
             ]}
           />
-        </>
+        </Suspense>
       </div>
 
       <ActiveFilterChips
