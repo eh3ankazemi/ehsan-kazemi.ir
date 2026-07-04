@@ -37,7 +37,7 @@ export default function BackToPageButton({ pageUrl }: BackToPageButtonProps) {
       >
         ←
       </motion.span>
-      <span>{t.navigation.back + " " + t.navigation[pageName]}</span>
+      <span>{t.navigation.back + " " + t.navigation[pageName as keyof typeof t.navigation]}</span>
     </Link>
   )
 }
