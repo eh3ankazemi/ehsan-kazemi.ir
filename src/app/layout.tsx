@@ -6,6 +6,7 @@ import Footer from "@/components/footer/Footer"
 import Header from "@/components/header/Header"
 import { siteMetadata } from "@/data/metadata"
 import { cn } from "@/lib/utils"
+import { AccentThemeProvider } from "@/providers/AccentThemeProvider"
 import ClientProviders from "@/providers/ClientProviders"
 import { LanguageProvider } from "@/providers/LanguageProvider"
 
@@ -58,22 +59,24 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="system">
-          <LanguageProvider>
-            <ClientProviders>
-              <div
-                className={cn(
-                  "fixed inset-0 -z-10",
-                  "bg-[radial-gradient(circle,#d1d5db_1px,transparent_1px)]",
-                  "dark:bg-[radial-gradient(circle,#3f3f46_1px,transparent_1px)]",
-                  "bg-size-[30px_30px]",
-                  "mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]"
-                )}
-              />
-              <Header />
-              <main className="grow container mx-auto px-4 py-6">{children}</main>
-              <Footer />
-            </ClientProviders>
-          </LanguageProvider>
+          <AccentThemeProvider>
+            <LanguageProvider>
+              <ClientProviders>
+                <div
+                  className={cn(
+                    "fixed inset-0 -z-10",
+                    "bg-[radial-gradient(circle,#d1d5db_1px,transparent_1px)]",
+                    "dark:bg-[radial-gradient(circle,#3f3f46_1px,transparent_1px)]",
+                    "bg-size-[30px_30px]",
+                    "mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]"
+                  )}
+                />
+                <Header />
+                <main className="grow container mx-auto px-4 py-6">{children}</main>
+                <Footer />
+              </ClientProviders>
+            </LanguageProvider>
+          </AccentThemeProvider>
         </ThemeProvider>
       </body>
     </html>
