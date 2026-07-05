@@ -50,6 +50,5 @@ export default async function BlogTagPage({ params }: PageProps) {
   const filteredPosts = posts.filter(post =>
     post.tags?.some(t => t.toLowerCase() === decodedTag.toLowerCase())
   )
-
   return <Tag Posts={filteredPosts} decodedTag={decodedTag} />
 }

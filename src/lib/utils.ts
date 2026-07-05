@@ -24,6 +24,7 @@ export function formatDuration(start: string, end: string): string {
   const formatMonth = (month: string) => {
     const date = new Date(2000, parseInt(month) - 1)
     return date.toLocaleDateString("en-US", { month: "short" })
+    // return date.toLocaleDateString("fa-IR", { month: "short" })
   }
 
   if (end === "Present") {

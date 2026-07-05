@@ -53,7 +53,7 @@ export { metadata } from "@/data/metadata"
  */
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" dir="ltr" data-theme={siteMetadata.theme} suppressHydrationWarning>
+    <html lang="fa" dir="rtl" data-theme={siteMetadata.theme} suppressHydrationWarning>
       <body
         className={`antialiased flex flex-col min-h-screen transition-colors overscroll-none ${gabarito.variable} ${vazirmatn.variable}`}
         suppressHydrationWarning

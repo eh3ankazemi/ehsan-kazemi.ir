@@ -33,7 +33,7 @@ ${categories ?? ""}
     <title>${escapeXml(siteMetadata.title)}</title>
     <link>${siteMetadata.siteUrl}</link>
     <description>${escapeXml(siteMetadata.description)}</description>
-    <language>en</language>
+      <language>fa-IR</language>
     <atom:link href="${siteMetadata.siteUrl}/rss.xml" rel="self" type="application/rss+xml"/>
 ${items}
   </channel>
