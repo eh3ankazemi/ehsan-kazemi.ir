@@ -69,7 +69,13 @@ export default async function BlogPostPage(props: { params: pageParams }) {
   const post = posts.find(p => p.slug === decodeURIComponent(slug))
   if (!post) return notFound()
 
-  const filePath = path.join(process.cwd(), "src", "data", "blog", `${decodeURIComponent(slug)}.mdx`)
+  const filePath = path.join(
+    process.cwd(),
+    "src",
+    "data",
+    "blog",
+    `${decodeURIComponent(slug)}.mdx`
+  )
 
   if (!fs.existsSync(filePath)) {
     return notFound()

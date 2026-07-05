@@ -25,7 +25,7 @@ export const siteMetadata: SiteMetadata = {
   description:
     "نمونه‌کارهای احسان کاظمی را ببینید؛ شامل وبلاگ و پروژه‌های هوش مصنوعی، یادگیری ماشین، توسعه فول‌استک و وب مدرن ساخته‌شده با Python، React، Next.js، TypeScript و PyTorch.",
   // Explore the portfolio of Ehsan Kazemi, showcasing AI, machine learning, full-stack development, and modern web projects built with Python, React, Next.js, TypeScript, and PyTorch.
-  
+
   /**
    * Keywords for SEO
    */

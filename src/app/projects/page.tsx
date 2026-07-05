@@ -8,7 +8,7 @@ export default async function ProjectsPage() {
   const projects = await getAllProjects()
   return (
     <Suspense fallback={<Loading />}>
-      <Projects projects={projects}  baseUrl="/projects" />
+      <Projects projects={projects} baseUrl="/projects" />
     </Suspense>
   )
 }

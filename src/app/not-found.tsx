@@ -26,9 +26,11 @@ export default function NotFound() {
   const t = useTranslation()
 
   useEffect(() => {
-    setLine(t.isRTL
-      ? "این صفحه‌ای نیست که دنبالش هستید!"
-      : funLines[Math.floor(Math.random() * funLines.length)])
+    setLine(
+      t.isRTL
+        ? "این صفحه‌ای نیست که دنبالش هستید!"
+        : funLines[Math.floor(Math.random() * funLines.length)]
+    )
   }, [t.isRTL])
 
   return (
@@ -93,7 +95,7 @@ export default function NotFound() {
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
             className="text-lg"
           >
-            →
+            {t.isRTL ? "←" : "→"}
           </motion.span>
         </Link>
       </motion.div>

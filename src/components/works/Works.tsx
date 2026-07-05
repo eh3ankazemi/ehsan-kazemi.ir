@@ -15,13 +15,7 @@ import WorkNotFound from "./WorkNotFound"
 
 const WORK_PAGE_SIZE = paginationConfig.projectsPerPage
 
-export default function Works({
-  work,
-  baseUrl,
-}: {
-  work: any
-  baseUrl: string
-}) {
+export default function Works({ work, baseUrl }: { work: any; baseUrl: string }) {
   const router = useRouter()
   const t = useTranslation()
   const searchParams = useSearchParams()
@@ -122,7 +116,6 @@ export default function Works({
 
     router.push(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`)
   }
-
 
   // Unique companies for filter dropdown
   const companyCounts: Record<string, number> = {}

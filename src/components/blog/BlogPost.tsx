@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { FaBookOpen, FaRegCalendarAlt } from "react-icons/fa"
 import BlogTag from "@/components/blog/BlogTag"
+import { useTranslation } from "@/hooks/useTranslation"
 import { BlogPostProps } from "@/lib/types"
 import { cn } from "@/lib/utils"
 
@@ -11,6 +12,7 @@ import { cn } from "@/lib/utils"
  * A functional component that renders a blog post card with a link, title, summary, date, and tags.
  */
 export default function BlogPost({ slug, title, summary, date, tags, readingTime }: BlogPostProps) {
+  const t = useTranslation()
   return (
     <Link href={`/blog/${slug}`} className="block h-full">
       <motion.div
@@ -69,7 +71,7 @@ export default function BlogPost({ slug, title, summary, date, tags, readingTime
                 <span>·</span>
                 <span className="flex items-center gap-1.5">
                   <FaBookOpen className="w-3.5 h-3.5" />
-                  {readingTime} min read
+                  {readingTime + t.minRead}
                 </span>
               </>
             )}
@@ -92,14 +94,14 @@ export default function BlogPost({ slug, title, summary, date, tags, readingTime
 
         {/* Read More Hint */}
         <div className="flex items-center gap-1 mt-4 text-sm font-semibold text-accent-600 dark:text-accent-400 group-hover:gap-2 transition-all duration-200">
-          <span>Read article</span>
+          <span>{t.post.readArticle}</span>
           <motion.span
             initial={{ x: 0 }}
             animate={{ x: 0 }}
             whileHover={{ x: 4 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
           >
-            →
+            {t.isRTL ? "←" : "→"}
           </motion.span>
         </div>
       </motion.div>

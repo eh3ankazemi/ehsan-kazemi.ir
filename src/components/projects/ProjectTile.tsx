@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { FaCalendarAlt } from "react-icons/fa"
 import TechBadge from "@/components/TechBadge"
+import { useTranslation } from "@/hooks/useTranslation"
 import { calculateDuration, cn } from "@/lib/utils"
 
 interface ProjectTileProps {
@@ -33,6 +34,7 @@ export default function ProjectTile({
   endDate,
   priority = false,
 }: ProjectTileProps) {
+  const t = useTranslation()
   return (
     <Link href={`/projects/${slug}`} className="block h-full">
       <motion.div
@@ -87,14 +89,14 @@ export default function ProjectTile({
               "flex flex-col items-center justify-center gap-2 p-4"
             )}
           >
-            <span className="text-white text-lg font-bold tracking-tight">Explore Project</span>
+            <span className="text-white text-lg font-bold tracking-tight">{t.exploreProject}</span>
             <motion.span
               initial={{ x: 0 }}
               whileHover={{ x: 4 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
               className="text-white text-2xl font-bold"
             >
-              →
+              {t.isRTL ? "←" : "→"}
             </motion.span>
           </motion.div>
         </div>

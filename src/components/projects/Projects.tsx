@@ -47,7 +47,7 @@ export default function Projects({ projects, baseUrl }: { projects: any; baseUrl
   const filteredProjects = useMemo(() => {
     return sortProjects(filterProjects(projects, selectedTechStack), sortOrder)
   }, [projects, selectedTechStack, sortOrder])
-  
+
   const projectItemsLangToShow = filteredProjects.filter(projectItem => projectItem.fa === t.isRTL)
   const { items: paginatedProjects, totalPages } = useMemo(
     () => paginateItems(projectItemsLangToShow, currentPage, PROJECTS_PAGE_SIZE),
@@ -177,10 +177,7 @@ export default function Projects({ projects, baseUrl }: { projects: any; baseUrl
         onClearAll={selectedTechStack.length > 1 ? handleClearFilters : undefined}
       />
 
-      <ProjectsClientUI
-        filteredProjects={filteredProjects}
-        paginatedProjects={paginatedProjects}
-      />
+      <ProjectsClientUI filteredProjects={filteredProjects} paginatedProjects={paginatedProjects} />
 
       <PaginationControls
         currentPage={currentPage}

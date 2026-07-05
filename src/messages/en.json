@@ -29,7 +29,12 @@
     "blog": "Blog",
     "projects": "Projects",
     "work": "Work",
-    "back":"Back to"
+    "back": "Back to"
+  },
+  "post": {
+    "readArticle": "Read article",
+    "tagged": "Posts tagged with",
+    "post": "Post"
   },
   "filter": {
     "company": "Filter by Company",
@@ -43,7 +48,9 @@
     "recentBlog": "Recent Blog Posts",
     "recentProjects": "Recent Projects",
     "view": "View all",
-    "notFound":"Page Not Found",
-    "gohome":"Go Home"
-  }
+    "notFound": "Page Not Found",
+    "gohome": "Go Home"
+  },
+  "exploreProject": "Explore Project",
+  "minRead": "min read"
 }
