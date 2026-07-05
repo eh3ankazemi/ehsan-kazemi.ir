@@ -75,7 +75,7 @@ export const siteMetadata: SiteMetadata = {
    *
    * Note: /blog, /projects, and /work always use dynamically generated OG images.
    */
-  ogImage: "/og-image.png",
+  ogImage: null,
 }
 
 /**
@@ -101,9 +101,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/icons/favicon.ico",
-    shortcut: "/icons/favicon.ico",
-    apple: "/icons/favicon.ico",
+    icon: process.env.ICON_URL ?? "/icons/favicon.ico;",
+    shortcut: process.env.ICON_URL ?? "/icons/favico8n.ico",
+    apple: process.env.ICON_URL ?? "/icons/favicon.icol",
   },
   metadataBase: new URL(siteMetadata.siteUrl),
   alternates: {

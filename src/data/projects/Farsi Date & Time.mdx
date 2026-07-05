@@ -1,0 +1,44 @@
+---
+fa: false
+title: Farsi Date & Time
+image: /projects/farsi-date-time.png
+description: A lightweight web application that displays the current date and time in both Persian and Gregorian calendars with real-time updates.
+startDate: 2023-08
+endDate: 2023-09
+techStack:
+  - HTML
+  - TypeScript
+  - ViteJS
+  - NodeJS
+role: Frontend Developer
+githubUrl: https://github.com/eh3ankazemi/farsi-date-time
+---
+
+# Introduction
+
+Farsi Date & Time is a lightweight web application that displays the current date and time in real time. It supports both the Persian (Jalali) and Gregorian calendars using the built-in JavaScript Internationalization API, providing an accurate and responsive experience without external libraries.
+
+## Features
+
+- **Real-Time Clock**: Updates every second without refreshing the page.
+- **Persian Calendar**: Displays the current Jalali date.
+- **Gregorian Calendar**: Shows the equivalent Gregorian date.
+- **Localized Formatting**: Supports Persian and English locales.
+- **Responsive Design**: Works smoothly on desktop and mobile devices.
+- **Lightweight**: Built without heavy date libraries.
+
+## Technical Details
+
+- **Frontend**: HTML and TypeScript
+- **Build Tool**: Vite
+- **Date Formatting**: JavaScript `Intl.DateTimeFormat`
+- **Localization**: Persian (`fa-IR`) and English (`en-US`)
+- **Performance**: Uses efficient timers for real-time updates
+
+## Challenges
+
+One of the main challenges was displaying the Persian calendar correctly without relying on third-party libraries. This was solved by using the native `Intl.DateTimeFormat` API, which provides accurate localization and formatting while keeping the project lightweight.
+
+## Outcome
+
+The project demonstrates how modern browser APIs can be used to create localized, real-time applications with minimal dependencies. It serves as a practical example of working with dates, localization, and TypeScript in a modern frontend environment.

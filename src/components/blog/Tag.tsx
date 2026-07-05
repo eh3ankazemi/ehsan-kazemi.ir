@@ -22,7 +22,7 @@ export default function Tag({ Posts, decodedTag }: TagProps) {
         <FaTag className="h-6 w-6 text-accent-500" />
 
         <div className="flex flex-col md:flex-row md:items-center">
-          <span className="mr-2 text-2xl font-bold leading-tight">{t.post.tagged}</span>
+          <span className="mr-2 text-2xl font-bold leading-tight">{t.post.tagged}{t.isRTL&& <>&nbsp;</>}</span>
 
           <span className="text-xl font-bold leading-tight text-accent-600">
             &quot;{decodedTag}&quot;
