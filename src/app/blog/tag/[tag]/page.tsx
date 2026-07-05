@@ -14,9 +14,8 @@ export async function generateStaticParams() {
   const posts = await getAllBlogPosts()
 
   const tags = [...new Set(posts.flatMap(post => post.tags ?? []))]
-
   return tags.map(tag => ({
-    tag,
+    tag: encodeURIComponent(tag),
   }))
 }
 
