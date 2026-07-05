@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { useTranslation } from "@/hooks/useTranslation"
 import { cn } from "@/lib/utils"
 
 /**
@@ -24,6 +25,7 @@ export default function TableOfContents() {
   const [activeId, setActiveId] = useState<string>("")
   const buttonRef = useRef<HTMLButtonElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
+  const t = useTranslation()
 
   useEffect(() => {
     const article = document.querySelector("article")
@@ -188,7 +190,7 @@ export default function TableOfContents() {
           )}
         >
           <h2 className="text-xs font-semibold tracking-wider text-gray-900 dark:text-gray-100 mb-6">
-            CONTENTS
+            {t.post.contents}
           </h2>
 
           <nav className="space-y-1">

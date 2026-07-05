@@ -33,7 +33,8 @@
   "post": {
     "readArticle": "Read article",
     "tagged": "Posts tagged with",
-    "post": "Post"
+    "post": "Post",
+    "contents": "CONTENTS"
   },
   "filter": {
     "company": "Filter by Company",

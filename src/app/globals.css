@@ -298,4 +298,5 @@ html[lang="fa"] .textright {
 
 pre {
   text-align: left;
+  direction: ltr;
 }

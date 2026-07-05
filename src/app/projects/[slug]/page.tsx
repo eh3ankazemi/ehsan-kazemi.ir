@@ -133,7 +133,9 @@ export default async function ProjectPage(props: { params: pageParams }) {
 
       {/* Header */}
       <h1 className="text-4xl font-bold mb-2">{frontmatter.title}</h1>
-      <p className="text-lg text-gray-600 dark:text-gray-400 mb-4 text-center">{frontmatter.description}</p>
+      <p className="text-lg text-gray-600 dark:text-gray-400 mb-4 text-center">
+        {frontmatter.description}
+      </p>
 
       {/* Metadata Pills & Links */}
       <div className="flex flex-wrap items-center gap-3 mb-6">
@@ -176,7 +178,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
             className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm transition"
           >
             <FaBook className="w-4 h-4" />
-            <span>Read Paper</span>
+            <span>View Live</span>
           </Link>
         )}
       </div>
