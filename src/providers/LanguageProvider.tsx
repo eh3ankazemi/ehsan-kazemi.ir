@@ -7,16 +7,19 @@ type Language = "en" | "fa"
 type LanguageContextType = {
   language: Language
   setLanguage: (lang: Language) => void
+  loaded: boolean
 }
 
 const LanguageContext = createContext<LanguageContextType | null>(null)
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>("fa")
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     const saved = localStorage.getItem("language") as Language | null
     if (saved === "fa" || saved === "en") setLanguageState(saved)
+    setLoaded(true)
   }, [])
 
   const setLanguage = (lang: Language) => {
@@ -29,6 +32,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       value={{
         language,
         setLanguage,
+        loaded,
       }}
     >
       {children}

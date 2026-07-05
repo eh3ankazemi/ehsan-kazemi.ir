@@ -16,6 +16,7 @@ import { siteMetadata } from "@/data/metadata"
 import { getAllProjects } from "@/lib/mdx"
 import { pageParams, ProjectFrontmatter } from "@/lib/types"
 import { formatDuration } from "@/lib/utils"
+import { UrlCheckerProvider } from "@/providers/UrlCheckerProvider"
 import type { CreativeWork, WithContext } from "schema-dts"
 
 /**
@@ -124,92 +125,95 @@ export default async function ProjectPage(props: { params: pageParams }) {
   }
 
   return (
-    <AnimatedArticle>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
-      <BackToPageButton pageUrl="/projects" />
+    <>
+      <UrlCheckerProvider />
+      <AnimatedArticle>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+        />
+        <BackToPageButton pageUrl="/projects" />
 
-      {/* Header */}
-      <h1 className="text-4xl font-bold mb-2">{frontmatter.title}</h1>
-      <p className="text-lg text-gray-600 dark:text-gray-400 mb-4 text-center">
-        {frontmatter.description}
-      </p>
+        {/* Header */}
+        <h1 className="text-4xl font-bold mb-2">{frontmatter.title}</h1>
+        <p className="text-lg text-gray-600 dark:text-gray-400 mb-4 text-center">
+          {frontmatter.description}
+        </p>
 
-      {/* Metadata Pills & Links */}
-      <div className="flex flex-wrap items-center gap-3 mb-6">
-        {frontmatter.teamSize && (
-          <div className="flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
-            <FaUsers className="w-4 h-4" />
+        {/* Metadata Pills & Links */}
+        <div className="flex flex-wrap items-center gap-3 mb-6">
+          {frontmatter.teamSize && (
+            <div className="flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
+              <FaUsers className="w-4 h-4" />
+              <span>
+                <strong>Team Size:</strong> {frontmatter.teamSize}
+              </span>
+            </div>
+          )}
+          {frontmatter.role && (
+            <div className="flex items-center gap-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">
+              <FaUserTie className="w-4 h-4" />
+              <span>
+                <strong>Role:</strong> {frontmatter.role}
+              </span>
+            </div>
+          )}
+          <div className="flex items-center gap-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">
+            <FaClock className="w-4 h-4" />
             <span>
-              <strong>Team Size:</strong> {frontmatter.teamSize}
+              <strong>Duration:</strong> {duration}
             </span>
           </div>
-        )}
-        {frontmatter.role && (
-          <div className="flex items-center gap-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">
-            <FaUserTie className="w-4 h-4" />
-            <span>
-              <strong>Role:</strong> {frontmatter.role}
-            </span>
+          {frontmatter.githubUrl && (
+            <Link
+              href={frontmatter.githubUrl}
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm transition"
+            >
+              <FaGithub className="w-4 h-4" />
+              <span>View on GitHub</span>
+            </Link>
+          )}
+          {frontmatter.paperUrl && (
+            <Link
+              href={frontmatter.paperUrl}
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm transition"
+            >
+              <FaBook className="w-4 h-4" />
+              <span>View Live</span>
+            </Link>
+          )}
+        </div>
+
+        {/* Tech Stack Section */}
+        <div className="flex items-center gap-2 mb-4">
+          <BsStack />
+          <h2 className="text-xl font-semibold">Tech Stack</h2>
+        </div>
+        <div className="flex flex-wrap gap-3 mb-8">
+          {frontmatter.techStack?.map(techName => (
+            <TechBadge key={techName} techName={techName} />
+          ))}
+        </div>
+
+        {/* Image Carousel - Display project photos if available */}
+        {projectImages.length > 0 && (
+          <div className="w-full">
+            <div
+              className="flex items-center justify-center gap-2 mb-4"
+              style={{ fontSize: "1.25rem" }}
+            >
+              <BsCardImage />
+              <h2 className="text-xl font-semibold">Project Gallery</h2>
+            </div>
+            <ProjectImageCarousel images={projectImages} />
           </div>
         )}
-        <div className="flex items-center gap-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">
-          <FaClock className="w-4 h-4" />
-          <span>
-            <strong>Duration:</strong> {duration}
-          </span>
-        </div>
-        {frontmatter.githubUrl && (
-          <Link
-            href={frontmatter.githubUrl}
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm transition"
-          >
-            <FaGithub className="w-4 h-4" />
-            <span>View on GitHub</span>
-          </Link>
-        )}
-        {frontmatter.paperUrl && (
-          <Link
-            href={frontmatter.paperUrl}
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm transition"
-          >
-            <FaBook className="w-4 h-4" />
-            <span>View Live</span>
-          </Link>
-        )}
-      </div>
 
-      {/* Tech Stack Section */}
-      <div className="flex items-center gap-2 mb-4">
-        <BsStack />
-        <h2 className="text-xl font-semibold">Tech Stack</h2>
-      </div>
-      <div className="flex flex-wrap gap-3 mb-8">
-        {frontmatter.techStack?.map(techName => (
-          <TechBadge key={techName} techName={techName} />
-        ))}
-      </div>
-
-      {/* Image Carousel - Display project photos if available */}
-      {projectImages.length > 0 && (
-        <div className="w-full">
-          <div
-            className="flex items-center justify-center gap-2 mb-4"
-            style={{ fontSize: "1.25rem" }}
-          >
-            <BsCardImage />
-            <h2 className="text-xl font-semibold">Project Gallery</h2>
-          </div>
-          <ProjectImageCarousel images={projectImages} />
-        </div>
-      )}
-
-      {/* Display the actual content of the .mdx file */}
-      <div className="max-w-4xl prose dark:prose-invert textright">{content}</div>
-    </AnimatedArticle>
+        {/* Display the actual content of the .mdx file */}
+        <div className="max-w-4xl prose dark:prose-invert textright">{content}</div>
+      </AnimatedArticle>
+    </>
   )
 }
