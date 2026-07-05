@@ -191,7 +191,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
           <BsStack />
           <h2 className="text-xl font-semibold">Tech Stack</h2>
         </div>
-        <div className="flex flex-wrap gap-3 mb-8">
+        <div className="flex flex-wrap gap-3 mb-8 justify-center">
           {frontmatter.techStack?.map(techName => (
             <TechBadge key={techName} techName={techName} />
           ))}
