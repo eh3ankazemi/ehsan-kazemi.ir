@@ -10,6 +10,7 @@ import rehypeHighlight from "rehype-highlight"
 import remark_gfm from "remark-gfm"
 import AnimatedArticle from "@/components/AnimatedArticle"
 import BackToPageButton from "@/components/BackToPageButton"
+import ImageMdx from "@/components/mdx/ImageMdx"
 import ProjectImageCarousel from "@/components/projects/ProjectImageCarousel"
 import TechBadge from "@/components/TechBadge"
 import { siteMetadata } from "@/data/metadata"
@@ -18,7 +19,6 @@ import { pageParams, ProjectFrontmatter } from "@/lib/types"
 import { formatDuration } from "@/lib/utils"
 import { UrlCheckerProvider } from "@/providers/UrlCheckerProvider"
 import type { CreativeWork, WithContext } from "schema-dts"
-
 /**
  * Generate static parameters for the project pages to be pre-rendered.
  */
@@ -78,6 +78,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
 
   const { content, frontmatter } = await compileMDX<ProjectFrontmatter>({
     source: mdxSource,
+    components: { ImageMdx },
     options: {
       parseFrontmatter: true,
       mdxOptions: {

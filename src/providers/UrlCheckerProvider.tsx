@@ -16,11 +16,12 @@ export function UrlCheckerProvider() {
     if (!loaded) return
     const isRTL = language === "fa"
     const hasPersian = params.endsWith(".Persian")
+
     if (hasPersian && !isRTL) switchLocale(params.replace(/\.Persian$/, ""))
-    const next = params.endsWith("/")
-      ? params.slice(0, -1) + ".Persian/"
-      : params + ".Persian"
-    if (!hasPersian && isRTL) switchLocale(next)
+    if (!hasPersian && isRTL) {
+      const next = params.endsWith("/") ? params.slice(0, -1) + ".Persian/" : params + ".Persian"
+      switchLocale(next)
+    }
   }, [language])
   return <></>
 }
