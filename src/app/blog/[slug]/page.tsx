@@ -21,6 +21,7 @@ import { siteMetadata } from "@/data/metadata"
 import { getAllBlogPosts } from "@/lib/mdx"
 import { pageParams } from "@/lib/types"
 import { getReadingTime } from "@/lib/utils"
+import { UrlCheckerProvider } from "@/providers/UrlCheckerProvider"
 import type { BlogPosting, WithContext } from "schema-dts"
 
 /**
@@ -151,42 +152,47 @@ export default async function BlogPostPage(props: { params: pageParams }) {
   }
 
   return (
-    <AnimatedArticle>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
-      <BackToPageButton pageUrl="/blog" />
-      <div className="text-3xl font-bold mb-4">{post.title}</div>
-      <div className="flex items-center gap-4 text-gray-500 mb-8">
-        <span className="flex items-center gap-1.5">
-          <FaRegCalendarAlt className="shrink-0" />
-          {new Date(post.date).toLocaleDateString(undefined, {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </span>
-        <span>•</span>
-        <span className="flex items-center gap-1.5">
-          <FaBookOpen className="shrink-0" />
-          {readingTime} min read
-        </span>
-      </div>
+    <>
+      <UrlCheckerProvider />
+      <AnimatedArticle>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+        />
+        <BackToPageButton pageUrl="/blog" />
+        <div className="text-3xl font-bold mb-4">{post.title}</div>
+        <div className="flex items-center gap-4 text-gray-500 mb-8">
+          <span className="flex items-center gap-1.5">
+            <FaRegCalendarAlt className="shrink-0" />
+            {new Date(post.date).toLocaleDateString(undefined, {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </span>
+          <span>•</span>
+          <span className="flex items-center gap-1.5">
+            <FaBookOpen className="shrink-0" />
+            {readingTime} min read
+          </span>
+        </div>
 
-      {/* Display current blog post tags */}
-      <div className="flex flex-wrap gap-2 mb-8 mt-2 justify-center items-center text-center">
-        {post.tags &&
-          post.tags.map(tag => (
-            <BlogTag key={tag} tag={tag} href={`/blog/tag/${encodeURIComponent(tag)}`} />
-          ))}
-      </div>
+        {/* Display current blog post tags */}
+        <div className="flex flex-wrap gap-2 mb-8 mt-2 justify-center items-center text-center">
+          {post.tags &&
+            post.tags.map(tag => (
+              <BlogTag key={tag} tag={tag} href={`/blog/tag/${encodeURIComponent(tag)}`} />
+            ))}
+        </div>
 
-      {/* Table of Contents */}
-      <TableOfContents />
+        {/* Table of Contents */}
+        <TableOfContents />
 
-      <div className="prose dark:prose-invert max-w-full overflow-hidden textright">{content}</div>
-      <SimilarBlogPosts allPosts={posts} currentPostPlug={slug} maxPosts={3} />
-    </AnimatedArticle>
+        <div className="prose dark:prose-invert max-w-full overflow-hidden textright">
+          {content}
+        </div>
+        <SimilarBlogPosts allPosts={posts} currentPostPlug={slug} maxPosts={3} />
+      </AnimatedArticle>
+    </>
   )
 }
