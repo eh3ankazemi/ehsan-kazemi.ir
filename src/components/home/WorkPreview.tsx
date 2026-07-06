@@ -6,6 +6,7 @@ import WorkItem from "@/components/works/WorkItem"
 import { homeIntroConfig } from "@/data/content"
 import { useTranslation } from "@/hooks/useTranslation"
 import { WorkItemProps } from "@/lib/types"
+import { useLanguage } from "@/providers/LanguageProvider"
 import { fadeUpVariants, staggerContainerVariants, staggerItemVariants } from "./animations"
 
 interface WorkPreviewProps {
@@ -28,10 +29,11 @@ function sortWork(items: WorkItemProps[]): WorkItemProps[] {
 export default function WorkPreview({ work }: WorkPreviewProps) {
   const t = useTranslation()
   const items = sortWork(work).slice(0, homeIntroConfig.workItemsToShow)
-
+  const { loaded } = useLanguage()
+  const status = loaded ? "active" : "hidden"
   return (
     <motion.div
-      initial="hidden"
+      initial={status}
       whileInView="visible"
       variants={fadeUpVariants}
       viewport={{ once: true, margin: "-100px" }}
@@ -39,7 +41,7 @@ export default function WorkPreview({ work }: WorkPreviewProps) {
     >
       <ViewAllHeader title={t.work.experience} pageUrl="/work" itemCount={work.length} />
       <motion.div
-        initial="hidden"
+        initial={status}
         whileInView="visible"
         variants={staggerContainerVariants}
         viewport={{ once: true, margin: "-50px" }}

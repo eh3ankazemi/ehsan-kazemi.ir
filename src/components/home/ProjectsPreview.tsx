@@ -6,6 +6,7 @@ import ViewAllHeader from "@/components/ViewAllHeader"
 import { homeIntroConfig } from "@/data/content"
 import { useTranslation } from "@/hooks/useTranslation"
 import { ProjectProps } from "@/lib/types"
+import { useLanguage } from "@/providers/LanguageProvider"
 import { fadeUpVariants, staggerContainerVariants, staggerItemVariants } from "./animations"
 
 interface ProjectsPreviewProps {
@@ -28,10 +29,11 @@ function sortProjects(items: ProjectProps[]): ProjectProps[] {
 export default function ProjectsPreview({ projects }: ProjectsPreviewProps) {
   const items = sortProjects(projects).slice(0, homeIntroConfig.projectsToShow)
   const t = useTranslation()
-
+  const { loaded } = useLanguage()
+  const status = loaded ? "active" : "hidden"
   return (
     <motion.div
-      initial="hidden"
+      initial={status}
       whileInView="visible"
       variants={fadeUpVariants}
       viewport={{ once: true, margin: "-100px" }}
@@ -43,7 +45,7 @@ export default function ProjectsPreview({ projects }: ProjectsPreviewProps) {
         itemCount={projects.length}
       />
       <motion.div
-        initial="hidden"
+        initial={status}
         whileInView="visible"
         variants={staggerContainerVariants}
         viewport={{ once: true, margin: "-50px" }}

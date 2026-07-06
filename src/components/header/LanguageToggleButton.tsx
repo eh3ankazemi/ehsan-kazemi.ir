@@ -9,7 +9,7 @@ import { useLanguage } from "@/providers/LanguageProvider"
 
 export default function LanguageToggleButton() {
   const [mounted, setMounted] = useState(false)
-  const { resolvedTheme, setTheme } = useTheme()
+  const { resolvedTheme } = useTheme()
   const { language, setLanguage } = useLanguage()
 
   useEffect(() => {
@@ -93,7 +93,7 @@ export default function LanguageToggleButton() {
           }}
         >
           {resolvedTheme === "dark" ? (
-            <FaLanguage className="w-5 h-5 text-yellow-400" />
+            <FaLanguage className="w-5 h-5 text-yellow-500" />
           ) : (
             <FaLanguage className="w-5 h-5 text-gray-600" />
           )}{" "}
