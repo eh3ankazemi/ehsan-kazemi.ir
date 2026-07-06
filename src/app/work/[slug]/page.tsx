@@ -10,6 +10,7 @@ import rehypeHighlight from "rehype-highlight"
 import remark_gfm from "remark-gfm"
 import AnimatedArticle from "@/components/AnimatedArticle"
 import BackToPageButton from "@/components/BackToPageButton"
+import PageHeaderSync from "@/components/header/PageHeaderSync"
 import { Timeline, TimelineItem } from "@/components/mdx/Timeline"
 import TechBadge from "@/components/TechBadge"
 import { siteMetadata } from "@/data/metadata"
@@ -129,6 +130,10 @@ export default async function WorkItemPage(props: { params: pageParams }) {
   return (
     <>
       <UrlCheckerProvider />
+      <PageHeaderSync
+        title={frontmatter.title}
+        subtitle={`${frontmatter.company} · ${frontmatter.start} - ${frontmatter.end}`}
+      />
       <AnimatedArticle>
         <script
           type="application/ld+json"

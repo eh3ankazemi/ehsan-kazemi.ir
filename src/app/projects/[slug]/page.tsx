@@ -10,6 +10,7 @@ import rehypeHighlight from "rehype-highlight"
 import remark_gfm from "remark-gfm"
 import AnimatedArticle from "@/components/AnimatedArticle"
 import BackToPageButton from "@/components/BackToPageButton"
+import PageHeaderSync from "@/components/header/PageHeaderSync"
 import ImageMdx from "@/components/mdx/ImageMdx"
 import ProjectImageCarousel from "@/components/projects/ProjectImageCarousel"
 import TechBadge from "@/components/TechBadge"
@@ -128,6 +129,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
   return (
     <>
       <UrlCheckerProvider />
+      <PageHeaderSync title={frontmatter.title} subtitle={`پروژه‌های احسان کاظمی · ${duration}`} />
       <AnimatedArticle>
         <script
           type="application/ld+json"

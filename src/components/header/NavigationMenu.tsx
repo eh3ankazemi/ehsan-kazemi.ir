@@ -74,9 +74,8 @@ export default function NavigationMenu() {
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
                   "relative flex items-center justify-center px-3 py-1.5 rounded-full text-[15px]",
-                  "font-medium text-center transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500",
-                  "focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black min-w-18",
-                  "text-ellipsis whitespace-nowrap overflow-hidden select-none active:scale-95",
+                  "font-medium text-center transition-all duration-200 focus:outline-none focus-visible:outline-none",
+                  "min-w-18 text-ellipsis whitespace-nowrap overflow-hidden select-none active:scale-95",
                   isActive
                     ? "text-accent-600 dark:text-accent-400 font-semibold"
                     : "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-800/50"

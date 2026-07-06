@@ -15,7 +15,7 @@ export default function Tag({ Posts, decodedTag }: TagProps) {
   const t = useTranslation()
   const tagItemsLangToShow = Posts.filter(postItem => postItem.fa === t.isRTL)
   return (
-    <div className="mx-auto flex max-w-4xl flex-col px-4 py-8">
+    <div className="mx-auto flex max-w-4xl flex-col px-4 py-2">
       <BackToPageButton pageUrl="/blog" />
 
       <div className="mb-6 flex items-center gap-3">

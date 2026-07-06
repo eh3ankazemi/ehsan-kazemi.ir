@@ -121,6 +121,59 @@ html[lang="fa"] body {
   font-family: var(--font-vazirmatn), sans-serif;
 }
 
+/* scrollbar */
+
+/* Width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #111827;
+  border-radius: 9999px;
+}
+
+/* Thumb */
+::-webkit-scrollbar-thumb {
+  background: var(--accent-500);
+  border-radius: 9999px;
+  border: 2px solid #111827;
+}
+
+/* Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-600);
+}
+
+html {
+  scrollbar-width: thin; /* auto | thin | none */
+  scrollbar-color: var(--accent-500) #111827;
+  overflow-y: scroll;
+}
+html.light {
+  scrollbar-color: var(--accent-500) #f3f4f6;
+}
+
+html.dark {
+  scrollbar-color: var(--accent-500) #111827;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #111827;
+}
+
+html.light ::-webkit-scrollbar-thumb,
+html.dark ::-webkit-scrollbar-thumb {
+  background: var(--accent-500);
+  border-radius: 9999px;
+}
+
 /* Custom scrollbar */
 .custom-scrollbar {
   overflow: auto;
@@ -299,4 +352,9 @@ html[lang="fa"] .textright {
 pre {
   text-align: left;
   direction: ltr;
+}
+
+html[lang="fa"] .left_fa{
+  right: inherit;
+  left: 0;
 }

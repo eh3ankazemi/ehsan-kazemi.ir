@@ -15,6 +15,7 @@ import BackToPageButton from "@/components/BackToPageButton"
 import BlogTag from "@/components/blog/BlogTag"
 import SimilarBlogPosts from "@/components/blog/SimilarBlogPosts"
 import TableOfContents from "@/components/blog/TableOfContents"
+import PageHeaderSync from "@/components/header/PageHeaderSync"
 import { CodeBlock } from "@/components/mdx/CodeBlock"
 import { InlineCode } from "@/components/mdx/InlineCode"
 import { siteMetadata } from "@/data/metadata"
@@ -151,9 +152,15 @@ export default async function BlogPostPage(props: { params: pageParams }) {
     },
   }
 
+  const headerSubtitle = `وبلاگ احسان کاظمی · ${new Date(post.date).toLocaleDateString(
+    undefined,
+    { year: "numeric", month: "short", day: "numeric" }
+  )}`
+
   return (
     <>
       <UrlCheckerProvider />
+      <PageHeaderSync title={post.title} subtitle={headerSubtitle} />
       <AnimatedArticle>
         <script
           type="application/ld+json"

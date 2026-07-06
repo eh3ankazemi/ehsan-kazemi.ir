@@ -41,7 +41,7 @@ export default function ThemeColorMenu({ isOpen, activeTheme, onSelect }: ThemeC
       initial="hidden"
       animate="visible"
       className={cn(
-        "origin-top-right absolute right-0 mt-2 w-52",
+        "origin-top-right absolute right-0 mt-2 w-52 left_fa",
         "bg-white dark:bg-gray-800",
         "border border-gray-300 dark:border-gray-700",
         "rounded-lg shadow-xl backdrop-blur-sm",
