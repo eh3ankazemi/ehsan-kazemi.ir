@@ -17,95 +17,89 @@ performance-focused starting point for showcasing your **work**, **blogs**, and 
 
 </div>
 
-<details>
-<summary><b>📝 Author's Note About This Theme</b></summary>
-
-This theme is generally aimed at developers and designers who want to create a personal website quickly and easily. Yes,
-I'm aware there are many other templates and themes available..._you can literally find them all over the internet_. The
-personal goal of building this theme was to get familiar with [Next.js](https://nextjs.org), and improve skills in
-**React** and **TypeScript**.
-
-I also wanted to create a starter template for myself, since none of the existing templates met my exact design and
-functionality needs, without requiring extensive modifications. So...here we are! Feel free to use this as a starting
-point for your own personal website, or as a reference for doing the same thing I did: _building your own custom theme!_
-
-</details>
-
 ## 🧱 Project Structure
 
-The site is organized around the following main routes/pages:
+The portfolio is organized into four main sections:
 
-- 🏠 **Home** – `/`
-- 💼 **Work** – `/work`
-- 🛠️ **Projects** – `/projects`
-- ✍️ **Blog** – `/blog`
+- 🏠 **Home** — `/`
+- 💼 **Work** — `/work`
+- 🚀 **Projects** — `/projects`
+- ✍️ **Blog** — `/blog`
 
-Each page is intentionally _simple_ and _clean_, making it easy to customize and build upon.
+Each section is powered by **MDX**, making it easy to manage content without modifying the application's source code.
 
-### ✨ Minimal Configuration Required
+### ✨ Content-First Workflow
 
-This theme is designed with **simplicity** in mind. After customizing your home page, adding content is as easy as
-creating `.mdx` files:
+Adding new content is simple—just create a new `.mdx` file.
 
-- **Blog Posts**: Drop a new `.mdx` file in `src/data/blog/` with frontmatter (title, summary, date, tags)
-- **Work Items**: Add an `.mdx` file in `src/data/work/` with your work details
-- **Projects**: Create an `.mdx` file in `src/data/projects/` with project information
+- **Blog Posts** → `src/data/blog/`
+- **Work Experience** → `src/data/work/`
+- **Projects** → `src/data/projects/`
 
-That's it! No manual configuration files to update, no arrays to maintain. The site automatically discovers and renders
-your content. Just write your content in Markdown, add frontmatter metadata, and the theme handles the rest: generating
-pages, navigation, filtering, and search capabilities automatically.
+Every file contains frontmatter metadata (such as title, description, date, tags, and more) along with the page content.
+
+The application automatically discovers new files and generates pages, navigation, filtering, and search—no additional configuration required.
 
 ---
 
+## 📚 Useful Resources
 
-Want to dig deeper into `Next.js`, or other resources, and see how this project was built? Check out the following
-resources:
+Want to learn more about the technologies used in this project?
 
-- [📘 Next.js Documentation](https://nextjs.org/docs): Core concepts and API
-- [🎓 Learn Next.js](https://nextjs.org/learn): Interactive tutorial
-- [🔗 GitHub – Next.js](https://github.com/nextjs): Source code and community discussion
-- [📖 React Documentation](https://reactjs.org/docs/getting-started.html): Learn React
-- [🎨 Tailwind CSS Documentation](https://tailwindcss.com/docs): Utility-first CSS framework
-- [🌎 MDN Web Docs](https://developer.mozilla.org/en-US/): Comprehensive web development resources
-- [🛠 Vercel Documentation](https://vercel.com/docs): Deployment and hosting with Vercel
+- 📘 **Next.js** — https://nextjs.org/docs
+- ⚛️ **React** — https://react.dev
+- 🎨 **Tailwind CSS** — https://tailwindcss.com/docs
+- 📝 **MDX** — https://mdxjs.com
+- 🌐 **TypeScript** — https://www.typescriptlang.org/docs
+- 🌍 **MDN Web Docs** — https://developer.mozilla.org/
 
 ---
 
 ## ▲ Deployment
 
-The fastest way to deploy this app is
-via [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme),
-the platform made by the creators of Next.js.
+This project can be deployed on any platform that supports **Node.js**.
 
-For more detailed instructions, check out
-the [Next.js deployment guide](https://nextjs.org/docs/app/building-your-application/deploying).
-If you do decide to use Vercel, this repository includes by default Analytics and Speed Insights integration.
+Popular options include:
 
-> **Note:** This does not mean you _have_ to use Vercel. You can deploy this app on any platform that supports
-> Node.js, such as [Netlify](https://www.netlify.com), [Render](https://render.com),
-> [AWS Amplify](https://aws.amazon.com/amplify/), or much more.
+- ▲ Vercel *(recommended)*
+- Netlify
+- Render
+- AWS Amplify
+- Railway
+- DigitalOcean
+
+Simply build the project and deploy the generated application to your preferred hosting provider.
 
 ---
 
 ## 🛠 Tech Stack
 
-This project uses:
+Built with modern web technologies:
 
-- ⚛️ [Next.js](https://nextjs.org) React-based framework
-- 💅 [Tailwind CSS](https://tailwindcss.com) Utility-first CSS framework
-- 🧱 [TypeScript](https://www.typescriptlang.org) Static typing
-- 📝 [MDX](https://mdxjs.com) Markdown with JSX support
+- ⚛️ Next.js
+- 🧱 TypeScript
+- 💅 Tailwind CSS
+- 📝 MDX
+- ⚡ React
+- 🎨 Lucide Icons
+- 📦 Bun / npm / pnpm / Yarn
+
 ---
 
 ## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=eh3ankazemi/ehsan-kazemi.ir&type=date&legend=top-left)](https://www.star-history.com/#eh3ankazemi/ehsan-kazemi.ir&type=date&legend=top-left)
 
+---
+
 ## 🪪 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is open source and available under the **MIT License**.
 
-## 💬 Feedback & Contributions
+---
 
-Got suggestions, issues, or ideas for improvement? Feel free to open an issue or submit a pull request.
-Contributions are always welcome! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for more details.
+## 💬 Contributing
+
+Contributions, bug reports, feature requests, and feedback are always welcome.
+
+If you'd like to improve the project, feel free to open an issue or submit a pull request. For contribution guidelines, see **CONTRIBUTING.md**.
