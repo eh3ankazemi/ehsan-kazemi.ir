@@ -22,15 +22,13 @@ export default function BlogPost({ slug, title, summary, date, tags, readingTime
         whileHover={{
           scale: 1.05,
           transition: {
-            type: "tween",
-            ease: [0.22, 1, 0.36, 1],
-            duration: 0.6,
+            type: "spring",
+            stiffness: 200,
+            damping: 30,
+            duration: 0.4,
           },
         }}
-        whileTap={{
-          scale: 0.98,
-          transition: { type: "tween", ease: "easeOut", duration: 0.15 },
-        }}
+        whileTap={{ scale: 0.98 }}
         className={cn(
           "group relative h-full flex flex-col",
           "border border-gray-300 dark:border-gray-700 rounded-lg p-5 shadow-sm",

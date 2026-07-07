@@ -36,6 +36,13 @@
     "post": "Post",
     "contents": "CONTENTS"
   },
+  "project": {
+    "duration": "Duration:",
+    "role": "Role:",
+    "viewgit": "View on GitHub",
+    "view":"View Live",
+    "team": "Team Size:"
+  },
   "filter": {
     "company": "Filter by Company",
     "newest": "Newest First",

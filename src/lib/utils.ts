@@ -29,25 +29,42 @@ export function getInitials(name: string): string {
  * @param end - the end date in "YYYY-MM" format or "Present"
  * @returns formatted duration string
  */
-export function formatDuration(start: string, end: string): string {
+export function formatDuration(start: string, end: string) {
   const [startYear, startMonth] = start.split("-")
   const [endYear, endMonth] = end === "Present" ? ["", ""] : end.split("-")
 
   const formatMonth = (month: string) => {
     const date = new Date(2000, parseInt(month) - 1)
-    return date.toLocaleDateString("en-US", { month: "short" })
-    // return date.toLocaleDateString("fa-IR", { month: "short" })
+    return {
+      en: date.toLocaleDateString("en-US", { month: "short" }),
+      fa: date.toLocaleDateString("fa-IR", { month: "short" }),
+    }
   }
 
   if (end === "Present") {
-    return `${formatMonth(startMonth)} ${startYear} – Present`
+    return {
+      en: `${formatMonth(startMonth).en} ${startYear} – Present`,
+      fa: `${formatMonth(startMonth).fa} ${startYear} – اکنون`,
+    }
   }
 
   if (startYear === endYear) {
-    return `${formatMonth(startMonth)} – ${formatMonth(endMonth)} ${startYear}`
+    return {
+      en: `${formatMonth(startMonth).en} – ${formatMonth(endMonth).en} ${startYear}`,
+      fa: `${formatMonth(startMonth).fa} – ${formatMonth(endMonth).fa} ${startYear}`,
+    }
   }
 
-  return `${formatMonth(startMonth)} ${startYear} – ${formatMonth(endMonth)} ${endYear}`
+  if (start === end) {
+    return {
+      en: `${formatMonth(startMonth).en} ${startYear}`,
+      fa: `${formatMonth(startMonth).fa} ${startYear}`,
+    }
+  }
+  return {
+    en: `${formatMonth(startMonth).en} ${startYear} – ${formatMonth(endMonth).en} ${endYear}`,
+    fa: `${formatMonth(startMonth).fa} ${startYear} – ${formatMonth(endMonth).fa} ${endYear}`,
+  }
 }
 
 /**

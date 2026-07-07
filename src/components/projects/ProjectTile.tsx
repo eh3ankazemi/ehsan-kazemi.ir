@@ -44,16 +44,14 @@ export default function ProjectTile({
                 whileHover={{
           scale: 1.05,
           filter: "brightness(1.15)",
-          transition: {        
-            type: "tween",
-            ease: [0.22, 1, 0.36, 1],
-            duration: 0.6,
+          transition: {
+            type: "spring",
+            stiffness: 200,
+            damping: 30,
+            duration: 0.4,
           },
         }}
-        whileTap={{
-          scale: 0.98,
-          transition: { type: "tween", ease: "easeOut", duration: 0.15 },
-        }}
+        whileTap={{ scale: 0.98 }}
         className={cn(
           "group relative overflow-hidden rounded-lg h-full flex flex-col",
           "border border-gray-300 dark:border-gray-700",

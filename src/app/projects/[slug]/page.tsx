@@ -12,6 +12,7 @@ import AnimatedArticle from "@/components/AnimatedArticle"
 import BackToPageButton from "@/components/BackToPageButton"
 import PageHeaderSync from "@/components/header/PageHeaderSync"
 import ImageMdx from "@/components/mdx/ImageMdx"
+import { MetadataLink } from "@/components/projects/MetadataLink"
 import ProjectImageCarousel from "@/components/projects/ProjectImageCarousel"
 import TechBadge from "@/components/TechBadge"
 import { siteMetadata } from "@/data/metadata"
@@ -129,7 +130,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
   return (
     <>
       <UrlCheckerProvider />
-      <PageHeaderSync title={frontmatter.title} subtitle={`پروژه‌های احسان کاظمی · ${duration}`} />
+      <PageHeaderSync title={frontmatter.title} subtitle={`پروژه‌های احسان کاظمی · ${duration.fa}`} />
       <AnimatedArticle>
         <script
           type="application/ld+json"
@@ -144,50 +145,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
         </p>
 
         {/* Metadata Pills & Links */}
-        <div className="flex flex-wrap items-center gap-3 mb-6">
-          {frontmatter.teamSize && (
-            <div className="flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">
-              <FaUsers className="w-4 h-4" />
-              <span>
-                <strong>Team Size:</strong> {frontmatter.teamSize}
-              </span>
-            </div>
-          )}
-          {frontmatter.role && (
-            <div className="flex items-center gap-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">
-              <FaUserTie className="w-4 h-4" />
-              <span>
-                <strong>Role:</strong> {frontmatter.role}
-              </span>
-            </div>
-          )}
-          <div className="flex items-center gap-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm">
-            <FaClock className="w-4 h-4" />
-            <span>
-              <strong>Duration:</strong> {duration}
-            </span>
-          </div>
-          {frontmatter.githubUrl && (
-            <Link
-              href={frontmatter.githubUrl}
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm transition"
-            >
-              <FaGithub className="w-4 h-4" />
-              <span>View on GitHub</span>
-            </Link>
-          )}
-          {frontmatter.paperUrl && (
-            <Link
-              href={frontmatter.paperUrl}
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm transition"
-            >
-              <FaBook className="w-4 h-4" />
-              <span>View Live</span>
-            </Link>
-          )}
-        </div>
+        <MetadataLink frontmatter={frontmatter} duration={duration} />
 
         {/* Tech Stack Section */}
         <div className="flex items-center gap-2 mb-4">

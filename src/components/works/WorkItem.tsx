@@ -40,15 +40,13 @@ export default function WorkItem({
         whileHover={{
           scale: 1.05,
           transition: {
-            type: "tween",
-            ease: [0.22, 1, 0.36, 1],
-            duration: 0.6,
+            type: "spring",
+            stiffness: 200,
+            damping: 30,
+            duration: 0.4,
           },
         }}
-        whileTap={{
-          scale: 0.98,
-          transition: { type: "tween", ease: "easeOut", duration: 0.15 },
-        }}
+        whileTap={{ scale: 0.98 }}
         className={cn(
           "border border-gray-300 dark:border-gray-700 rounded-xl p-4 shadow-sm",
           "hover:border-accent-500 transition cursor-pointer",
@@ -59,7 +57,7 @@ export default function WorkItem({
         <div className="flex items-center">
           {/* Company Logo */}
           {logoUrl && (
-            <div className="mr-4 flex items-center">
+            <div className="flex items-center">
               <Image
                 src={logoUrl}
                 alt={`${company} logo`}
@@ -70,7 +68,7 @@ export default function WorkItem({
             </div>
           )}
           <h3 className="text-xl font-semibold group-hover:text-accent-500 transition">
-            {title} @ {company}
+            &nbsp;&nbsp;{title} @ {company}
           </h3>
         </div>
 
