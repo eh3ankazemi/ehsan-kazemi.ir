@@ -345,16 +345,16 @@ html.dark ::-webkit-scrollbar-thumb {
   }
 }
 
-html[lang="fa"] .textright {
-  text-align: right;
-}
-
 pre {
   text-align: left;
   direction: ltr;
 }
 
-html[lang="fa"] .left_fa{
+html[lang="fa"] .left_fa {
   right: inherit;
   left: 0;
+}
+
+.ltr {
+  direction: ltr;
 }

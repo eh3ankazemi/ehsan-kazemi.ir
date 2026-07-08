@@ -195,7 +195,7 @@ export default async function BlogPostPage(props: { params: pageParams }) {
         {/* Table of Contents */}
         <TableOfContents />
 
-        <div className="prose dark:prose-invert max-w-full overflow-hidden textright">
+        <div className="prose dark:prose-invert max-w-full overflow-hidden rtl:text-right">
           {content}
         </div>
         <SimilarBlogPosts allPosts={posts} currentPostPlug={slug} maxPosts={3} />

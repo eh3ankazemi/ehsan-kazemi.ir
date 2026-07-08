@@ -23,7 +23,7 @@ export const siteMetadata: SiteMetadata = {
    * Site description (shown in search results and social media)
    */
   description:
-    "نمونه‌کارهای احسان کاظمی را ببینید؛ شامل وبلاگ و پروژه‌های هوش مصنوعی، یادگیری ماشین، توسعه فول‌استک و وب مدرن ساخته‌شده با Python، React، Next.js، TypeScript و PyTorch.",
+    "احسان کاظمی، مهندس هوش مصنوعی و توسعه‌دهنده فول‌استک. مشاهده پروژه‌ها، مقالات، سوابق کاری و نمونه‌کارهای مرتبط با هوش مصنوعی، یادگیری ماشین، Python، React، Next.js و TypeScript.",
   // Explore the portfolio of Ehsan Kazemi, showcasing AI, machine learning, full-stack development, and modern web projects built with Python, React, Next.js, TypeScript, and PyTorch.
 
   /**
@@ -31,20 +31,20 @@ export const siteMetadata: SiteMetadata = {
    */
   keywords: [
     "احسان کاظمی",
+    "احسان فریلنسر",
     "Ehsan Kazemi",
     "eh3ankazemi",
     "توسعه‌دهنده نرم‌افزار",
     "هوش مصنوعی",
     "توسعه‌دهنده فول استک",
-    "یادگیری ماشین",
+    "احسان کاظمی فریلنسر",
     "AI Developer",
     "Software Developer",
     "Full Stack Developer",
     "React",
-    "Next.js",
+    "Next js",
     "TypeScript",
     "Python",
-    "Artificial Intelligence",
     "Portfolio",
   ],
   /**

@@ -11,6 +11,7 @@ import { ScrollProgress } from "@/components/header/ScrollProgress"
 import ThemeToggleButton from "@/components/header/ThemeToggleButton"
 import { cn } from "@/lib/utils"
 import { usePageHeader } from "@/providers/PageHeaderProvider"
+import LanguagePopup from "./LanguagePopup"
 import LanguageToggleButton from "./LanguageToggleButton"
 
 // Root path segments whose /<root>/<slug> pages get the mobile header title flip.
@@ -94,86 +95,93 @@ export default function Header() {
   const showTitleBlock = isDetailPage && isMobile && isScrolled && headerInfo !== null
 
   return (
-    <header
-      id="headerPortfolio"
-      className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
-        "text-black dark:text-white",
-        "bg-zinc-50/90 dark:bg-zinc-950/90",
-        "border-b border-gray-300 dark:border-gray-800",
-        "backdrop-blur-md backdrop-saturate-150",
-        "shadow-sm hover:shadow-md"
-      )}
-    >
-      <div
+    <>
+      <header
+        id="headerPortfolio"
         className={cn(
-          "max-w-4xl mx-auto w-full px-5 py-4 md:py-5",
-          "flex items-center justify-between gap-4",
-          "transition-all duration-300"
+          "sticky top-0 z-50 w-full transition-all duration-300",
+          "text-black dark:text-white",
+          "bg-zinc-50/90 dark:bg-zinc-950/90",
+          "border-b border-gray-300 dark:border-gray-800",
+          "backdrop-blur-md backdrop-saturate-150",
+          "shadow-sm hover:shadow-md"
         )}
       >
-        {/* Left side: logo or current path. On mobile, detail pages (blog post/project/
+        <div
+          className={cn(
+            "max-w-4xl mx-auto w-full px-5 py-4 md:py-5",
+            "flex items-center justify-between gap-4",
+            "transition-all duration-300"
+          )}
+        >
+          {/* Left side: logo or current path. On mobile, detail pages (blog post/project/
             work item) flip this over to reveal the page title once the reader scrolls down. */}
-        <div className="min-w-0 flex-1 md:flex-initial" style={{ perspective: 1000 }}>
-          <AnimatePresence mode="wait" initial={false}>
-            {showTitleBlock && headerInfo ? (
-              <motion.div
-                key="title-block"
-                initial={{ rotateX: -90, opacity: 0 }}
-                animate={{ rotateX: 0, opacity: 1 }}
-                exit={{ rotateX: 90, opacity: 0 }}
-                transition={FLIP_TRANSITION}
-                style={{ transformOrigin: "top" }}
-              >
-                <div className="min-w-0">
-                  <p className="font-semibold text-sm leading-snug line-clamp-2">{headerInfo.title}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{headerInfo.subtitle}</p>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="breadcrumbs"
-                initial={{ rotateX: -90, opacity: 0 }}
-                animate={{ rotateX: 0, opacity: 1 }}
-                exit={{ rotateX: 90, opacity: 0 }}
-                transition={FLIP_TRANSITION}
-                style={{ transformOrigin: "top" }}
-              >
-                <Breadcrumbs />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <div className="min-w-0 flex-1 md:flex-initial" style={{ perspective: 1000 }}>
+            <AnimatePresence mode="wait" initial={false}>
+              {showTitleBlock && headerInfo ? (
+                <motion.div
+                  key="title-block"
+                  initial={{ rotateX: -90, opacity: 0 }}
+                  animate={{ rotateX: 0, opacity: 1 }}
+                  exit={{ rotateX: 90, opacity: 0 }}
+                  transition={FLIP_TRANSITION}
+                  style={{ transformOrigin: "top" }}
+                >
+                  <div className="min-w-0">
+                    <p className="font-semibold text-sm leading-snug line-clamp-2">
+                      {headerInfo.title}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                      {headerInfo.subtitle}
+                    </p>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="breadcrumbs"
+                  initial={{ rotateX: -90, opacity: 0 }}
+                  animate={{ rotateX: 0, opacity: 1 }}
+                  exit={{ rotateX: 90, opacity: 0 }}
+                  transition={FLIP_TRANSITION}
+                  style={{ transformOrigin: "top" }}
+                >
+                  <Breadcrumbs />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Center: Segmented navigation - Hidden on mobile */}
+          <NavigationMenu />
+
+          {/* Right side: Theme toggle + Mobile Menu Toggle */}
+          <div className="flex items-center gap-3">
+            {/* Theme toggle button */}
+            <ThemeToggleButton />
+
+            {/* <LangToggleButton /> */}
+            <LanguageToggleButton />
+
+            {/* Hamburger Mobile Menu toggle */}
+            <MobileMenuToggle
+              isOpen={mobileMenuOpen}
+              onToggleAction={() => setMobileMenuOpen(!mobileMenuOpen)}
+            />
+          </div>
         </div>
 
-        {/* Center: Segmented navigation - Hidden on mobile */}
-        <NavigationMenu />
+        {/* Mobile Menu */}
+        <MobileMenu isOpen={mobileMenuOpen} setIsOpenAction={setMobileMenuOpen} />
 
-        {/* Right side: Theme toggle + Mobile Menu Toggle */}
-        <div className="flex items-center gap-3">
-          {/* Theme toggle button */}
-          <ThemeToggleButton />
-
-          {/* <LangToggleButton /> */}
-          <LanguageToggleButton />
-
-          {/* Hamburger Mobile Menu toggle */}
-          <MobileMenuToggle
-            isOpen={mobileMenuOpen}
-            onToggleAction={() => setMobileMenuOpen(!mobileMenuOpen)}
-          />
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <MobileMenu isOpen={mobileMenuOpen} setIsOpenAction={setMobileMenuOpen} />
-
-      {/* Scroll progress bar for blog posts: always shown on desktop, but on mobile it
+        {/* Scroll progress bar for blog posts: always shown on desktop, but on mobile it
           only appears once the reader starts scrolling (alongside the title flip). */}
-      {isBlogPost && (
-        <div className={cn("md:block", isScrolled ? "block" : "hidden")}>
-          <ScrollProgress />
-        </div>
-      )}
-    </header>
+        {isBlogPost && (
+          <div className={cn("md:block", isScrolled ? "block" : "hidden")}>
+            <ScrollProgress />
+          </div>
+        )}
+      </header>
+      <LanguagePopup />
+    </>
   )
 }

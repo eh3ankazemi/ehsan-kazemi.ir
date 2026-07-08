@@ -13,9 +13,6 @@ export default function Breadcrumbs() {
 
   const segments = pathname.split("/").filter(Boolean)
 
-  // Generate initials from the name
-  const initials = getInitials(t.homeIntro.name)
-
   // Only show breadcrumbs for /blog, /projects, /work and their subpaths
   const allowedRoots = ["blog", "projects", "work"]
 
@@ -39,7 +36,7 @@ export default function Breadcrumbs() {
         )}
       >
         {/* Initials on mobile */}
-        <span className="block md:hidden text-lg">{initials}</span>
+        <span className="block md:hidden text-lg">{t.homeIntro.shortName}</span>
         {/* Full name on desktop */}
         <span className="hidden md:inline text-lg">{t.homeIntro.name}</span>
       </Link>

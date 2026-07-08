@@ -177,7 +177,7 @@ export default async function WorkItemPage(props: { params: pageParams }) {
             </div>
           </>
         )}
-        <div className="max-w-5xl prose dark:prose-invert textright">{content}</div>
+        <div className="max-w-5xl prose dark:prose-invert rtl:text-right">{content}</div>
       </AnimatedArticle>
     </>
   )

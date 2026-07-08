@@ -46,10 +46,10 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
   }
 
   return {
-    title: `${project.title} | احسان کاظمی`,
+    title: `پروژه ${project.title} | احسان کاظمی`,
     description: project.description,
     openGraph: {
-      title: `${project.title} | احسان کاظمی`,
+      title: `پروژه ${project.title} | احسان کاظمی`,
       description: project.description,
       type: "article",
     },
@@ -130,7 +130,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
   return (
     <>
       <UrlCheckerProvider />
-      <PageHeaderSync title={frontmatter.title} subtitle={`پروژه‌های احسان کاظمی · ${duration.fa}`} />
+      <PageHeaderSync title={frontmatter.title} subtitle={`پروژه‌ احسان کاظمی · ${duration.fa}`} />
       <AnimatedArticle>
         <script
           type="application/ld+json"
@@ -173,7 +173,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
         )}
 
         {/* Display the actual content of the .mdx file */}
-        <div className="max-w-4xl prose dark:prose-invert textright">{content}</div>
+        <div className="max-w-4xl prose dark:prose-invert rtl:text-right">{content}</div>
       </AnimatedArticle>
     </>
   )
