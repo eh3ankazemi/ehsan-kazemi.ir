@@ -28,7 +28,22 @@
     "blog": "Blog",
     "projects": "Projects",
     "work": "Work",
-    "back": "Back to"
+    "back": "Back to",
+    "about": "About"
+  },
+  "about": {
+    "hi": "Hi, I'm",
+    "skill":"Skills",
+    "aboutme": "About Me",
+    "freelancer": "Freelancer Developer",
+    "freelancer_": "Delivering custom applications.",
+    "frontend": "Frontend",
+    "frontend_": "Building fast website React, Next.js & Astro.js",
+    "backend": "Backend",
+    "backend_": "Building scalable APIs with Next.js & Express.js",
+    "artificial": "Artificial Intelligence",
+    "artificial_": "Machine Learning & LLMs",
+    "about": "I'm a Full Stack Web Developer passionate about creating modern, fast and user-friendly applications. I enjoy solving challenging problems, learning new technologies and building products that people love to use."
   },
   "post": {
     "readArticle": "Read article",
@@ -40,7 +55,7 @@
     "duration": "Duration:",
     "role": "Role:",
     "viewgit": "View on GitHub",
-    "view":"View Live",
+    "view": "View Live",
     "team": "Team Size:"
   },
   "filter": {

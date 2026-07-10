@@ -17,6 +17,7 @@ export default function NavigationMenu() {
   const navItems = useMemo(
     () => [
       { name: t.navigation.home, path: "/" },
+      { name: t.navigation.about, path: "/about" },
       { name: t.navigation.work, path: "/work" },
       { name: t.navigation.projects, path: "/projects" },
       { name: t.navigation.blog, path: "/blog" },

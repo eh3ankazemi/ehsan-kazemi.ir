@@ -15,6 +15,12 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: "/blog",
     },
+    openGraph: {
+      title: "وبلاگ | احسان کاظمی",
+      description:
+        "آخرین پست‌های وبلاگ من در مورد توسعه نرم‌افزار، فناوری و موارد دیگر را بخوانید.",
+      type: "website",
+    },
   }
 }
 

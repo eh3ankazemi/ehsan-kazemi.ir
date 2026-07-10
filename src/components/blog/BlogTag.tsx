@@ -20,7 +20,8 @@ export default function BlogTag({ tag, href }: { tag: string; href?: string }) {
 
   const content = (
     <span className={href ? `${baseClasses} ${hoverClasses}` : baseClasses}>
-      <FaTag className="w-3 h-3 mr-1" />
+      <FaTag className="w-3 h-3" />
+      &nbsp;
       {tag}
     </span>
   )

@@ -15,7 +15,7 @@ import LanguagePopup from "./LanguagePopup"
 import LanguageToggleButton from "./LanguageToggleButton"
 
 // Root path segments whose /<root>/<slug> pages get the mobile header title flip.
-const DETAIL_PAGE_ROOTS = ["blog", "projects", "work"]
+const DETAIL_PAGE_ROOTS = ["blog", "about", "projects", "work"]
 const DETAIL_PAGE_REGEX = new RegExp(`^/(${DETAIL_PAGE_ROOTS.join("|")})/[^/]+$`)
 
 // Tailwind's `md` breakpoint - the flip is a mobile-only affordance.

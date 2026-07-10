@@ -23,6 +23,7 @@ export default function MobileMenu({
   // Only show breadcrumbs for /blog, /projects, /work and their subpaths
   const navItems = [
     { name: t.navigation.home, path: "/" },
+    { name: t.navigation.about, path: "/about" },
     { name: t.navigation.work, path: "/work" },
     { name: t.navigation.projects, path: "/projects" },
     { name: t.navigation.blog, path: "/blog" },

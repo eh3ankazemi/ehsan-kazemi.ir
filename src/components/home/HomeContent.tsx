@@ -42,16 +42,20 @@ export default function HomeContent({ blog, work, projects }: HomeContentProps) 
           viewport={{ once: true }}
           className="text-center mt-2"
         >
-          <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-            {t.home.title}
-            <motion.span
-              initial={{ rotate: 0 }}
-              animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
-              transition={{ duration: 1.5, delay: 0.5, ease: "easeInOut" }}
-              className="inline-block"
-            >
-              👋
-            </motion.span>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100 leading-snug">
+            <span>
+              {t.home.title}
+              <motion.span
+                initial={{ rotate: 0 }}
+                animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
+                transition={{ duration: 1.5, delay: 0.5, ease: "easeInOut" }}
+                className="inline-block"
+              >
+                👋
+              </motion.span>
+            </span>
+            <br />
+            <span className="mt-3 ml-22">{t.about.freelancer}</span>
           </h1>
 
           <motion.div

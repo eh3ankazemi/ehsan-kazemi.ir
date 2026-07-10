@@ -358,3 +358,9 @@ html[lang="fa"] .left_fa {
 .ltr {
   direction: ltr;
 }
+
+.skills {
+  direction: ltr;
+  display: flex;
+  justify-content: space-evenly;
+}
