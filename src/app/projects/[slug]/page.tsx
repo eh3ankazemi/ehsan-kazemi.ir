@@ -96,7 +96,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
   // Get project images
   const projectImages: { src: string; alt: string }[] = []
   if (fs.existsSync(projectPhotoDir)) {
-    const allowedExtensions = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg", ".bmp"]
+    const allowedExtensions = [".jpg", ".jpeg", ".webp", ".png", ".gif", ".svg", ".bmp"]
     const imageFiles = fs
       .readdirSync(projectPhotoDir)
       .filter(f => allowedExtensions.includes(path.extname(f).toLowerCase()))
