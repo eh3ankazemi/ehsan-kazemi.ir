@@ -10,33 +10,33 @@ import { getAllWorkItems } from "@/lib/mdx"
  */
 export async function generateMetadata(): Promise<Metadata> {
   return {
-  title: "سوابق کاری | احسان کاظمی",
-  description:
-    "سوابق کاری، تجربه‌های حرفه‌ای، همکاری‌ها، نقش‌های شغلی و فناوری‌هایی که در پروژه‌های مختلف استفاده کرده‌ام را مشاهده کنید.",
-    alternates: {
-      canonical: "/work",
-  },
-  keywords: [
-    "احسان کاظمی",
-    "سوابق کاری",
-    "تجربه کاری",
-    "رزومه",
-    "سابقه شغلی",
-    "برنامه نویس",
-    "توسعه دهنده وب",
-    "برنامه نویس فول استک",
-    "Next.js",
-    "React",
-    "TypeScript",
-    "AI Developer",
-    "Web Developer",
-    "Portfolio",
-    "Work Experience",
-  ],
-  openGraph: {
     title: "سوابق کاری | احسان کاظمی",
     description:
       "سوابق کاری، تجربه‌های حرفه‌ای، همکاری‌ها، نقش‌های شغلی و فناوری‌هایی که در پروژه‌های مختلف استفاده کرده‌ام را مشاهده کنید.",
+    alternates: {
+      canonical: "/work",
+    },
+    keywords: [
+      "احسان کاظمی",
+      "سوابق کاری",
+      "تجربه کاری",
+      "رزومه",
+      "سابقه شغلی",
+      "برنامه نویس",
+      "توسعه دهنده وب",
+      "برنامه نویس فول استک",
+      "Next.js",
+      "React",
+      "TypeScript",
+      "AI Developer",
+      "Web Developer",
+      "Portfolio",
+      "Work Experience",
+    ],
+    openGraph: {
+      title: "سوابق کاری | احسان کاظمی",
+      description:
+        "سوابق کاری، تجربه‌های حرفه‌ای، همکاری‌ها، نقش‌های شغلی و فناوری‌هایی که در پروژه‌های مختلف استفاده کرده‌ام را مشاهده کنید.",
       type: "website",
     },
   }

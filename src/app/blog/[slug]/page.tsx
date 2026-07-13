@@ -152,10 +152,11 @@ export default async function BlogPostPage(props: { params: pageParams }) {
     },
   }
 
-  const headerSubtitle = `وبلاگ احسان کاظمی · ${new Date(post.date).toLocaleDateString(
-    undefined,
-    { year: "numeric", month: "short", day: "numeric" }
-  )}`
+  const headerSubtitle = `وبلاگ احسان کاظمی · ${new Date(post.date).toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })}`
 
   return (
     <>

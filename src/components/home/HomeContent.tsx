@@ -55,7 +55,7 @@ export default function HomeContent({ blog, work, projects }: HomeContentProps) 
               </motion.span>
             </span>
             <br />
-            <span className="mt-3 ml-22">{t.about.freelancer}</span>
+            <span className="mt-3 sm:ml-22 ml-18.5">{t.about.freelancer}</span>
           </h1>
 
           <motion.div

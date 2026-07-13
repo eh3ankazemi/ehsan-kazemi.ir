@@ -41,7 +41,7 @@ export default function ProjectTile({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ opacity: { duration: 0.8 } }}
-                whileHover={{
+        whileHover={{
           scale: 1.05,
           filter: "brightness(1.15)",
           transition: {

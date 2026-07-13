@@ -1,104 +1,20 @@
 "use client"
 
-// import { motion } from "framer-motion"
-import { motion, Variants } from "framer-motion"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import { FaCode, FaBrain, FaServer, FaBriefcase } from "react-icons/fa"
 import { useTranslation } from "@/hooks/useTranslation"
 import { techToIcon } from "@/lib/devIcons"
 import { cn } from "@/lib/utils"
-
-const cardVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    x: 30,
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-}
-const container: Variants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
-    },
-  },
-}
-
-const cardsContainer: Variants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-}
-
-const fadeUp: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-}
-
-const fadeLeft: Variants = {
-  hidden: {
-    opacity: 0,
-    x: 40,
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-}
-
-const scaleIn: Variants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.9,
-  },
-  show: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.45,
-    },
-  },
-}
-
-const fadeRight: Variants = {
-  hidden: {
-    opacity: 0,
-    x: -40,
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-}
+import {
+  cardVariants,
+  container,
+  cardsContainer,
+  fadeUp,
+  fadeLeft,
+  fadeRight,
+  scaleIn,
+} from "./animations"
 
 const skills = [
   "NextJS",

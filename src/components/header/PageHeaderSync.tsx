@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { usePageHeader } from "@/providers/PageHeaderProvider";
+import { usePageHeader } from "@/providers/PageHeaderProvider"
 
 /**
  * Publishes the current page's title/subtitle into `PageHeaderProvider` so the mobile
