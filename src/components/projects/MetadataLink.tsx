@@ -3,14 +3,15 @@
 import Link from "next/link"
 import { FaUsers, FaUserTie, FaClock, FaGithub, FaBook } from "react-icons/fa"
 import { useTranslation } from "@/hooks/useTranslation"
-import { ProjectFrontmatter } from "@/lib/schemas"
+import type { ProjectFrontmatter } from "@/lib/schemas"
+import type { LocalizedDuration } from "@/lib/utils"
 
 export function MetadataLink({
   frontmatter,
   duration,
 }: {
   frontmatter: ProjectFrontmatter
-  duration: any
+  duration: LocalizedDuration
 }) {
   const t = useTranslation()
   return (
@@ -42,6 +43,7 @@ export function MetadataLink({
           <Link
             href={frontmatter.githubUrl}
             rel="noopener noreferrer"
+            target="_blank"
             className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm transition"
           >
             <FaGithub className="w-4 h-4" />
@@ -52,13 +54,14 @@ export function MetadataLink({
           <Link
             href={frontmatter.paperUrl}
             rel="noopener noreferrer"
+            target="_blank"
             className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full text-sm transition"
           >
             <FaBook className="w-4 h-4" />
             <span>{t.project.view}</span>
           </Link>
         )}
-      </div>{" "}
+      </div>
     </>
   )
 }

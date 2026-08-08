@@ -79,6 +79,7 @@ export default function LanguageToggleButton() {
 
   return (
     <button
+      type="button"
       onClick={handleToggle}
       className={cn(
         "relative w-11 h-11 rounded-lg",
@@ -86,7 +87,9 @@ export default function LanguageToggleButton() {
         "bg-gray-100 dark:bg-gray-800",
         "hover:bg-gray-200 dark:hover:bg-gray-700",
         "flex items-center justify-center",
-        "transition-all active:scale-95"
+        "transition-all active:scale-95",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500",
+        "focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black"
       )}
       aria-label="Toggle language"
     >

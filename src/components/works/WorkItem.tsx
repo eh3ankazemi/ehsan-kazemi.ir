@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import React from "react"
 import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa"
+import { useTranslation } from "@/hooks/useTranslation"
 import { calculateDuration, cn } from "@/lib/utils"
 
 interface WorkItemProps {
@@ -31,8 +32,17 @@ export default function WorkItem({
   locations,
   logoUrl,
 }: WorkItemProps) {
+  const t = useTranslation()
+
   return (
-    <Link href={`/work/${slug}`} className="block group">
+    <Link
+      href={`/work/${slug}`}
+      className={cn(
+        "group block rounded-xl",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500",
+        "focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black"
+      )}
+    >
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -49,12 +59,12 @@ export default function WorkItem({
         whileTap={{ scale: 0.98 }}
         className={cn(
           "border border-gray-300 dark:border-gray-700 rounded-xl p-4 shadow-sm",
-          "hover:border-accent-500 transition cursor-pointer",
+          "hover:border-accent-500 transition",
           "bg-gray-100 dark:bg-gray-900",
           "hover:bg-gray-200 dark:hover:bg-gray-800"
         )}
       >
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           {/* Company Logo */}
           {logoUrl && (
             <div className="flex items-center">
@@ -68,7 +78,7 @@ export default function WorkItem({
             </div>
           )}
           <h3 className="text-xl font-semibold group-hover:text-accent-500 transition">
-            &nbsp;&nbsp;{title} @ {company}
+            {title} @ {company}
           </h3>
         </div>
 
@@ -80,18 +90,18 @@ export default function WorkItem({
               {start} – {end}
             </span>
             <span>·</span>
-            <span>{calculateDuration(start, end)}</span>
+            <span>{calculateDuration(start, end, t.isRTL ? "fa" : "en")}</span>
           </div>
           {locations && locations.length > 0 && (
-            <div className="flex items-center mt-1 sm:mt-0 sm:ml-2">
+            <div className="flex items-center mt-1 sm:mt-0 sm:ms-2">
               <span className="hidden sm:inline mx-2">|</span>
-              <FaMapMarkerAlt className="w-4 h-4 mr-1" />
+              <FaMapMarkerAlt className="w-4 h-4 me-1" />
               <span>{locations.join(", ")}</span>
             </div>
           )}
         </div>
 
-        <p className="mt-2 text-gray-700">{description}</p>
+        <p className="mt-2 text-gray-700 dark:text-gray-300">{description}</p>
       </motion.div>
     </Link>
   )

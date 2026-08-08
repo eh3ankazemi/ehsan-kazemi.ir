@@ -7,15 +7,16 @@ import FilterDropdown from "@/components/FilterDropdown"
 import SortDropdown from "@/components/SortDropdown"
 import { paginationConfig } from "@/data/content"
 import { useTranslation } from "@/hooks/useTranslation"
-import { filterWorkItems, paginateItems, sortWorkItems } from "@/lib/utils"
+import { filterWorkItems, getFilterOptions, paginateItems, sortWorkItems } from "@/lib/utils"
 import ActiveFilterChips from "../ActiveFilterChips"
 import PaginationControls from "../PaginationControls"
 import WorkClientUI from "./WorkClientUI"
 import WorkNotFound from "./WorkNotFound"
+import type { WorkItemProps } from "@/lib/types"
 
-const WORK_PAGE_SIZE = paginationConfig.projectsPerPage
+const WORK_PAGE_SIZE = paginationConfig.workItemsPerPage
 
-export default function Works({ work, baseUrl }: { work: any; baseUrl: string }) {
+export default function Works({ work, baseUrl }: { work: WorkItemProps[]; baseUrl: string }) {
   const router = useRouter()
   const t = useTranslation()
   const searchParams = useSearchParams()
@@ -50,11 +51,21 @@ export default function Works({ work, baseUrl }: { work: any; baseUrl: string })
     return sortWorkItems(filterWorkItems(work, selectedCompanies), sortOrder)
   }, [work, selectedCompanies, sortOrder])
 
-  const WorkItemsLangToShow = filteredWorkItems.filter(workItem => workItem.fa === t.isRTL)
-  const { items: paginatedWorkItems, totalPages } = paginateItems(
-    WorkItemsLangToShow,
-    currentPage,
-    WORK_PAGE_SIZE
+  const workItemsForLanguage = useMemo(
+    () => filteredWorkItems.filter(workItem => workItem.fa === t.isRTL),
+    [filteredWorkItems, t.isRTL]
+  )
+  const { items: paginatedWorkItems, totalPages } = useMemo(
+    () => paginateItems(workItemsForLanguage, currentPage, WORK_PAGE_SIZE),
+    [currentPage, workItemsForLanguage]
+  )
+  const companyOptions = useMemo(
+    () =>
+      getFilterOptions(
+        work.filter(workItem => workItem.fa === t.isRTL),
+        workItem => [workItem.company]
+      ),
+    [t.isRTL, work]
   )
 
   if (currentPage < 1 || (totalPages > 0 && currentPage > totalPages)) return <WorkNotFound />
@@ -76,7 +87,9 @@ export default function Works({ work, baseUrl }: { work: any; baseUrl: string })
 
     params.delete("page")
 
-    router.push(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`)
+    router.replace(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`, {
+      scroll: false,
+    })
   }
 
   const handleClearFilters = () => {
@@ -87,7 +100,9 @@ export default function Works({ work, baseUrl }: { work: any; baseUrl: string })
     params.delete("company")
     params.delete("page")
 
-    router.push(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`)
+    router.replace(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`, {
+      scroll: false,
+    })
   }
 
   const handleSortChange = (order: "newest" | "oldest" | "asc" | "desc") => {
@@ -96,11 +111,13 @@ export default function Works({ work, baseUrl }: { work: any; baseUrl: string })
     params.set("sort", order)
     params.delete("page")
 
-    router.push(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`)
+    router.replace(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`, {
+      scroll: false,
+    })
   }
 
   const handleRemoveCompany = (company: string) => {
-    const updated = companyDrafts.filter(c => c !== company)
+    const updated = selectedCompanies.filter(selectedCompany => selectedCompany !== company)
 
     setCompanyDrafts(updated)
 
@@ -114,32 +131,22 @@ export default function Works({ work, baseUrl }: { work: any; baseUrl: string })
 
     params.delete("page")
 
-    router.push(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`)
+    router.replace(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`, {
+      scroll: false,
+    })
   }
-
-  // Unique companies for filter dropdown
-  const companyCounts: Record<string, number> = {}
-  paginatedWorkItems.forEach((workItem: { company: string | number }) => {
-    companyCounts[workItem.company] = (companyCounts[workItem.company] || 0) + 1
-  })
-  const uniqueCompanies: { company: string; count: number }[] = Object.entries(companyCounts)
-    .map(([company, count]) => ({ company, count }))
-    .sort((a, b) => a.company.localeCompare(b.company))
   return (
     <section className="mx-auto max-w-4xl px-4">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <Suspense fallback={null}>
           <FilterDropdown
-            items={uniqueCompanies.map(({ company, count }) => ({
-              name: company,
-              count,
-            }))}
+            items={companyOptions}
             selectedItems={companyDrafts}
             onToggle={handleToggleCompany}
             onApply={handleApplyFilters}
             onClear={handleClearFilters}
             placeholder={t.filter.company}
-            resultCount={paginatedWorkItems.length}
+            resultCount={workItemsForLanguage.length}
           />
         </Suspense>
 
@@ -159,9 +166,13 @@ export default function Works({ work, baseUrl }: { work: any; baseUrl: string })
         filters={selectedCompanies}
         onRemove={handleRemoveCompany}
         onClearAll={selectedCompanies.length > 1 ? handleClearFilters : undefined}
+        clearAllLabel={t.filter.clearAll}
       />
 
-      <WorkClientUI filteredWorkItems={filteredWorkItems} paginatedWorkItems={paginatedWorkItems} />
+      <WorkClientUI
+        filteredWorkItems={workItemsForLanguage}
+        paginatedWorkItems={paginatedWorkItems}
+      />
 
       <PaginationControls
         currentPage={currentPage}

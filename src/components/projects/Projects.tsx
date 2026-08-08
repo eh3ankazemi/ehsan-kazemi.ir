@@ -7,16 +7,23 @@ import FilterDropdown from "@/components/FilterDropdown"
 import SortDropdown from "@/components/SortDropdown"
 import { paginationConfig } from "@/data/content"
 import { useTranslation } from "@/hooks/useTranslation"
-import { filterProjects, paginateItems, sortProjects } from "@/lib/utils"
+import { filterProjects, getFilterOptions, paginateItems, sortProjects } from "@/lib/utils"
 
 import ActiveFilterChips from "../ActiveFilterChips"
 import PaginationControls from "../PaginationControls"
 import ProjectsClientUI from "./ProjectsClientUI"
 import ProjectsNotFound from "./ProjectsNotFound"
+import type { ProjectProps } from "@/lib/types"
 
 const PROJECTS_PAGE_SIZE = paginationConfig.projectsPerPage
 
-export default function Projects({ projects, baseUrl }: { projects: any; baseUrl: string }) {
+export default function Projects({
+  projects,
+  baseUrl,
+}: {
+  projects: ProjectProps[]
+  baseUrl: string
+}) {
   const t = useTranslation()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -48,10 +55,21 @@ export default function Projects({ projects, baseUrl }: { projects: any; baseUrl
     return sortProjects(filterProjects(projects, selectedTechStack), sortOrder)
   }, [projects, selectedTechStack, sortOrder])
 
-  const projectItemsLangToShow = filteredProjects.filter(projectItem => projectItem.fa === t.isRTL)
+  const projectsForLanguage = useMemo(
+    () => filteredProjects.filter(project => project.fa === t.isRTL),
+    [filteredProjects, t.isRTL]
+  )
   const { items: paginatedProjects, totalPages } = useMemo(
-    () => paginateItems(projectItemsLangToShow, currentPage, PROJECTS_PAGE_SIZE),
-    [projectItemsLangToShow, currentPage]
+    () => paginateItems(projectsForLanguage, currentPage, PROJECTS_PAGE_SIZE),
+    [currentPage, projectsForLanguage]
+  )
+  const techOptions = useMemo(
+    () =>
+      getFilterOptions(
+        projects.filter(project => project.fa === t.isRTL),
+        project => project.techStack
+      ),
+    [projects, t.isRTL]
   )
 
   if (currentPage < 1 || (totalPages > 0 && currentPage > totalPages)) {
@@ -103,7 +121,7 @@ export default function Projects({ projects, baseUrl }: { projects: any; baseUrl
   }
 
   const handleRemoveTech = (tech: string) => {
-    const updated = techDrafts.filter(t => t !== tech)
+    const updated = selectedTechStack.filter(selectedTech => selectedTech !== tech)
 
     setTechDrafts(updated)
 
@@ -122,34 +140,18 @@ export default function Projects({ projects, baseUrl }: { projects: any; baseUrl
     })
   }
 
-  // Unique techStackCounts for filter dropdown
-  const techStackCounts: Record<string, number> = {}
-  paginatedProjects.forEach(project => {
-    ;(project.techStack ?? []).forEach(tech => {
-      techStackCounts[tech] = (techStackCounts[tech] || 0) + 1
-    })
-  })
-  const uniqueTechStack = Object.entries(techStackCounts)
-    .map(([tech, count]) => ({
-      tech,
-      count,
-    }))
-    .sort((a, b) => a.tech.localeCompare(b.tech))
   return (
     <section className="mx-auto max-w-4xl px-4">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <Suspense fallback={null}>
           <FilterDropdown
-            items={uniqueTechStack.map(({ tech, count }) => ({
-              name: tech,
-              count,
-            }))}
+            items={techOptions}
             selectedItems={techDrafts}
             onToggle={handleToggleTech}
             onApply={handleApplyFilters}
             onClear={handleClearFilters}
-            placeholder={t.filter.company}
-            resultCount={paginatedProjects.length}
+            placeholder={t.filter.technologies}
+            resultCount={projectsForLanguage.length}
           />
         </Suspense>
 
@@ -175,9 +177,13 @@ export default function Projects({ projects, baseUrl }: { projects: any; baseUrl
         filters={selectedTechStack}
         onRemove={handleRemoveTech}
         onClearAll={selectedTechStack.length > 1 ? handleClearFilters : undefined}
+        clearAllLabel={t.filter.clearAll}
       />
 
-      <ProjectsClientUI filteredProjects={filteredProjects} paginatedProjects={paginatedProjects} />
+      <ProjectsClientUI
+        filteredProjects={projectsForLanguage}
+        paginatedProjects={paginatedProjects}
+      />
 
       <PaginationControls
         currentPage={currentPage}

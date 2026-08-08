@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion"
-import { useState, useRef, useEffect } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { FaChevronDown, FaCheck } from "react-icons/fa"
 import { cn } from "@/lib/utils"
 
@@ -15,6 +15,7 @@ interface SortDropdownProps {
 export default function SortDropdown({ sortOrder, onChange, options }: SortDropdownProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const dropdownId = useId()
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -40,7 +41,11 @@ export default function SortDropdown({ sortOrder, onChange, options }: SortDropd
   return (
     <div className="relative" ref={dropdownRef}>
       <button
+        type="button"
         onClick={() => setIsDropdownOpen(prev => !prev)}
+        aria-controls={dropdownId}
+        aria-expanded={isDropdownOpen}
+        aria-haspopup="true"
         className={cn(
           "cursor-pointer flex items-center justify-between",
           "border border-gray-300 dark:border-gray-700",
@@ -69,6 +74,7 @@ export default function SortDropdown({ sortOrder, onChange, options }: SortDropd
       <AnimatePresence>
         {isDropdownOpen && (
           <motion.div
+            id={dropdownId}
             initial={{ opacity: 0, scale: 0.95, y: -10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
@@ -85,6 +91,7 @@ export default function SortDropdown({ sortOrder, onChange, options }: SortDropd
               const isSelected = sortOrder === value
               return (
                 <motion.button
+                  type="button"
                   key={value}
                   onClick={() => {
                     onChange(value)

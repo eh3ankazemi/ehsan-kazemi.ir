@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { FaFrown } from "react-icons/fa"
 import WorkItem from "@/components/works/WorkItem"
-import { WorkItemProps } from "@/lib/types"
+import { useTranslation } from "@/hooks/useTranslation"
+import type { WorkItemProps } from "@/lib/types"
 
 export default function WorkClientUI({
   filteredWorkItems,
@@ -10,6 +11,8 @@ export default function WorkClientUI({
   filteredWorkItems: WorkItemProps[]
   paginatedWorkItems: WorkItemProps[]
 }) {
+  const t = useTranslation()
+
   return (
     // Work Items List or No Results Message
     <AnimatePresence mode="wait">
@@ -35,10 +38,9 @@ export default function WorkClientUI({
           transition={{ duration: 0.3, ease: "easeOut" }}
         >
           <FaFrown className="text-4xl md:text-5xl mb-3 text-gray-400 dark:text-gray-500" />
-          <p className="text-lg md:text-xl lg:text-2xl font-semibold">No work items found</p>
+          <p className="text-lg md:text-xl lg:text-2xl font-semibold">{t.filter.noWorkTitle}</p>
           <p className="text-sm md:text-base lg:text-lg mt-2 max-w-2xl">
-            The combination of selected company filters didn&apos;t match any work items. Try
-            changing or clearing your filters.
+            {t.filter.noWorkDescription}
           </p>
         </motion.div>
       )}

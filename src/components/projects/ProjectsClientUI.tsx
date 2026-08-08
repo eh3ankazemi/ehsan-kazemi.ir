@@ -2,7 +2,8 @@ import { AnimatePresence, motion } from "framer-motion"
 import { FaFrown } from "react-icons/fa"
 
 import ProjectTile from "@/components/projects/ProjectTile"
-import { ProjectProps } from "@/lib/types"
+import { useTranslation } from "@/hooks/useTranslation"
+import type { ProjectProps } from "@/lib/types"
 
 export default function ProjectsClientUI({
   filteredProjects,
@@ -11,6 +12,8 @@ export default function ProjectsClientUI({
   filteredProjects: ProjectProps[]
   paginatedProjects: ProjectProps[]
 }) {
+  const t = useTranslation()
+
   return (
     <AnimatePresence mode="wait">
       {filteredProjects.length > 0 ? (
@@ -37,11 +40,10 @@ export default function ProjectsClientUI({
         >
           <FaFrown className="mb-3 text-4xl text-gray-400 dark:text-gray-500 md:text-5xl" />
 
-          <p className="text-lg font-semibold md:text-xl lg:text-2xl">No projects found</p>
+          <p className="text-lg font-semibold md:text-xl lg:text-2xl">{t.filter.noProjectsTitle}</p>
 
           <p className="mt-2 max-w-2xl text-sm md:text-base lg:text-lg">
-            The combination of selected tech stack filters didn&apos;t match any projects. Try
-            changing or clearing your filters.
+            {t.filter.noProjectsDescription}
           </p>
         </motion.div>
       )}

@@ -36,7 +36,14 @@ export default function ProjectTile({
 }: ProjectTileProps) {
   const t = useTranslation()
   return (
-    <Link href={`/projects/${slug}`} className="block h-full">
+    <Link
+      href={`/projects/${slug}`}
+      className={cn(
+        "group block h-full rounded-lg",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500",
+        "focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black"
+      )}
+    >
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -53,15 +60,12 @@ export default function ProjectTile({
         }}
         whileTap={{ scale: 0.98 }}
         className={cn(
-          "group relative overflow-hidden rounded-lg h-full flex flex-col",
+          "relative overflow-hidden rounded-lg h-full flex flex-col",
           "border border-gray-300 dark:border-gray-700",
           "bg-white dark:bg-gray-900",
           "shadow-sm hover:shadow-2xl hover:shadow-accent-500/20",
           "hover:border-accent-500 dark:hover:border-accent-500",
-          "transition-all duration-200",
-          "focus-visible:outline-none focus-visible:ring-2",
-          "focus-visible:ring-accent-500 focus-visible:ring-offset-2",
-          "dark:focus-visible:ring-offset-black"
+          "transition-all duration-200"
         )}
       >
         {/* Image Container */}
@@ -135,7 +139,7 @@ export default function ProjectTile({
                 {startDate} – {endDate}
               </span>
               <span>·</span>
-              <span>{calculateDuration(startDate, endDate)}</span>
+              <span>{calculateDuration(startDate, endDate, t.isRTL ? "fa" : "en")}</span>
             </div>
           )}
 

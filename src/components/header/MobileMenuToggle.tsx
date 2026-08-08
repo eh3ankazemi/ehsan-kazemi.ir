@@ -15,6 +15,7 @@ export default function MobileMenuToggle({
 }) {
   return (
     <button
+      type="button"
       className={cn(
         "md:hidden w-11 h-11 flex items-center justify-center rounded-lg",
         "bg-gray-100 dark:bg-gray-900",
@@ -27,11 +28,16 @@ export default function MobileMenuToggle({
         "focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black",
         "shadow-sm hover:shadow-md"
       )}
-      onMouseDown={e => {
-        e.stopPropagation()
-        onToggleAction()
+      onMouseDown={event => event.stopPropagation()}
+      onClick={onToggleAction}
+      onKeyDown={event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault()
+          onToggleAction()
+        }
       }}
       aria-label={isOpen ? "Close menu" : "Open menu"}
+      aria-controls="mobile-navigation"
       aria-expanded={isOpen}
     >
       <motion.div

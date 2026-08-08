@@ -29,7 +29,12 @@ export function getInitials(name: string): string {
  * @param end - the end date in "YYYY-MM" format or "Present"
  * @returns formatted duration string
  */
-export function formatDuration(start: string, end: string) {
+export type LocalizedDuration = {
+  en: string
+  fa: string
+}
+
+export function formatDuration(start: string, end: string): LocalizedDuration {
   const [startYear, startMonth] = start.split("-")
   const [endYear, endMonth] = end === "Present" ? ["", ""] : end.split("-")
 
@@ -48,17 +53,17 @@ export function formatDuration(start: string, end: string) {
     }
   }
 
-  if (startYear === endYear) {
-    return {
-      en: `${formatMonth(startMonth).en} – ${formatMonth(endMonth).en} ${startYear}`,
-      fa: `${formatMonth(startMonth).fa} – ${formatMonth(endMonth).fa} ${startYear}`,
-    }
-  }
-
   if (start === end) {
     return {
       en: `${formatMonth(startMonth).en} ${startYear}`,
       fa: `${formatMonth(startMonth).fa} ${startYear}`,
+    }
+  }
+
+  if (startYear === endYear) {
+    return {
+      en: `${formatMonth(startMonth).en} – ${formatMonth(endMonth).en} ${startYear}`,
+      fa: `${formatMonth(startMonth).fa} – ${formatMonth(endMonth).fa} ${startYear}`,
     }
   }
   return {
@@ -73,7 +78,7 @@ export function formatDuration(start: string, end: string) {
  * @param end - End date string or "Present"
  * @returns Formatted duration (e.g., "2 yrs 3 mos", "6 mos", "1 yr")
  */
-export function calculateDuration(start: string, end: string): string {
+export function calculateDuration(start: string, end: string, locale: "en" | "fa" = "en"): string {
   const parseDate = (dateStr: string): Date => {
     // Handle "Present" or similar
     if (dateStr.toLowerCase().includes("present") || dateStr.toLowerCase().includes("current")) {
@@ -107,6 +112,16 @@ export function calculateDuration(start: string, end: string): string {
 
   const years = Math.floor(totalMonths / 12)
   const months = totalMonths % 12
+
+  if (locale === "fa") {
+    const number = new Intl.NumberFormat("fa-IR")
+
+    if (years === 0 && months === 0) return `${number.format(1)} ماه`
+    if (years === 0) return `${number.format(months)} ماه`
+    if (months === 0) return `${number.format(years)} سال`
+
+    return `${number.format(years)} سال ${number.format(months)} ماه`
+  }
 
   if (years === 0 && months === 0) {
     return "1 mo"
@@ -181,10 +196,18 @@ export function diceCoefficient(a: string, b: string): number {
 
   const pairsA = bigrams(a)
   const pairsB = bigrams(b)
-  const setB = new Set(pairsB)
+  const countsB = new Map<string, number>()
+  for (const pair of pairsB) {
+    countsB.set(pair, (countsB.get(pair) ?? 0) + 1)
+  }
+
   let matches = 0
   for (const pair of pairsA) {
-    if (setB.has(pair)) matches++
+    const remaining = countsB.get(pair) ?? 0
+    if (remaining > 0) {
+      matches++
+      countsB.set(pair, remaining - 1)
+    }
   }
   return (2 * matches) / (pairsA.length + pairsB.length)
 }
@@ -347,4 +370,22 @@ export function paginateItems<T>(
   const totalPages = Math.ceil(items.length / pageSize)
   const start = (page - 1) * pageSize
   return { items: items.slice(start, start + pageSize), totalPages }
+}
+
+/** Builds alphabetized filter options with counts from a collection. */
+export function getFilterOptions<T>(
+  items: readonly T[],
+  getValues: (item: T) => readonly string[] | undefined
+): Array<{ name: string; count: number }> {
+  const counts = new Map<string, number>()
+
+  for (const item of items) {
+    for (const value of getValues(item) ?? []) {
+      counts.set(value, (counts.get(value) ?? 0) + 1)
+    }
+  }
+
+  return [...counts.entries()]
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => a.name.localeCompare(b.name))
 }

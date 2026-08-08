@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion"
-import { useState, useRef, useEffect } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { FaChevronDown, FaBroom, FaCheck } from "react-icons/fa"
 import { useTranslation } from "@/hooks/useTranslation"
 import { cn } from "@/lib/utils"
@@ -29,6 +29,7 @@ export default function FilterDropdown({
 }: FilterDropdownProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const dropdownId = useId()
   const t = useTranslation()
 
   useEffect(() => {
@@ -61,7 +62,11 @@ export default function FilterDropdown({
   return (
     <div className="relative" ref={dropdownRef}>
       <button
+        type="button"
         onClick={() => setIsDropdownOpen(prev => !prev)}
+        aria-controls={dropdownId}
+        aria-expanded={isDropdownOpen}
+        aria-haspopup="dialog"
         className={cn(
           "cursor-pointer flex items-center justify-between relative w-full",
           "border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-2.5",
@@ -75,7 +80,9 @@ export default function FilterDropdown({
         )}
       >
         <span className="truncate">
-          {selectedItems.length === 0 ? placeholder : `${selectedItems.length} Selected`}
+          {selectedItems.length === 0
+            ? placeholder
+            : `${selectedItems.length} ${t.filter.selected}`}
         </span>
         <motion.div
           animate={{ rotate: isDropdownOpen ? -180 : 0 }}
@@ -84,23 +91,24 @@ export default function FilterDropdown({
         >
           <FaChevronDown className="text-sm" />
         </motion.div>
-        {resultCount > 0 && (
-          <span
-            className={cn(
-              "absolute -top-2 -right-2 bg-accent-600 dark:bg-accent-500 text-white",
-              "text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center",
-              "shadow-md border border-white dark:border-black"
-            )}
-            title={`${resultCount} results`}
-          >
-            {resultCount}
-          </span>
-        )}
+        <span
+          className={cn(
+            "absolute -top-2 -right-2 bg-accent-600 dark:bg-accent-500 text-white",
+            "text-xs font-bold rounded-full min-w-6 h-6 px-1 flex items-center justify-center",
+            "shadow-md border border-white dark:border-black"
+          )}
+          title={t.filter.results.replace("{count}", String(resultCount))}
+        >
+          {resultCount}
+        </span>
       </button>
 
       <AnimatePresence>
         {isDropdownOpen && (
           <motion.div
+            id={dropdownId}
+            role="dialog"
+            aria-label={placeholder}
             initial={{ opacity: 0, scale: 0.95, y: -10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
@@ -149,6 +157,7 @@ export default function FilterDropdown({
             </div>
             <div className="flex justify-between items-center pt-3 border-t border-gray-200 dark:border-gray-700">
               <button
+                type="button"
                 onClick={handleApply}
                 className={cn(
                   "px-4 py-2 rounded-lg cursor-pointer text-sm font-medium",
@@ -162,6 +171,7 @@ export default function FilterDropdown({
                 {t.filter.apply}
               </button>
               <button
+                type="button"
                 onClick={onClear}
                 className={cn(
                   "flex items-center gap-1.5 px-3 py-2 rounded-lg cursor-pointer",
@@ -172,7 +182,7 @@ export default function FilterDropdown({
                   "focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500",
                   "focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-800"
                 )}
-                title="Clear filters"
+                title={t.filter.clearFilters}
               >
                 <FaBroom />
                 {t.filter.clear}

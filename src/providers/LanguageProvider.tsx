@@ -1,8 +1,7 @@
 "use client"
 
 import { createContext, useContext, useEffect, useState } from "react"
-
-type Language = "en" | "fa"
+import type { Language } from "@/lib/locale"
 
 type LanguageContextType = {
   language: Language

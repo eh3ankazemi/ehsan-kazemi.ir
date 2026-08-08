@@ -9,11 +9,11 @@ import PaginationControls from "@/components/PaginationControls"
 import SortDropdown from "@/components/SortDropdown"
 import { paginationConfig } from "@/data/content"
 import { useTranslation } from "@/hooks/useTranslation"
-import { BlogPostProps } from "@/lib/types"
-import { filterBlogPosts, paginateItems, sortBlogPosts } from "@/lib/utils"
+import { filterBlogPosts, getFilterOptions, paginateItems, sortBlogPosts } from "@/lib/utils"
 
 import BlogClientUI from "./BlogClientUI"
 import BlogNotFound from "./BlogNotFound"
+import type { BlogPostProps } from "@/lib/types"
 
 const POSTS_PAGE_SIZE = paginationConfig.blogPostsPerPage
 
@@ -54,11 +54,21 @@ export default function Blogs({ posts, baseUrl }: { posts: BlogPostProps[]; base
   }, [posts, selectedTags, sortOrder])
 
   // Pagination
-  const PostItemsLangToShow = filteredPosts.filter(postItem => postItem.fa === t.isRTL)
-  const { items: paginatedPosts, totalPages } = paginateItems(
-    PostItemsLangToShow,
-    currentPage,
-    POSTS_PAGE_SIZE
+  const postsForLanguage = useMemo(
+    () => filteredPosts.filter(post => post.fa === t.isRTL),
+    [filteredPosts, t.isRTL]
+  )
+  const { items: paginatedPosts, totalPages } = useMemo(
+    () => paginateItems(postsForLanguage, currentPage, POSTS_PAGE_SIZE),
+    [currentPage, postsForLanguage]
+  )
+  const tagOptions = useMemo(
+    () =>
+      getFilterOptions(
+        posts.filter(post => post.fa === t.isRTL),
+        post => post.tags
+      ),
+    [posts, t.isRTL]
   )
 
   // Invalid page
@@ -81,7 +91,9 @@ export default function Blogs({ posts, baseUrl }: { posts: BlogPostProps[]; base
 
     params.delete("page")
 
-    router.push(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`)
+    router.replace(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`, {
+      scroll: false,
+    })
   }
 
   const handleClearFilters = () => {
@@ -92,7 +104,9 @@ export default function Blogs({ posts, baseUrl }: { posts: BlogPostProps[]; base
     params.delete("tags")
     params.delete("page")
 
-    router.push(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`)
+    router.replace(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`, {
+      scroll: false,
+    })
   }
 
   const handleSortChange = (order: "asc" | "desc" | "newest" | "oldest") => {
@@ -103,11 +117,13 @@ export default function Blogs({ posts, baseUrl }: { posts: BlogPostProps[]; base
     params.set("sort", value)
     params.delete("page")
 
-    router.push(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`)
+    router.replace(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`, {
+      scroll: false,
+    })
   }
 
   const handleRemoveTag = (tag: string) => {
-    const updated = tagDrafts.filter(t => t !== tag)
+    const updated = selectedTags.filter(selectedTag => selectedTag !== tag)
 
     setTagDrafts(updated)
 
@@ -121,37 +137,23 @@ export default function Blogs({ posts, baseUrl }: { posts: BlogPostProps[]; base
 
     params.delete("page")
 
-    router.push(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`)
+    router.replace(`${baseUrl}${params.toString() ? `?${params.toString()}` : ""}`, {
+      scroll: false,
+    })
   }
 
-  // Unique tags for filter dropdown
-  const tagCounts: Record<string, number> = {}
-  paginatedPosts.forEach(post => {
-    ;(post.tags ?? []).forEach(tag => {
-      tagCounts[tag] = (tagCounts[tag] || 0) + 1
-    })
-  })
-  const uniqueTags = Object.entries(tagCounts)
-    .map(([tag, count]) => ({
-      tag,
-      count,
-    }))
-    .sort((a, b) => a.tag.localeCompare(b.tag))
   return (
     <section className="mx-auto max-w-4xl px-4">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <Suspense fallback={null}>
           <FilterDropdown
-            items={uniqueTags.map(({ tag, count }) => ({
-              name: tag,
-              count,
-            }))}
+            items={tagOptions}
             selectedItems={tagDrafts}
             onToggle={handleToggleTag}
             onApply={handleApplyFilters}
             onClear={handleClearFilters}
-            placeholder={t.filter.company}
-            resultCount={paginatedPosts.length}
+            placeholder={t.filter.tags}
+            resultCount={postsForLanguage.length}
           />
         </Suspense>
 
@@ -177,9 +179,10 @@ export default function Blogs({ posts, baseUrl }: { posts: BlogPostProps[]; base
         filters={selectedTags}
         onRemove={handleRemoveTag}
         onClearAll={selectedTags.length > 1 ? handleClearFilters : undefined}
+        clearAllLabel={t.filter.clearAll}
       />
 
-      <BlogClientUI filteredPosts={filteredPosts} paginatedPosts={paginatedPosts} />
+      <BlogClientUI filteredPosts={postsForLanguage} paginatedPosts={paginatedPosts} />
 
       <PaginationControls
         currentPage={currentPage}

@@ -60,10 +60,22 @@
   },
   "filter": {
     "company": "Filter by Company",
+    "tags": "Filter by Tag",
+    "technologies": "Filter by Technology",
     "newest": "Newest First",
     "oldest": "Oldest First",
     "apply": "Apply",
-    "clear": "Clear"
+    "clear": "Clear",
+    "clearAll": "Clear All",
+    "clearFilters": "Clear filters",
+    "selected": "selected",
+    "results": "{count} results",
+    "noBlogTitle": "No blog posts found",
+    "noBlogDescription": "The selected tags didn't match any blog posts. Try changing or clearing your filters.",
+    "noProjectsTitle": "No projects found",
+    "noProjectsDescription": "The selected technologies didn't match any projects. Try changing or clearing your filters.",
+    "noWorkTitle": "No work items found",
+    "noWorkDescription": "The selected companies didn't match any work items. Try changing or clearing your filters."
   },
   "home": {
     "title": "Hi, I'm Ehsan",

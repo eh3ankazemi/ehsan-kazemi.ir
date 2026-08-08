@@ -2,7 +2,8 @@ import { AnimatePresence, motion } from "framer-motion"
 import { FaFrown } from "react-icons/fa"
 
 import BlogPost from "@/components/blog/BlogPost"
-import { BlogPostProps } from "@/lib/types"
+import { useTranslation } from "@/hooks/useTranslation"
+import type { BlogPostProps } from "@/lib/types"
 
 export default function BlogClientUI({
   filteredPosts,
@@ -11,6 +12,8 @@ export default function BlogClientUI({
   filteredPosts: BlogPostProps[]
   paginatedPosts: BlogPostProps[]
 }) {
+  const t = useTranslation()
+
   return (
     <AnimatePresence mode="wait">
       {filteredPosts.length > 0 ? (
@@ -37,11 +40,10 @@ export default function BlogClientUI({
         >
           <FaFrown className="mb-3 text-4xl text-gray-400 dark:text-gray-500 md:text-5xl" />
 
-          <p className="text-lg font-semibold md:text-xl lg:text-2xl">No blog posts found</p>
+          <p className="text-lg font-semibold md:text-xl lg:text-2xl">{t.filter.noBlogTitle}</p>
 
           <p className="mt-2 max-w-2xl text-sm md:text-base lg:text-lg">
-            The combination of selected tags didn&apos;t match any blog posts. Try changing or
-            clearing your filters.
+            {t.filter.noBlogDescription}
           </p>
         </motion.div>
       )}

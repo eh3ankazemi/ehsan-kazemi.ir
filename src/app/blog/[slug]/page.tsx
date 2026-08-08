@@ -135,7 +135,9 @@ export default async function BlogPostPage(props: { params: pageParams }) {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.summary,
-    image: `${siteMetadata.siteUrl}/blog/${post.slug}/opengraph-image`,
+    ...(siteMetadata.ogImage && {
+      image: new URL(siteMetadata.ogImage, siteMetadata.siteUrl).toString(),
+    }),
     inLanguage: post.fa ? "fa-IR" : "en",
     datePublished: new Date(post.date).toISOString(),
     url: `${siteMetadata.siteUrl}/blog/${post.slug}`,
@@ -152,7 +154,10 @@ export default async function BlogPostPage(props: { params: pageParams }) {
     },
   }
 
-  const headerSubtitle = `وبلاگ احسان کاظمی · ${new Date(post.date).toLocaleDateString(undefined, {
+  const locale = post.fa ? "fa-IR" : "en-US"
+  const headerSubtitle = `${post.fa ? "وبلاگ احسان کاظمی" : "Ehsan Kazemi's Blog"} · ${new Date(
+    post.date
+  ).toLocaleDateString(locale, {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -172,7 +177,7 @@ export default async function BlogPostPage(props: { params: pageParams }) {
         <div className="flex items-center gap-4 text-gray-500 mb-8">
           <span className="flex items-center gap-1.5">
             <FaRegCalendarAlt className="shrink-0" />
-            {new Date(post.date).toLocaleDateString(undefined, {
+            {new Date(post.date).toLocaleDateString(locale, {
               year: "numeric",
               month: "long",
               day: "numeric",
@@ -181,7 +186,7 @@ export default async function BlogPostPage(props: { params: pageParams }) {
           <span>•</span>
           <span className="flex items-center gap-1.5">
             <FaBookOpen className="shrink-0" />
-            {readingTime} min read
+            {post.fa ? `${readingTime} دقیقه مطالعه` : `${readingTime} min read`}
           </span>
         </div>
 

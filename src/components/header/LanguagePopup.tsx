@@ -81,11 +81,13 @@ export default function LanguagePopup() {
           stiffness: 260,
           damping: 24,
         }}
-        className="fixed bottom-6 left-6 z-50 w-90 rounded-2xl border border-zinc-200 bg-white p-5 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 ltr"
+        className="fixed bottom-4 left-4 right-4 z-50 w-auto rounded-2xl border border-zinc-200 bg-white p-5 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 ltr sm:bottom-6 sm:left-6 sm:right-auto sm:w-90"
       >
         <button
+          type="button"
           onClick={() => setShow(false)}
-          className="absolute mo right-3 top-3 rounded-md p-1 text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-white"
+          aria-label="Dismiss language suggestion"
+          className="absolute right-3 top-3 rounded-md p-1 text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-white"
         >
           <FaX className="h-4 w-4" />
         </button>
@@ -112,6 +114,7 @@ export default function LanguagePopup() {
 
         <div className="flex gap-3">
           <button
+            type="button"
             onClick={handleToggle}
             className="flex-1 rounded-xl bg-accent-600 px-4 py-2.5 text-center font-medium text-white transition hover:bg-accent-700"
             aria-label="Toggle language"
@@ -120,6 +123,7 @@ export default function LanguagePopup() {
           </button>
 
           <button
+            type="button"
             onClick={() => setShow(false)}
             className="rounded-xl border border-zinc-300 px-4 py-2.5 text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
           >

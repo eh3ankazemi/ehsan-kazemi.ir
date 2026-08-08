@@ -127,13 +127,19 @@ export default async function WorkItemPage(props: { params: pageParams }) {
     ...(frontmatter.end !== "Present" && { endDate: frontmatter.end }),
     url: `${siteMetadata.siteUrl}/work/${post.slug}`,
   }
+  const endLabel = frontmatter.fa && frontmatter.end === "Present" ? "اکنون" : frontmatter.end
+  const duration = calculateDuration(
+    frontmatter.start,
+    frontmatter.end,
+    frontmatter.fa ? "fa" : "en"
+  )
 
   return (
     <>
       <UrlCheckerProvider />
       <PageHeaderSync
         title={frontmatter.title}
-        subtitle={`${frontmatter.company} · ${frontmatter.start} - ${frontmatter.end}`}
+        subtitle={`${frontmatter.company} · ${frontmatter.start} - ${endLabel}`}
       />
       <AnimatedArticle lang={post.fa ? "fa" : "en"} dir={post.fa ? "rtl" : "ltr"}>
         <script
@@ -160,16 +166,18 @@ export default async function WorkItemPage(props: { params: pageParams }) {
         <p className="text-lg text-gray-600 dark:text-gray-400 mb-2">{frontmatter.description}</p>
         <p className="text-sm text-gray-500 dark:text-gray-500 mb-6 flex items-center gap-2">
           <span>
-            {frontmatter.start} - {frontmatter.end}
+            {frontmatter.start} - {endLabel}
           </span>
           <span>·</span>
-          <span>{calculateDuration(frontmatter.start, frontmatter.end)}</span>
+          <span>{duration}</span>
         </p>
         {frontmatter.techStack && frontmatter.techStack.length > 0 && (
           <>
             <div className="flex items-center gap-2 mb-4">
               <BsStack />
-              <h2 className="text-xl font-semibold">Tech Stack</h2>
+              <h2 className="text-xl font-semibold">
+                {frontmatter.fa ? "پشته فناوری" : "Tech Stack"}
+              </h2>
             </div>
             <div className="flex flex-wrap gap-4 mb-8 justify-center">
               {frontmatter.techStack.map(techName => (
