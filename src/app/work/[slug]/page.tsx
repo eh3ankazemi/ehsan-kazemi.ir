@@ -15,6 +15,7 @@ import { Timeline, TimelineItem } from "@/components/mdx/Timeline"
 import TechBadge from "@/components/TechBadge"
 import { siteMetadata } from "@/data/metadata"
 import { getAllWorkItems } from "@/lib/mdx"
+import { createArticleMetadata } from "@/lib/seo"
 import { pageParams, WorkItemFrontmatter } from "@/lib/types"
 import { calculateDuration } from "@/lib/utils"
 import { UrlCheckerProvider } from "@/providers/UrlCheckerProvider"
@@ -44,15 +45,15 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
     }
   }
 
-  return {
-    title: `${post.company} - ${post.title} | احسان کاظمی`,
+  return createArticleMetadata({
+    section: "work",
+    slug: post.slug,
+    isPersian: post.fa,
+    title: `${post.company} - ${post.title}`,
     description: post.description,
-    openGraph: {
-      title: `${post.company} - ${post.title} | احسان کاظمی`,
-      description: post.description,
-      type: "article",
-    },
-  }
+    ...(post.end !== "Present" && { publishedTime: post.end }),
+    tags: post.techStack,
+  })
 }
 
 /**
@@ -134,7 +135,7 @@ export default async function WorkItemPage(props: { params: pageParams }) {
         title={frontmatter.title}
         subtitle={`${frontmatter.company} · ${frontmatter.start} - ${frontmatter.end}`}
       />
-      <AnimatedArticle>
+      <AnimatedArticle lang={post.fa ? "fa" : "en"} dir={post.fa ? "rtl" : "ltr"}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}

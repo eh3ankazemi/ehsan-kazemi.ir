@@ -101,13 +101,12 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: process.env.ICON_URL ?? "/icons/favicon.ico;",
-    shortcut: process.env.ICON_URL ?? "/icons/favico8n.ico",
-    apple: process.env.ICON_URL ?? "/icons/favicon.icol",
+    icon: process.env.ICON_URL ?? "/icons/favicon.ico",
+    shortcut: process.env.ICON_URL ?? "/icons/favicon.ico",
+    apple: "/icons/apple-touch-icon.png",
   },
   metadataBase: new URL(siteMetadata.siteUrl),
   alternates: {
-    canonical: "/",
     types: {
       "application/rss+xml": "/rss.xml",
     },

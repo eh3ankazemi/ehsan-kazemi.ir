@@ -17,6 +17,7 @@ import ProjectImageCarousel from "@/components/projects/ProjectImageCarousel"
 import TechBadge from "@/components/TechBadge"
 import { siteMetadata } from "@/data/metadata"
 import { getAllProjects } from "@/lib/mdx"
+import { createArticleMetadata } from "@/lib/seo"
 import { pageParams, ProjectFrontmatter } from "@/lib/types"
 import { formatDuration } from "@/lib/utils"
 import { UrlCheckerProvider } from "@/providers/UrlCheckerProvider"
@@ -45,15 +46,15 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
     }
   }
 
-  return {
-    title: `پروژه ${project.title} | احسان کاظمی`,
+  return createArticleMetadata({
+    section: "projects",
+    slug: project.slug,
+    isPersian: project.fa,
+    title: project.title,
     description: project.description,
-    openGraph: {
-      title: `پروژه ${project.title} | احسان کاظمی`,
-      description: project.description,
-      type: "article",
-    },
-  }
+    publishedTime: project.endDate,
+    tags: project.techStack,
+  })
 }
 
 /**
@@ -114,6 +115,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
     "@type": "CreativeWork",
     name: frontmatter.title,
     description: frontmatter.description,
+    inLanguage: post.fa ? "fa-IR" : "en",
     url: `${siteMetadata.siteUrl}/projects/${post.slug}`,
     dateCreated: frontmatter.startDate,
     dateModified: frontmatter.endDate,
@@ -131,7 +133,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
     <>
       <UrlCheckerProvider />
       <PageHeaderSync title={frontmatter.title} subtitle={`پروژه‌ احسان کاظمی · ${duration.fa}`} />
-      <AnimatedArticle>
+      <AnimatedArticle lang={post.fa ? "fa" : "en"} dir={post.fa ? "rtl" : "ltr"}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}

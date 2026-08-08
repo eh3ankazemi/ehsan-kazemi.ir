@@ -5,23 +5,15 @@ import { useEffect } from "react"
 import { useLanguage } from "@/providers/LanguageProvider"
 
 export function UrlCheckerProvider() {
-  const params = usePathname()
-  const { language, loaded } = useLanguage()
+  const pathname = usePathname()
+  const { language, loaded, setLanguage } = useLanguage()
 
-  function switchLocale(locale: string) {
-    window.history.replaceState(null, "", locale)
-    location.reload()
-  }
   useEffect(() => {
     if (!loaded) return
-    const isRTL = language === "fa"
-    const hasPersian = params.endsWith(".Persian")
 
-    if (hasPersian && !isRTL) switchLocale(params.replace(/\.Persian$/, ""))
-    if (!hasPersian && isRTL) {
-      const next = params.endsWith("/") ? params.slice(0, -1) + ".Persian/" : params + ".Persian"
-      switchLocale(next)
-    }
-  }, [language])
+    const routeLanguage = pathname.endsWith(".Persian") ? "fa" : "en"
+    if (language !== routeLanguage) setLanguage(routeLanguage)
+  }, [language, loaded, pathname, setLanguage])
+
   return <></>
 }

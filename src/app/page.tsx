@@ -2,7 +2,14 @@ import HomeContent from "@/components/home/HomeContent"
 import { footerConfig } from "@/data/content"
 import { siteMetadata } from "@/data/metadata"
 import { getAllBlogPosts, getAllProjects, getAllWorkItems } from "@/lib/mdx"
+import type { Metadata } from "next"
 import type { Person, WithContext } from "schema-dts"
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+}
 
 /**
  * Home component that serves as the main landing page for the portfolio.

@@ -3,11 +3,28 @@ import { join } from "node:path"
 
 import { siteMetadata } from "@/data/metadata"
 import { getAllBlogPosts, getAllProjects, getAllWorkItems } from "@/lib/mdx"
+import { escapeXml } from "@/lib/utils"
 
-const base = siteMetadata.siteUrl
+const base = siteMetadata.siteUrl.replace(/\/$/, "")
+
+type SitemapEntry = {
+  loc: string
+  lastmod?: Date
+  changefreq: string
+  priority: string
+}
 
 function formatDate(date: Date) {
   return date.toISOString()
+}
+
+function route(...segments: string[]) {
+  return `${base}/${segments.map(segment => encodeURIComponent(segment)).join("/")}`
+}
+
+function validDate(value: string): Date | undefined {
+  const date = new Date(value)
+  return Number.isNaN(date.getTime()) ? undefined : date
 }
 
 export async function generateSitemap() {
@@ -19,56 +36,51 @@ export async function generateSitemap() {
 
   const tags = [...new Set(posts.flatMap(post => post.tags ?? []))]
 
-  const urls = [
+  const urls: SitemapEntry[] = [
     {
       loc: base,
-      lastmod: new Date(),
       changefreq: "weekly",
       priority: "1.0",
     },
     {
-      loc: `${base}/work`,
-      lastmod: new Date(),
+      loc: route("work"),
       changefreq: "yearly",
       priority: "0.8",
     },
     {
-      loc: `${base}/projects`,
-      lastmod: new Date(),
+      loc: route("projects"),
       changefreq: "monthly",
       priority: "0.8",
     },
     {
-      loc: `${base}/blog`,
-      lastmod: new Date(),
+      loc: route("blog"),
       changefreq: "weekly",
       priority: "0.8",
     },
 
     ...posts.map(post => ({
-      loc: `${base}/blog/${post.slug}`,
+      loc: route("blog", post.slug),
       lastmod: new Date(post.date),
       changefreq: "monthly",
       priority: "0.6",
     })),
 
     ...tags.map(tag => ({
-      loc: `${base}/blog/tag/${tag}`,
-      lastmod: new Date(),
+      loc: route("blog", "tag", tag),
       changefreq: "weekly",
       priority: "0.5",
     })),
 
     ...workItems.map(item => ({
-      loc: `${base}/work/${item.slug}`,
-      lastmod: new Date(),
+      loc: route("work", item.slug),
+      lastmod: item.end === "Present" ? undefined : validDate(item.end),
       changefreq: "yearly",
       priority: "0.6",
     })),
 
     ...projects.map(project => ({
-      loc: `${base}/projects/${project.slug}`,
-      lastmod: new Date(project.endDate),
+      loc: route("projects", project.slug),
+      lastmod: validDate(project.endDate),
       changefreq: "monthly",
       priority: "0.6",
     })),
@@ -79,8 +91,7 @@ export async function generateSitemap() {
 ${urls
   .map(
     url => `  <url>
-    <loc>${url.loc}</loc>
-    <lastmod>${formatDate(url.lastmod)}</lastmod>
+    <loc>${escapeXml(url.loc)}</loc>${url.lastmod ? `\n    <lastmod>${formatDate(url.lastmod)}</lastmod>` : ""}
     <changefreq>${url.changefreq}</changefreq>
     <priority>${url.priority}</priority>
   </url>`

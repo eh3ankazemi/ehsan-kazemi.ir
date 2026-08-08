@@ -3,14 +3,22 @@
 import { motion } from "framer-motion"
 import { ReactNode } from "react"
 
+type AnimatedArticleProps = {
+  children: ReactNode
+  lang?: "en" | "fa"
+  dir?: "ltr" | "rtl"
+}
+
 /**
  * AnimatedArticle component that wraps around an article element and applies a fade-in animation.
  * @param children - The content of the article.
  * @constructor
  */
-export default function AnimatedArticle({ children }: { children: ReactNode }) {
+export default function AnimatedArticle({ children, lang, dir }: AnimatedArticleProps) {
   return (
     <motion.article
+      lang={lang}
+      dir={dir}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.0 }}

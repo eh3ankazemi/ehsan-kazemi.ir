@@ -20,6 +20,7 @@ import { CodeBlock } from "@/components/mdx/CodeBlock"
 import { InlineCode } from "@/components/mdx/InlineCode"
 import { siteMetadata } from "@/data/metadata"
 import { getAllBlogPosts } from "@/lib/mdx"
+import { createArticleMetadata } from "@/lib/seo"
 import { pageParams } from "@/lib/types"
 import { getReadingTime } from "@/lib/utils"
 import { UrlCheckerProvider } from "@/providers/UrlCheckerProvider"
@@ -49,17 +50,15 @@ export async function generateMetadata(props: { params: pageParams }): Promise<M
     }
   }
 
-  return {
-    title: `${post.title} | احسان کاظمی`,
-    description: post.title,
-    openGraph: {
-      title: `${post.title} | احسان کاظمی`,
-      description: post.title,
-      type: "article",
-      publishedTime: post.date,
-      tags: post.tags,
-    },
-  }
+  return createArticleMetadata({
+    section: "blog",
+    slug: post.slug,
+    isPersian: post.fa,
+    title: post.title,
+    description: post.summary,
+    publishedTime: post.date,
+    tags: post.tags,
+  })
 }
 
 /**
@@ -137,6 +136,7 @@ export default async function BlogPostPage(props: { params: pageParams }) {
     headline: post.title,
     description: post.summary,
     image: `${siteMetadata.siteUrl}/blog/${post.slug}/opengraph-image`,
+    inLanguage: post.fa ? "fa-IR" : "en",
     datePublished: new Date(post.date).toISOString(),
     url: `${siteMetadata.siteUrl}/blog/${post.slug}`,
     ...(post.tags && post.tags.length > 0 && { keywords: post.tags.join(", ") }),
@@ -162,13 +162,13 @@ export default async function BlogPostPage(props: { params: pageParams }) {
     <>
       <UrlCheckerProvider />
       <PageHeaderSync title={post.title} subtitle={headerSubtitle} />
-      <AnimatedArticle>
+      <AnimatedArticle lang={post.fa ? "fa" : "en"} dir={post.fa ? "rtl" : "ltr"}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
         <BackToPageButton pageUrl="/blog" />
-        <div className="text-3xl font-bold mb-4">{post.title}</div>
+        <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
         <div className="flex items-center gap-4 text-gray-500 mb-8">
           <span className="flex items-center gap-1.5">
             <FaRegCalendarAlt className="shrink-0" />

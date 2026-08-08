@@ -1,20 +1,30 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { FaLanguage } from "react-icons/fa"
 import { FaX } from "react-icons/fa6"
 import { useTranslation } from "@/hooks/useTranslation"
+import { localizedContentPath } from "@/lib/locale"
 import { useLanguage } from "@/providers/LanguageProvider"
 
 export default function LanguagePopup() {
   const { isRTL } = useTranslation()
   const { language, setLanguage } = useLanguage()
+  const pathname = usePathname()
+  const router = useRouter()
   const [show, setShow] = useState(false)
   const handleToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
     const nextLang = language === "en" ? "fa" : "en"
 
     const updateLanguage = () => {
+      const destination = localizedContentPath(pathname, nextLang)
+      if (destination && destination !== pathname) {
+        router.push(destination)
+        return
+      }
+
       setLanguage(nextLang)
 
       document.documentElement.lang = nextLang
