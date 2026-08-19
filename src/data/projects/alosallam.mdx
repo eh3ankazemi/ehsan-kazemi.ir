@@ -1,0 +1,95 @@
+---
+fa: false
+title: AloSallam
+image: /projects/alosallam.webp
+description: An AI-powered sales assistant for Basalam sellers that automatically answers customer questions using product information, seller knowledge, and retrieval-augmented generation.
+startDate: 2026-01
+endDate: 2026-08
+techStack:
+  - React
+  - TypeScript
+  - TailwindCSS
+  - NodeJS
+  - MongoDB
+  - Linux
+  - ViteJS
+  - Docker
+role: Full Stack Developer & AI Developer
+paperUrl: https://alosallam.ir/
+---
+
+import ImageMdx from "@/components/mdx/ImageMdx"
+
+<ImageMdx
+  title='AloSallam'
+  image='/projects/alosallam.webp'
+  paperUrl='https://alosallam.ir/'
+/>
+
+# Introduction
+
+**AloSallam** is an AI-powered sales assistant designed for sellers on **Basalam**. The platform helps sellers automatically respond to customer questions by combining product information, frequently asked questions, previous seller responses, and AI-powered retrieval.
+
+The system is designed to reduce the time sellers spend answering repetitive questions while keeping responses relevant to the seller's actual products and knowledge.
+
+## Features
+
+- **AI-powered customer support** for Basalam sellers.
+- **Automatic customer question answering** based on retrieved knowledge.
+- **RAG architecture** for retrieving relevant product and seller information before generating an answer.
+- **Product knowledge indexing** to make seller products available to the AI.
+- **Seller answer learning**, allowing manually answered questions to become reusable knowledge.
+- **FAQ and knowledge-base retrieval** for frequently asked customer questions.
+- **Confidence Score** for generated answers to determine whether an answer is reliable enough to send automatically.
+- **Seller referral system** for questions that require human intervention.
+- **SMS notifications** when an important question cannot be confidently answered by the AI.
+- **Multi-tenant architecture** with isolated data and settings for each seller.
+- **Seller management panel** with statistics and system activity.
+- **JWT-based authentication** for secure access.
+- **Responsive and mobile-friendly interface** designed for sellers who primarily use mobile devices.
+
+## AI & RAG Architecture
+
+One of the core parts of AloSallam is its Retrieval-Augmented Generation architecture.
+
+Before generating an answer, the system searches the seller's knowledge base for relevant information. This knowledge can include:
+
+- Product information.
+- Previous seller answers.
+- Frequently asked questions.
+- Other seller-specific knowledge.
+
+If a relevant source cannot be retrieved, the system does not blindly ask the language model to generate an answer. Instead, the question can be referred to the seller.
+
+For generated responses, the system also tracks information such as confidence, retrieved sources, generation time, and answer metadata.
+
+This approach helps reduce unsupported AI responses and keeps generated answers grounded in the seller's actual data.
+
+## Technical Details
+
+- **Frontend:** Next.js, React, TypeScript
+- **Styling:** Tailwind CSS
+- **Backend:** Node.js / NestJS
+- **Database:** MongoDB
+- **AI:** OpenAI API
+- **Architecture:** Retrieval-Augmented Generation (RAG)
+- **Authentication:** JWT
+- **Notifications:** SMS
+- **Data Isolation:** Multi-tenant architecture
+- **Deployment:** Linux server with Docker
+
+## Challenges
+
+One of the main challenges was building an AI system that could answer customer questions accurately without relying only on the language model's general knowledge.
+
+The solution required designing a retrieval pipeline that first searches seller-specific information and only generates an answer when sufficient relevant context is available.
+
+Another challenge was designing the system as a multi-tenant platform where each seller has independent products, knowledge, settings, conversations, and AI responses.
+
+The platform also needed to handle uncertain questions safely. Instead of generating potentially incorrect answers, the system uses retrieval results and confidence information to determine when a question should be passed to the seller.
+
+## Outcome
+
+AloSallam combines modern full-stack development with AI and RAG technologies to create an automated sales assistant for Basalam sellers.
+
+The project demonstrates experience in building AI-powered applications, retrieval pipelines, multi-tenant architectures, API-driven systems, authentication, database design, and production deployment with Docker.
