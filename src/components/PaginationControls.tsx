@@ -42,7 +42,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
   if (totalPages <= 1) return null
 
   return (
-    <nav aria-label="Pagination" className="flex justify-center items-center gap-2 mt-10">
+    <nav aria-label="Pagination" className="flex justify-center items-center gap-2 mt-10 ltr">
       {/* Prev Button */}
       <Link
         href={buildPageUrl(baseUrl, Math.max(1, currentPage - 1), searchParams)}
