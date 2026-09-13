@@ -9,6 +9,8 @@ export async function generateRobots() {
 Disallow: /api/*
 Disallow: /_next/*
 Disallow: /private/*
+Disallow: /projects/sarahosh
+Disallow: /projects/sarahosh.Persian
 Sitemap: ${siteMetadata.siteUrl}/sitemap.xml
 `
 
