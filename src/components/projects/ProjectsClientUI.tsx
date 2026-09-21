@@ -19,26 +19,28 @@ export default function ProjectsClientUI({
       {filteredProjects.length > 0 ? (
         <motion.div
           key="projects"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
+          className="rounded-[28px] border border-slate-200 bg-white/60 p-3 shadow-[0_24px_60px_rgba(148,163,184,0.12)] backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/50 sm:p-5"
         >
-          {paginatedProjects.map((project, index) => (
-            <ProjectTile key={project.slug} {...project} priority={index === 0} />
-          ))}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
+            {paginatedProjects.map((project, index) => (
+              <ProjectTile key={project.slug} {...project} priority={index === 0} />
+            ))}
+          </div>
         </motion.div>
       ) : (
         <motion.div
           key="no-results"
-          className="mt-12 flex flex-col items-center px-4 text-center text-gray-600 dark:text-gray-300"
+          className="mt-12 flex flex-col items-center px-4 text-center text-slate-600 dark:text-slate-300"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
         >
-          <FaFrown className="mb-3 text-4xl text-gray-400 dark:text-gray-500 md:text-5xl" />
+          <FaFrown className="mb-3 text-4xl text-slate-400 dark:text-slate-500 md:text-5xl" />
 
           <p className="text-lg font-semibold md:text-xl lg:text-2xl">{t.filter.noProjectsTitle}</p>
 

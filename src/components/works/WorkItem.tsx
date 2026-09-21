@@ -38,71 +38,73 @@ export default function WorkItem({
     <Link
       href={`/work/${slug}`}
       className={cn(
-        "group block rounded-xl",
+        "group block rounded-[26px]",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500",
         "focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black"
       )}
     >
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ opacity: { duration: 0.8 } }}
+      <motion.article
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ opacity: { duration: 0.8 }, ease: "easeOut" }}
         whileHover={{
-          scale: 1.05,
+          y: -8,
+          scale: 1.01,
           transition: {
             type: "spring",
-            stiffness: 200,
-            damping: 30,
-            duration: 0.4,
+            stiffness: 220,
+            damping: 22,
+            duration: 0.35,
           },
         }}
-        whileTap={{ scale: 0.98 }}
+        whileTap={{ scale: 0.99 }}
         className={cn(
-          "border border-gray-300 dark:border-gray-700 rounded-xl p-4 shadow-sm",
-          "hover:border-accent-500 transition",
-          "bg-gray-100 dark:bg-gray-900",
-          "hover:bg-gray-200 dark:hover:bg-gray-800"
+          "rounded-[26px] border border-slate-200 bg-white/80 p-5 shadow-[0_18px_40px_rgba(148,163,184,0.18)] backdrop-blur-sm",
+          "transition-all duration-300 hover:border-accent-400 hover:shadow-[0_22px_48px_rgba(59,130,246,0.12)]",
+          "dark:border-white/10 dark:bg-slate-900/75 dark:shadow-[0_20px_50px_rgba(2,6,23,0.45)] dark:hover:border-accent-500"
         )}
       >
-        <div className="flex items-center gap-2">
-          {/* Company Logo */}
+        <div className="flex items-center gap-3">
           {logoUrl && (
-            <div className="flex items-center">
+            <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-slate-50 shadow-sm dark:border-white/10 dark:bg-slate-800">
               <Image
                 src={logoUrl}
                 alt={`${company} logo`}
-                width={25}
-                height={25}
-                className="rounded-full"
+                width={32}
+                height={32}
+                className="rounded-full object-cover"
               />
             </div>
           )}
-          <h3 className="text-xl font-semibold group-hover:text-accent-500 transition">
-            {title} @ {company}
-          </h3>
+
+          <div className="min-w-0 flex-1">
+            <h3 className="text-lg font-black tracking-[-0.02em] text-slate-900 transition-colors duration-200 group-hover:text-accent-600 dark:text-white dark:group-hover:text-accent-400 sm:text-xl">
+              {title} <span className="text-slate-500 dark:text-slate-400">@ {company}</span>
+            </h3>
+          </div>
         </div>
 
-        {/* Duration and Locations */}
-        <div className="mt-2 text-gray-500 flex flex-col sm:flex-row sm:items-center">
+        <div className="mt-4 flex flex-col gap-2 text-sm text-slate-500 dark:text-slate-400 sm:flex-row sm:flex-wrap sm:items-center">
           <div className="flex items-center gap-2 rtl:text-right">
-            <FaCalendarAlt className="w-4 h-4" />
+            <FaCalendarAlt className="h-4 w-4" />
             <span>
               {start} – {end}
             </span>
             <span>·</span>
             <span>{calculateDuration(start, end, t.isRTL ? "fa" : "en")}</span>
           </div>
+
           {locations && locations.length > 0 && (
-            <div className="flex items-center mt-1 sm:mt-0 sm:ms-2">
-              <span className="hidden sm:inline mx-2">|</span>
-              <FaMapMarkerAlt className="w-4 h-4 me-1" />
+            <div className="flex items-center sm:ms-2">
+              <span className="hidden sm:inline mx-2 text-slate-300 dark:text-slate-600">|</span>
+              <FaMapMarkerAlt className="me-1 h-4 w-4" />
               <span>{locations.join(", ")}</span>
             </div>
           )}
         </div>
 
-        <p className="mt-2 text-gray-700 dark:text-gray-300">{description}</p>
-      </motion.div>
+        <p className="mt-4 text-[0.96rem] leading-7 text-slate-700 dark:text-slate-300">{description}</p>
+      </motion.article>
     </Link>
   )
 }

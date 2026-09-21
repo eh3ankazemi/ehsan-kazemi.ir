@@ -122,19 +122,73 @@ export const factIconMap: Record<string, IconType> = {
  */
 export const socialIconMap: Record<
   keyof typeof footerConfig.socialLinks,
-  { icon: IconType; label: string }
+  { icon: IconType; label: string; hoverClass: string }
 > = {
-  github: { icon: FaGithub, label: "GitHub" },
-  linkedin: { icon: FaLinkedin, label: "LinkedIn" },
-  goodreads: { icon: FaGoodreads, label: "GoodReads" },
-  instagram: { icon: FaInstagram, label: "Instagram" },
-  twitter: { icon: FaXTwitter, label: "X" },
-  reddit: { icon: FaReddit, label: "Reddit" },
-  dribbble: { icon: FaDribbble, label: "Dribbble" },
-  youtube: { icon: FaYoutube, label: "YouTube" },
-  bluesky: { icon: FaBluesky, label: "Bluesky" },
-  stackoverflow: { icon: FaStackOverflow, label: "Stack Overflow" },
-  link: { icon: FaLink, label: "LinkStack" },
-  call: { icon: FaPhone, label: "Call" },
-  email: { icon: FaEnvelope, label: "Email" },
+  github: {
+    icon: FaGithub,
+    label: "GitHub",
+    hoverClass: "hover:text-slate-900 hover:bg-white dark:hover:text-white dark:hover:bg-slate-700",
+  },
+  linkedin: {
+    icon: FaLinkedin,
+    label: "LinkedIn",
+    hoverClass: "hover:text-[#0A66C2] hover:bg-[#EAF3FF] dark:hover:bg-[#0B2447]",
+  },
+  goodreads: {
+    icon: FaGoodreads,
+    label: "GoodReads",
+    hoverClass: "hover:text-[#8A5A44] hover:bg-[#F8EFEA] dark:hover:bg-[#3A2A22]",
+  },
+  instagram: {
+    icon: FaInstagram,
+    label: "Instagram",
+    hoverClass:
+      "hover:text-[#E1306C] hover:bg-gradient-to-br hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF] hover:text-white",
+  },
+  twitter: {
+    icon: FaXTwitter,
+    label: "X",
+    hoverClass:
+      "hover:text-slate-900 hover:bg-slate-200 dark:hover:text-white dark:hover:bg-slate-700",
+  },
+  reddit: {
+    icon: FaReddit,
+    label: "Reddit",
+    hoverClass: "hover:text-[#FF4500] hover:bg-[#FFF0EA] dark:hover:bg-[#3B1F15]",
+  },
+  dribbble: {
+    icon: FaDribbble,
+    label: "Dribbble",
+    hoverClass: "hover:text-[#EA4C89] hover:bg-[#FFF0F5] dark:hover:bg-[#3E2433]",
+  },
+  youtube: {
+    icon: FaYoutube,
+    label: "YouTube",
+    hoverClass: "hover:text-[#FF0033] hover:bg-[#FFE8ED] dark:hover:bg-[#3F1B22]",
+  },
+  bluesky: {
+    icon: FaBluesky,
+    label: "Bluesky",
+    hoverClass: "hover:text-[#0285FF] hover:bg-[#EAF5FF] dark:hover:bg-[#172C3F]",
+  },
+  stackoverflow: {
+    icon: FaStackOverflow,
+    label: "Stack Overflow",
+    hoverClass: "hover:text-[#F48024] hover:bg-[#FFF2E8] dark:hover:bg-[#3B2617]",
+  },
+  link: {
+    icon: FaLink,
+    label: "LinkStack",
+    hoverClass: "hover:text-[#10B981] hover:bg-[#ECFDF5] dark:hover:bg-[#102C26]",
+  },
+  call: {
+    icon: FaPhone,
+    label: "Call",
+    hoverClass: "hover:text-[#22C55E] hover:bg-[#ECFDF5] dark:hover:bg-[#112A23]",
+  },
+  email: {
+    icon: FaEnvelope,
+    label: "Email",
+    hoverClass: "hover:text-[#F59E0B] hover:bg-[#FFF7ED] dark:hover:bg-[#382B18]",
+  },
 }

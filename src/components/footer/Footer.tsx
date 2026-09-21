@@ -15,9 +15,8 @@ function SocialLinks() {
         .filter(([_, url]) => url && url.trim() !== "")
         .map(([platform, url]) => {
           const platformKey = platform as keyof typeof socialIconMap
-          const { icon: Icon, label } = socialIconMap[platformKey]
+          const { icon: Icon, label, hoverClass } = socialIconMap[platformKey]
 
-          // Add mailto: prefix for email if not already present
           const href = platform === "email" && !url.startsWith("mailto:") ? `mailto:${url}` : url
 
           return (
@@ -27,21 +26,15 @@ function SocialLinks() {
               aria-label={label}
               target="_blank"
               className={cn(
-                "group relative flex items-center justify-center w-11 h-11",
-                "rounded-lg border border-gray-300 dark:border-gray-700",
-                "bg-gray-100 dark:bg-gray-800",
-                "text-gray-700 dark:text-gray-300",
-                "hover:border-accent-500 dark:hover:border-accent-400",
-                "hover:bg-accent-500/10 dark:hover:bg-accent-500/10",
-                "hover:text-accent-600 dark:hover:text-accent-400",
-                "transition-all duration-200",
-                "hover:scale-110 hover:shadow-md",
+                "group relative flex h-11 w-11 items-center justify-center rounded-xl border border-gray-300 bg-gray-100 text-gray-700 shadow-sm transition-all duration-300",
+                "dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300",
+                "hover:-translate-y-1 hover:scale-105 hover:shadow-lg",
                 "active:scale-95",
-                "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500",
-                "focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black"
+                "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black",
+                hoverClass
               )}
             >
-              <Icon className="w-5 h-5" />
+              <Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
             </Link>
           )
         })}
