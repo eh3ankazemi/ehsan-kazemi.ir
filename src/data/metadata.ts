@@ -16,23 +16,23 @@ export const siteMetadata: SiteMetadata = {
   /**
    * Site title (shown in browser tabs and search results)
    */
-  title: "احسان کاظمی | مهندس هوش مصنوعی و توسعه‌دهنده فول‌استک",
-  // Ehsan Kazemi | AI Engineer & Full-Stack Developer
+  title: "Ehsan Kazemi | احسان کاظمی | AI Engineer & Full-Stack Developer",
 
   /**
    * Site description (shown in search results and social media)
    */
   description:
-    "احسان کاظمی، مهندس هوش مصنوعی و توسعه‌دهنده فول‌استک. مشاهده پروژه‌ها، مقالات، سوابق کاری و نمونه‌کارهای مرتبط با هوش مصنوعی، یادگیری ماشین، Python، React، Next.js و TypeScript.",
-  // Explore the portfolio of Ehsan Kazemi, showcasing AI, machine learning, full-stack development, and modern web projects built with Python, React, Next.js, TypeScript, and PyTorch.
+    "Ehsan Kazemi (احسان کاظمی) is an AI Engineer and Full-Stack Developer from Isfahan, Iran. نمونه‌کارها، پروژه‌های هوش مصنوعی، سوابق کاری و وبلاگ فنی احسان کاظمی را ببینید.",
 
   /**
    * Keywords for SEO
    */
   keywords: [
     "احسان کاظمی",
-    "احسان فریلنسر",
     "Ehsan Kazemi",
+    "Ehsan Kazemi AI Engineer",
+    "Ehsan Kazemi Developer",
+    "احسان فریلنسر",
     "eh3ankazemi",
     "توسعه‌دهنده نرم‌افزار",
     "هوش مصنوعی",
@@ -51,7 +51,7 @@ export const siteMetadata: SiteMetadata = {
    * Author information
    */
   author: {
-    name: "احسان کاظمی",
+    name: "Ehsan Kazemi",
     url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ehsan-kazemi.ir",
   },
 

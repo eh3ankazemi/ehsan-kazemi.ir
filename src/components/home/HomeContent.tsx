@@ -57,6 +57,9 @@ export default function HomeContent({ blog, work, projects }: HomeContentProps) 
             <br />
             <span className="mt-3 sm:ml-22 ml-18.5">{t.about.freelancer}</span>
           </h1>
+          <p className="text-sm sm:text-base font-medium text-gray-500 dark:text-gray-400 mb-6">
+            Ehsan Kazemi | AI Engineer &amp; Full-Stack Developer
+          </p>
 
           <motion.div
             initial="hidden"

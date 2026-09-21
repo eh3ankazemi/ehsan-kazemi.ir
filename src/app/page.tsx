@@ -25,7 +25,7 @@ export default async function Home() {
     getAllProjects(),
   ])
 
-  const sameAs = Object.values(footerConfig.socialLinks).filter(url => url && url !== "/")
+  const sameAs = Object.values(footerConfig.socialLinks).filter(url => /^https?:\/\//.test(url))
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -35,10 +35,22 @@ export default async function Home() {
         "@id": `${siteMetadata.siteUrl}/#website`,
         url: siteMetadata.siteUrl,
         name: siteMetadata.author.name,
-        alternateName: [siteMetadata.title, "Ehsan Kazemi"],
+        alternateName: [siteMetadata.title, "احسان کاظمی"],
         description: siteMetadata.description,
         inLanguage: "fa-IR",
         publisher: { "@id": `${siteMetadata.siteUrl}/#person` },
+        hasPart: { "@id": `${siteMetadata.siteUrl}/#navigation` },
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${siteMetadata.siteUrl}/#navigation`,
+        name: "Ehsan Kazemi site navigation",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "About Ehsan Kazemi", url: `${siteMetadata.siteUrl}/about` },
+          { "@type": "ListItem", position: 2, name: "Work experience", url: `${siteMetadata.siteUrl}/work` },
+          { "@type": "ListItem", position: 3, name: "Projects", url: `${siteMetadata.siteUrl}/projects` },
+          { "@type": "ListItem", position: 4, name: "Technical blog", url: `${siteMetadata.siteUrl}/blog` },
+        ],
       },
       {
         "@type": "ProfilePage",
@@ -56,6 +68,8 @@ export default async function Home() {
         url: siteMetadata.siteUrl,
         description: siteMetadata.description,
         jobTitle: "AI Engineer, Full-Stack Developer",
+        alternateName: "احسان کاظمی",
+        knowsLanguage: ["en", "fa"],
         ...(sameAs.length > 0 && { sameAs }),
       },
     ],
