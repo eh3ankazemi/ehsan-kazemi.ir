@@ -57,6 +57,11 @@ export async function generateSitemap() {
       changefreq: "weekly",
       priority: "0.8",
     },
+    {
+      loc: route("about"),
+      changefreq: "monthly",
+      priority: "0.8",
+    },
 
     ...posts.map(post => ({
       loc: route("blog", post.slug),

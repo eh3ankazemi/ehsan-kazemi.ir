@@ -83,7 +83,10 @@ export const siteMetadata: SiteMetadata = {
  * This is used in layout.tsx
  */
 export const metadata: Metadata = {
-  title: siteMetadata.title,
+  title: {
+    default: siteMetadata.title,
+    template: `%s | ${siteMetadata.author.name}`,
+  },
   description: siteMetadata.description,
   keywords: siteMetadata.keywords,
   authors: [{ name: siteMetadata.author.name, url: siteMetadata.author.url }],
@@ -107,17 +110,24 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(siteMetadata.siteUrl),
   alternates: {
+    canonical: "/",
+    languages: {
+      fa: "/",
+      en: "/",
+      "x-default": "/",
+    },
     types: {
       "application/rss+xml": "/rss.xml",
     },
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "fa_IR",
     title: siteMetadata.title,
     description: siteMetadata.description,
     url: siteMetadata.siteUrl,
-    siteName: siteMetadata.title,
+    siteName: siteMetadata.author.name,
+    alternateLocale: ["en_US"],
     ...(siteMetadata.ogImage && {
       images: [
         {

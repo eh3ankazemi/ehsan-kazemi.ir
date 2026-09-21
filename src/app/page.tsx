@@ -3,7 +3,6 @@ import { footerConfig } from "@/data/content"
 import { siteMetadata } from "@/data/metadata"
 import { getAllBlogPosts, getAllProjects, getAllWorkItems } from "@/lib/mdx"
 import type { Metadata } from "next"
-import type { Person, WithContext } from "schema-dts"
 
 export const metadata: Metadata = {
   alternates: {
@@ -28,14 +27,38 @@ export default async function Home() {
 
   const sameAs = Object.values(footerConfig.socialLinks).filter(url => url && url !== "/")
 
-  const jsonLd: WithContext<Person> = {
+  const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: siteMetadata.author.name,
-    url: siteMetadata.siteUrl,
-    description: siteMetadata.description,
-    jobTitle: "AI Engineer, Full-Stack Dev",
-    ...(sameAs.length > 0 && { sameAs }),
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${siteMetadata.siteUrl}/#website`,
+        url: siteMetadata.siteUrl,
+        name: siteMetadata.author.name,
+        alternateName: [siteMetadata.title, "Ehsan Kazemi"],
+        description: siteMetadata.description,
+        inLanguage: "fa-IR",
+        publisher: { "@id": `${siteMetadata.siteUrl}/#person` },
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": `${siteMetadata.siteUrl}/#profile`,
+        url: siteMetadata.siteUrl,
+        name: siteMetadata.title,
+        isPartOf: { "@id": `${siteMetadata.siteUrl}/#website` },
+        mainEntity: { "@id": `${siteMetadata.siteUrl}/#person` },
+        inLanguage: "fa-IR",
+      },
+      {
+        "@type": "Person",
+        "@id": `${siteMetadata.siteUrl}/#person`,
+        name: siteMetadata.author.name,
+        url: siteMetadata.siteUrl,
+        description: siteMetadata.description,
+        jobTitle: "AI Engineer, Full-Stack Developer",
+        ...(sameAs.length > 0 && { sameAs }),
+      },
+    ],
   }
 
   return (
