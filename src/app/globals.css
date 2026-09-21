@@ -112,13 +112,27 @@
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at top, rgba(59, 130, 246, 0.08), transparent 25%),
+    linear-gradient(180deg, #f8fafc 0%, #eef4ff 100%);
   color: var(--foreground);
   font-family: var(--font-gabarito), sans-serif;
 }
 
+html.dark body {
+  background:
+    radial-gradient(circle at top, rgba(59, 130, 246, 0.14), transparent 28%),
+    radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.12), transparent 25%),
+    #020817;
+}
+
 html[lang="fa"] body {
   font-family: var(--font-vazirmatn), sans-serif;
+}
+
+::selection {
+  background: rgba(96, 165, 250, 0.35);
+  color: inherit;
 }
 
 /* scrollbar */
