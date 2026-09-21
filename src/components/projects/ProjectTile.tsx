@@ -130,24 +130,26 @@ export default function ProjectTile({
             </div>
           )}
 
-          {techStack && techStack.length > 0 && (() => {
-            const maxBadges = 5
-            const visibleTechStack = techStack.slice(0, maxBadges)
-            const remainingCount = techStack.length - maxBadges
+          {techStack &&
+            techStack.length > 0 &&
+            (() => {
+              const maxBadges = 5
+              const visibleTechStack = techStack.slice(0, maxBadges)
+              const remainingCount = techStack.length - maxBadges
 
-            return (
-              <div className="mt-auto flex flex-wrap justify-center gap-2">
-                {visibleTechStack.map(techName => (
-                  <TechBadge key={techName} techName={techName} variant="small" />
-                ))}
-                {remainingCount > 0 && (
-                  <div className="flex items-center gap-1.5 rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold text-slate-600 dark:bg-slate-700 dark:text-slate-200">
-                    + {remainingCount}
-                  </div>
-                )}
-              </div>
-            )
-          })()}
+              return (
+                <div className="mt-auto flex flex-wrap justify-center gap-2">
+                  {visibleTechStack.map(techName => (
+                    <TechBadge key={techName} techName={techName} variant="small" />
+                  ))}
+                  {remainingCount > 0 && (
+                    <div className="flex items-center gap-1.5 rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold text-slate-600 dark:bg-slate-700 dark:text-slate-200">
+                      + {remainingCount}
+                    </div>
+                  )}
+                </div>
+              )
+            })()}
         </div>
       </motion.article>
     </Link>

@@ -103,7 +103,9 @@ export default function WorkItem({
           )}
         </div>
 
-        <p className="mt-4 text-[0.96rem] leading-7 text-slate-700 dark:text-slate-300">{description}</p>
+        <p className="mt-4 text-[0.96rem] leading-7 text-slate-700 dark:text-slate-300">
+          {description}
+        </p>
       </motion.article>
     </Link>
   )

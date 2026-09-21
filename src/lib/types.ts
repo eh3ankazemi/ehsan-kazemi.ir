@@ -67,16 +67,7 @@ export type tagPageParams = Promise<{ tag: string }>
  * Set `siteMetadata.theme` in src/data/metadata.ts to one of these values.
  */
 export type Theme =
-  | "blue"
-  | "purple"
-  | "green"
-  | "orange"
-  | "rose"
-  | "teal"
-  | "indigo"
-  | "amber"
-  | "cyan"
-  | "violet"
+  "blue" | "purple" | "green" | "orange" | "rose" | "teal" | "indigo" | "amber" | "cyan" | "violet"
 
 /**
  * @description Shape of the site-wide metadata configuration object in src/data/metadata.ts.

@@ -46,10 +46,30 @@ export default async function Home() {
         "@id": `${siteMetadata.siteUrl}/#navigation`,
         name: "Ehsan Kazemi site navigation",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "About Ehsan Kazemi", url: `${siteMetadata.siteUrl}/about` },
-          { "@type": "ListItem", position: 2, name: "Work experience", url: `${siteMetadata.siteUrl}/work` },
-          { "@type": "ListItem", position: 3, name: "Projects", url: `${siteMetadata.siteUrl}/projects` },
-          { "@type": "ListItem", position: 4, name: "Technical blog", url: `${siteMetadata.siteUrl}/blog` },
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "About Ehsan Kazemi",
+            url: `${siteMetadata.siteUrl}/about`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Work experience",
+            url: `${siteMetadata.siteUrl}/work`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "Projects",
+            url: `${siteMetadata.siteUrl}/projects`,
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            name: "Technical blog",
+            url: `${siteMetadata.siteUrl}/blog`,
+          },
         ],
       },
       {
