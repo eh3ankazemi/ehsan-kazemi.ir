@@ -1,0 +1,70 @@
+---
+fa: true
+title: "انتخاب بین Server و Client Component در Next.js"
+summary: "راهنمایی کاربردی برای تعیین محل اجرای کامپوننت‌ها، کوچک نگه‌داشتن باندل مرورگر و انتقال امن داده در App Router."
+date: 2026-10-03
+tags:
+  - Next.js
+  - React
+  - TypeScript
+---
+
+React Server Components یکی از بخش‌های اصلی App Router در Next.js است. پرسش اصلی این نیست که کدام نوع کامپوننت همیشه بهتر است؛ بلکه باید مشخص کنیم هر بخش از صفحه در کجا اجرا شود.
+
+## ابتدا از Server Component استفاده کنید
+
+کامپوننت‌های App Router به‌صورت پیش‌فرض Server Component هستند. برای محتوایی که می‌تواند روی سرور آماده شود، مانند ساختار صفحه، درخواست به پایگاه داده و ارتباط با API خصوصی، از آن‌ها استفاده کنید.
+
+```tsx
+export default async function ProjectsPage() {
+  const projects = await getProjects()
+
+  return <ProjectList projects={projects} />
+}
+```
+
+به این ترتیب کدهای مخصوص سرور وارد باندل مرورگر نمی‌شوند. هیچ‌وقت اطلاعات محرمانه، اتصال پایگاه داده یا متغیرهای محیطی خصوصی را به Client Component نفرستید.
+
+## برای تعامل از Client Component استفاده کنید
+
+اگر کامپوننت به APIهای مرورگر، state، effect یا event handler نیاز دارد، باید از `"use client"` استفاده کند. این مرز را نزدیک همان قابلیت تعاملی قرار دهید و بی‌دلیل کل صفحه را Client Component نکنید.
+
+```tsx
+"use client"
+
+import { useState } from "react"
+
+export function ProjectFilter({ tags }: { tags: string[] }) {
+  const [selectedTag, setSelectedTag] = useState("")
+
+  return (
+    <select value={selectedTag} onChange={event => setSelectedTag(event.target.value)}>
+      <option value="">همه پروژه‌ها</option>
+      {tags.map(tag => (
+        <option key={tag} value={tag}>
+          {tag}
+        </option>
+      ))}
+    </select>
+  )
+}
+```
+
+فیلتر تعاملی است، اما صفحه و داده‌های پروژه همچنان می‌توانند روی سرور رندر شوند.
+
+## ترکیب دو نوع کامپوننت
+
+یک Server Component می‌تواند Client Component را رندر کند و propهای قابل‌سریال‌سازی به آن بدهد. اتصال پایگاه داده یا تابع دلخواه را نمی‌توان به مرورگر منتقل کرد. دریافت داده را روی سرور انجام دهید و فقط مقادیری را بفرستید که رابط تعاملی نیاز دارد.
+
+همچنین Client Component می‌تواند محتوای Server Component را از طریق `children` دریافت کند. این الگو برای قرار دادن محتوای آماده‌شده روی سرور داخل پنجره، تب یا provider سمت کاربر مفید است، بدون این‌که کل محتوا به باندل مرورگر منتقل شود.
+
+## چک‌لیست تصمیم‌گیری
+
+- کد به `useState`، `useEffect` یا handler کلیک نیاز دارد؟ فقط همان بخش تعاملی را Client Component کنید.
+- داده خصوصی می‌خواند یا به اعتبارنامه سرور نیاز دارد؟ آن را روی سرور نگه دارید.
+- بخش بزرگی از صفحه ثابت است؟ رندر روی سرور را ترجیح دهید.
+- به provider سمت مرورگر نیاز دارید؟ آن را در سمت کاربر نگه دارید، اما کل برنامه را بی‌دلیل زیر مرز کلاینت نبرید.
+
+## جمع‌بندی
+
+از Server Component شروع کنید و فقط زمانی Client Component اضافه کنید که تعامل مرورگر لازم است. این کار مرز اجرا را روشن می‌کند، حجم JavaScript ارسالی به کاربر را کاهش می‌دهد و پردازش خصوصی را روی سرور نگه می‌دارد.

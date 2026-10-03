@@ -1,0 +1,70 @@
+---
+fa: false
+title: "Choosing Between Server and Client Components in Next.js"
+summary: "A practical guide to deciding where components should run, keeping client bundles small, and passing data safely in the App Router."
+date: 2026-10-03
+tags:
+  - Next.js
+  - React
+  - TypeScript
+---
+
+React Server Components are a core part of the Next.js App Router. The important question is not whether one kind of component is universally better, but where each piece of a page should run.
+
+## Start with a Server Component
+
+Components in the App Router are Server Components by default. Use them for content that can be rendered on the server, such as page structure, database queries, and calls to private APIs.
+
+```tsx
+export default async function ProjectsPage() {
+  const projects = await getProjects()
+
+  return <ProjectList projects={projects} />
+}
+```
+
+This keeps server-only code out of the browser bundle. Never pass secrets, database clients, or private environment variables to a Client Component.
+
+## Add a Client Component for interaction
+
+A component needs `"use client"` when it uses browser APIs, state, effects, or event handlers. Keep that boundary close to the interactive feature instead of marking an entire page as a Client Component.
+
+```tsx
+"use client"
+
+import { useState } from "react"
+
+export function ProjectFilter({ tags }: { tags: string[] }) {
+  const [selectedTag, setSelectedTag] = useState("")
+
+  return (
+    <select value={selectedTag} onChange={event => setSelectedTag(event.target.value)}>
+      <option value="">All projects</option>
+      {tags.map(tag => (
+        <option key={tag} value={tag}>
+          {tag}
+        </option>
+      ))}
+    </select>
+  )
+}
+```
+
+The filter can be interactive while the surrounding page and project data remain server-rendered.
+
+## Compose the two kinds of components
+
+A Server Component can render a Client Component and pass it serializable props. It cannot pass a database connection or an arbitrary function to the browser. Keep data fetching on the server, then pass only the values the interactive UI needs.
+
+Client Components can also receive Server Components as `children`. This is useful for wrapping server-rendered content in a client-side dialog, tab panel, or provider without moving all of that content into the browser bundle.
+
+## A quick decision checklist
+
+- Does the code need `useState`, `useEffect`, or a click handler? Use a Client Component for that interactive part.
+- Does it read private data or need server credentials? Keep it on the server.
+- Is a large section of the page static? Prefer rendering it on the server.
+- Is a shared provider required in the browser? Keep the provider client-side, but avoid putting the whole application behind unnecessary client boundaries.
+
+## Conclusion
+
+Start with Server Components and introduce Client Components only where browser interactivity is required. This makes the boundary explicit, limits JavaScript sent to visitors, and keeps private work on the server.

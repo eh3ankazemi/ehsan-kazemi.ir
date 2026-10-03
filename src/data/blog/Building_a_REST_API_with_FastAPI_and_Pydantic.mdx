@@ -1,0 +1,89 @@
+---
+fa: false
+title: "Building a REST API with FastAPI and Pydantic"
+summary: "Build a small, validated API with FastAPI, define clear request and response models, and test the endpoints."
+date: 2026-10-01
+tags:
+  - Python
+  - FastAPI
+  - API
+---
+
+FastAPI makes it straightforward to create typed HTTP endpoints in Python. Pydantic models validate incoming data and describe the shape of responses, while FastAPI uses those types to generate interactive API documentation.
+
+## Define a request model
+
+Use a Pydantic model to describe accepted input. Validation happens before the endpoint function runs, so invalid payloads receive a structured `422` response.
+
+```py
+from pydantic import BaseModel, Field
+
+
+class TaskCreate(BaseModel):
+    title: str = Field(min_length=1, max_length=120)
+    completed: bool = False
+```
+
+## Create the application and endpoints
+
+```py
+from fastapi import FastAPI
+
+app = FastAPI(title="Tasks API")
+tasks: list[dict] = []
+
+
+@app.get("/tasks")
+def list_tasks():
+    return tasks
+
+
+@app.post("/tasks", status_code=201)
+def create_task(task: TaskCreate):
+    new_task = {"id": len(tasks) + 1, **task.model_dump()}
+    tasks.append(new_task)
+    return new_task
+```
+
+Run the development server with `fastapi dev main.py`, then open `/docs` to try the endpoints through the generated Swagger UI.
+
+This in-memory list is useful for demonstrating request handling, but it is not durable storage: data disappears when the process restarts, and concurrent requests can make updates unsafe. A real service should use a database and define transaction and concurrency behavior deliberately.
+
+## Separate input and output
+
+Do not return internal database fields by accident. Define a response model that exposes only the fields clients should see.
+
+```py
+class TaskRead(TaskCreate):
+    id: int
+
+
+@app.get("/tasks", response_model=list[TaskRead])
+def list_tasks():
+    return tasks
+```
+
+For a production application, also consider authentication and authorization, pagination, consistent error responses, database migrations, and request logging. Validate user input at the API boundary even when the frontend already performs validation.
+
+## Test the API
+
+FastAPI's test client can exercise endpoints without launching a network server.
+
+```py
+from fastapi.testclient import TestClient
+from main import app
+
+client = TestClient(app)
+
+
+def test_create_task():
+    response = client.post("/tasks", json={"title": "Write tests"})
+    assert response.status_code == 201
+    assert response.json()["title"] == "Write tests"
+```
+
+Keep tests independent of a particular database state, and add cases for missing fields, invalid values, and expected error statuses.
+
+## Conclusion
+
+FastAPI and Pydantic provide a compact foundation for typed APIs. Clear request and response models make the contract easier to document, validate, and test as an application grows.

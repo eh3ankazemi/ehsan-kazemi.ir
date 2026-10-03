@@ -1,0 +1,89 @@
+---
+fa: true
+title: "ساخت REST API با FastAPI و Pydantic"
+summary: "با FastAPI یک API کوچک و اعتبارسنجی‌شده بسازید، مدل‌های درخواست و پاسخ تعریف کنید و endpointها را آزمایش کنید."
+date: 2026-10-01
+tags:
+  - Python
+  - FastAPI
+  - API
+---
+
+ساخت endpointهای HTTP تایپ‌دار در پایتون با FastAPI ساده است. مدل‌های Pydantic داده‌های ورودی را اعتبارسنجی و شکل پاسخ را مشخص می‌کنند. FastAPI نیز با استفاده از همین نوع‌ها، مستندات تعاملی API را تولید می‌کند.
+
+## تعریف مدل درخواست
+
+با مدل Pydantic ورودی‌های مجاز را مشخص کنید. اعتبارسنجی پیش از اجرای تابع endpoint انجام می‌شود؛ بنابراین payload نامعتبر پاسخ ساختاریافته `422` دریافت می‌کند.
+
+```py
+from pydantic import BaseModel, Field
+
+
+class TaskCreate(BaseModel):
+    title: str = Field(min_length=1, max_length=120)
+    completed: bool = False
+```
+
+## ساخت برنامه و endpointها
+
+```py
+from fastapi import FastAPI
+
+app = FastAPI(title="Tasks API")
+tasks: list[dict] = []
+
+
+@app.get("/tasks")
+def list_tasks():
+    return tasks
+
+
+@app.post("/tasks", status_code=201)
+def create_task(task: TaskCreate):
+    new_task = {"id": len(tasks) + 1, **task.model_dump()}
+    tasks.append(new_task)
+    return new_task
+```
+
+سرور توسعه را با دستور `fastapi dev main.py` اجرا کنید و برای آزمایش endpointها، صفحه `/docs` را باز کنید.
+
+این فهرست درون حافظه برای نمایش نحوه دریافت درخواست مناسب است، اما ذخیره‌سازی پایدار نیست: با راه‌اندازی مجدد برنامه داده‌ها از بین می‌روند و درخواست‌های هم‌زمان می‌توانند به‌روزرسانی ناامن ایجاد کنند. سرویس واقعی باید از پایگاه داده استفاده کند و رفتار تراکنش‌ها و هم‌زمانی را مشخص کند.
+
+## جداسازی ورودی و خروجی
+
+برای جلوگیری از افشای تصادفی فیلدهای داخلی پایگاه داده، مدل پاسخی تعریف کنید که فقط اطلاعات قابل‌نمایش برای کلاینت را برگرداند.
+
+```py
+class TaskRead(TaskCreate):
+    id: int
+
+
+@app.get("/tasks", response_model=list[TaskRead])
+def list_tasks():
+    return tasks
+```
+
+در برنامه‌ی عملیاتی، احراز هویت و مجوزها، صفحه‌بندی، پاسخ خطای یکپارچه، migration پایگاه داده و ثبت درخواست‌ها را هم در نظر بگیرید. حتی اگر فرانت‌اند اعتبارسنجی دارد، ورودی کاربر را در مرز API نیز بررسی کنید.
+
+## آزمایش API
+
+کلاینت آزمایش FastAPI می‌تواند endpointها را بدون اجرای سرور شبکه بررسی کند.
+
+```py
+from fastapi.testclient import TestClient
+from main import app
+
+client = TestClient(app)
+
+
+def test_create_task():
+    response = client.post("/tasks", json={"title": "Write tests"})
+    assert response.status_code == 201
+    assert response.json()["title"] == "Write tests"
+```
+
+آزمایش‌ها را به وضعیت خاصی از پایگاه داده وابسته نکنید و برای فیلدهای حذف‌شده، مقادیر نامعتبر و کدهای خطای مورد انتظار نیز حالت‌های جداگانه بنویسید.
+
+## جمع‌بندی
+
+FastAPI و Pydantic پایه‌ای جمع‌وجور برای ساخت APIهای تایپ‌دار فراهم می‌کنند. مدل‌های روشن درخواست و پاسخ، مستندسازی، اعتبارسنجی و آزمایش قرارداد API را با رشد برنامه آسان‌تر می‌کنند.
