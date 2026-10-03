@@ -82,13 +82,7 @@ export default function HomeContent({ blog, work, projects }: HomeContentProps) 
             </p>
 
             <div className="mt-7 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-200 sm:text-sm">
-              {[
-                "Backend",
-                "Frontend",
-                "Android",
-                'Deep Learning',
-                'ML',
-              ].map(item => (
+              {["Backend", "Frontend", "Android", "Deep Learning", "ML"].map(item => (
                 <span
                   key={item}
                   className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-sm"
