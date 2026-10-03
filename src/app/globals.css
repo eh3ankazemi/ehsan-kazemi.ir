@@ -377,3 +377,9 @@ html[lang="fa"] .left_fa {
   display: flex;
   justify-content: space-evenly;
 }
+
+.home {
+  background-image:
+    radial-gradient(circle at top, rgba(34, 211, 238, 0.2), transparent 35%),
+    radial-gradient(circle at bottom, rgba(99, 102, 241, 0.18), transparent 38%);
+}
