@@ -16,8 +16,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    const saved = localStorage.getItem("language") as Language | null
+    const saved = window.localStorage.getItem("language") as Language | null
+    // const browserLanguage = window.navigator.language.toLowerCase()
     if (saved === "fa" || saved === "en") setLanguageState(saved)
+    // else if (browserLanguage.startsWith("en")) {
+    //   setLanguageState("en")
+    // }
+
     setLoaded(true)
   }, [])
 

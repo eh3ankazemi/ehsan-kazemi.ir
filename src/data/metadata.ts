@@ -22,7 +22,7 @@ export const siteMetadata: SiteMetadata = {
    * Site description (shown in search results and social media)
    */
   description:
-    "Ehsan Kazemi (احسان کاظمی) is an AI Engineer and Full-Stack Developer from Isfahan, Iran. نمونه‌کارها، پروژه‌های هوش مصنوعی، سوابق کاری و وبلاگ فنی احسان کاظمی را ببینید.",
+    "Ehsan Kazemi (احسان کاظمی) is an AI Engineer and Full-Stack Developer from Isfahan, Iran. Portfolio, AI projects, work experience, and technical blog of Ehsan Kazemi.",
 
   /**
    * Keywords for SEO
@@ -30,27 +30,27 @@ export const siteMetadata: SiteMetadata = {
   keywords: [
     "احسان کاظمی",
     "Ehsan Kazemi",
+    "EhsaN Kazemi",
+    "eh3ankazemi",
     "Ehsan Kazemi AI Engineer",
-    "Ehsan Kazemi Developer",
-    "احسان فریلنسر",
+    "AI Engineer Iran",
+    "مهندس هوش مصنوعی",
     "eh3ankazemi",
     "برنامه‌نویس فول‌استک",
-    "توسعه‌دهنده نرم‌افزار",
-    "مهندس هوش مصنوعی",
-    "هوش مصنوعی",
-    "توسعه‌دهنده فول استک",
-    "احسان کاظمی فریلنسر",
-    "AI Engineer",
-    "AI Developer",
-    "Software Developer",
     "Full Stack Developer",
-    "React Developer",
     "Next.js Developer",
+    "React Developer",
     "TypeScript Developer",
     "Python Developer",
-    "پورتفولیو",
-    "نمونه‌کار",
     "Portfolio",
+    "پورتفولیو",
+    "ایران",
+    "احسان کاظمی فریلنسر",
+    "Ehsan Kazemi portfolio",
+    "احسان کاظمی وبلاگ",
+    "Ehsan Kazemi blog",
+    "AI Developer",
+    "Software Developer",
   ],
   /**
    * Author information
@@ -72,6 +72,18 @@ export const siteMetadata: SiteMetadata = {
   social: {
     twitter: "@eh3ankazemi",
   },
+
+  /**
+   * Social profile URLs used for Person/Organization schema markup.
+   */
+  sameAs: [
+    "https://github.com/eh3ankazemi",
+    "https://www.linkedin.com/in/eh3ankazemi",
+    "https://x.com/eh3ankazemi",
+    "https://www.instagram.com/eh3ankazemi/",
+    "https://www.youtube.com/@eh3ankazemi",
+    "https://links.ehsan-kazemi.ir/",
+  ],
 
   /**
    * Optional: Custom Open Graph image for the index (home) page.
@@ -154,4 +166,7 @@ export const metadata: Metadata = {
     ...(siteMetadata.ogImage && { images: [siteMetadata.ogImage] }),
   },
   category: "technology",
+  // verification: {
+  //   google: process.env.GOOGLE_SITE_VERIFICATION ?? "",
+  // },
 }

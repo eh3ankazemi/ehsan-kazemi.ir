@@ -85,6 +85,7 @@ export interface SiteMetadata {
   social: {
     twitter: string
   }
+  sameAs?: string[]
   /** Set to null to use the auto-generated dynamic OG image for the home page. */
   ogImage: string | null
 }
