@@ -94,7 +94,8 @@ export const footerConfig = {
     stackoverflow: "",
     bluesky: "",
     link: "https://links.ehsan-kazemi.ir/",
-    call: "tel:+989212154476",
+    // call: "tel:+989212154476",
+    call: "",
     email: "mailto:eh3ankazemii@gmail.com",
   },
 }
