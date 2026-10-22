@@ -71,7 +71,7 @@ function CompanyHeader({ frontmatter }: { frontmatter: WorkItemFrontmatter }) {
           className="rounded-lg object-contain"
         />
       )}
-      <h1 className="text-4xl font-bold">{frontmatter.company}</h1>
+      <h1 className="text-4xl font-bold text-center">{frontmatter.company}</h1>
     </>
   )
 }
@@ -163,7 +163,7 @@ export default async function WorkItemPage(props: { params: pageParams }) {
             </div>
           )}
         </div>
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-2">{frontmatter.description}</p>
+        <p className="text-lg text-gray-600 dark:text-gray-400 mb-2 text-center">{frontmatter.description}</p>
         <p className="text-sm text-gray-500 dark:text-gray-500 mb-6 flex items-center gap-2">
           <span>
             {frontmatter.start} - {endLabel}

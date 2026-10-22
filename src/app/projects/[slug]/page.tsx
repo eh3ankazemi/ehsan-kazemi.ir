@@ -141,7 +141,7 @@ export default async function ProjectPage(props: { params: pageParams }) {
         <BackToPageButton pageUrl="/projects" />
 
         {/* Header */}
-        <h1 className="text-4xl font-bold mb-2">{frontmatter.title}</h1>
+        <h1 className="text-4xl font-bold text-center mb-2">{frontmatter.title}</h1>
         <p className="text-lg text-gray-600 dark:text-gray-400 mb-4 text-center">
           {frontmatter.description}
         </p>
