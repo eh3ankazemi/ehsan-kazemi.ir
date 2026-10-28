@@ -173,7 +173,7 @@ export default async function BlogPostPage(props: { params: pageParams }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
         <BackToPageButton pageUrl="/blog" />
-        <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+        <h1 className="text-3xl font-bold mb-4 text-center">{post.title}</h1>
         <div className="flex items-center gap-4 text-gray-500 mb-8">
           <span className="flex items-center gap-1.5">
             <FaRegCalendarAlt className="shrink-0" />
