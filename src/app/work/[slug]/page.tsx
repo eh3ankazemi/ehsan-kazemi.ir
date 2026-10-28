@@ -163,7 +163,9 @@ export default async function WorkItemPage(props: { params: pageParams }) {
             </div>
           )}
         </div>
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-2 text-center">{frontmatter.description}</p>
+        <p className="text-lg text-gray-600 dark:text-gray-400 mb-2 text-center">
+          {frontmatter.description}
+        </p>
         <p className="text-sm text-gray-500 dark:text-gray-500 mb-6 flex items-center gap-2">
           <span>
             {frontmatter.start} - {endLabel}
