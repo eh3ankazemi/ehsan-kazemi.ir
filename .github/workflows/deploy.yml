@@ -50,6 +50,8 @@ jobs:
           bun run test
 
       - name: Build
+        env:
+          STATIC_EXPORT: "1"
         run: bun run build
 
       - name: Pre build
