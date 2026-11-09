@@ -25,6 +25,7 @@ function SocialLinks() {
               href={href}
               aria-label={label}
               target="_blank"
+              rel="noopener noreferrer"
               className={cn(
                 "group relative flex h-11 w-11 items-center justify-center rounded-xl border border-gray-300 bg-gray-100 text-gray-700 shadow-sm transition-all duration-300",
                 "dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300",

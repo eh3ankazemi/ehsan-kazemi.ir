@@ -92,7 +92,7 @@ export const siteMetadata: SiteMetadata = {
    *
    * Note: /blog, /projects, and /work always use dynamically generated OG images.
    */
-  ogImage: null,
+  ogImage: "/icons/android-chrome-512x512.png",
 }
 
 /**
@@ -151,8 +151,8 @@ export const metadata: Metadata = {
       images: [
         {
           url: siteMetadata.ogImage,
-          width: 1200,
-          height: 630,
+          width: 512,
+          height: 512,
           alt: siteMetadata.title,
         },
       ],
