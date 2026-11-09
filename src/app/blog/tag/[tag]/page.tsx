@@ -15,7 +15,9 @@ export async function generateStaticParams() {
 
   const tags = [...new Set(posts.flatMap(post => post.tags ?? []))]
   return tags.map(tag => ({
-    tag: encodeURIComponent(tag),
+    // Next.js encodes dynamic route params when it builds the URL. Returning an
+    // encoded value here would turn spaces into %2520 in the generated path.
+    tag,
   }))
 }
 
@@ -30,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `پست‌های برچسب‌گذاری شده "${decodedTag}" | احسان کاظمی`,
     description: `مرور پست‌های وبلاگ با برچسب‌های ${decodedTag}.`,
     alternates: {
-      canonical: `/blog/tag/${decodedTag.toLowerCase()}`,
+      canonical: `/blog/tag/${encodeURIComponent(decodedTag.toLowerCase())}`,
     },
     openGraph: {
       title: `پست‌های برچسب‌گذاری شده "${decodedTag}" | احسان کاظمی`,
